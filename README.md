@@ -31,12 +31,12 @@ judge current browser is weixin's built-in browser or not
 
 >`judge.kernel()`
 
-judge current browser's kernel,whicth can judge 'webkit','gecko','IE','edge'
+judge current browser's kernel,whicth can judge `webkit`,`gecko`,`IE`,`edge`
 
 >`judge.platform()`
 
-judge user's current device,whitch can judge:'Android','iPad','iPhone','windows phone'
-,'Mac os X','Windows','Linux','qq','blackberry'
+judge user's current device,whitch can judge:`Android`,`iPad`,`iPhone`,`windows phone`
+,`Mac os X`,`Windows`,`Linux`,`qq`,`blackberry`
 
 >`judge.isExist(value)`
 
