@@ -34,6 +34,7 @@ judge current browser is weixin's built-in browser or not
 judge current browser's kernel,whicth can judge 'webkit','gecko','IE','edge'
 
 >`judge.platform()`
+
 judge user's current device,whitch can judge:'Android','iPad','iPhone','windows phone'
 ,'Mac os X','Windows','Linux','qq','blackberry'
 
@@ -72,7 +73,7 @@ judge.inArray(val,arr);
 
 judge current user's device is touch device or not
 
->'judge.isEmail(em)'
+>`judge.isEmail(em)`
 
 ```js
 var email = 'trigkit@163.com';
