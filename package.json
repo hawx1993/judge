@@ -1,0 +1,28 @@
+{
+  "name": "judge",
+  "version": "0.1.0",
+  "description": "a library judge something",
+  "main": "judge.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hawx1993/judge.git"
+  },
+  "keywords": [
+    "judge"
+  ],
+  "author": "trigkit4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hawx1993/judge/issues"
+  },
+  "homepage": "https://github.com/hawx1993/judge#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-uglify": "^1.5.1",
+    "jshint": "^2.9.1"
+  }
+}
