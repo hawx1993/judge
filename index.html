@@ -3,20 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
- 
+
 </head>
 <body>
 
 <script src="judge.js"></script>
 <script>
-    var arr = [];//judge.isEmpty(arr); => true
-    var n = null;//judge.isEmpty(n); => true
-    var u = undefined;//judge.isEmpty(u); => true
-    var num = 0;//judge.isEmpty(num); => false
-    var obj = Object.create(null);//judge.isEmpty(obj); => true
-    var str = '';//judge.isEmpty(str); => true
+var obj = {};
+judge.type(obj);//object
 
-    alert(judge.isEmpty(str));
+var num = Number(1);
+judge.type(num);//number
+
+var str = '123';
+judge.type(str);//string
+
+var n = null;
+judge.type(n);//null
+
+
+var u = undefined;
+judge.type(u);//undefined
+
+var fn = function () {};
+judge.type(fn);//function
+
+var bool = Boolean();
+judge.type(bool);//boolean
+
+var proto = Object.prototype;
+judge.type(proto);//object
+
+function Person(){}
+var p1 = new Person();
+judge.type(p1);//object
+
+
+//    var arr = [];//judge.isEmpty(arr); => true
+//    var n = null;//judge.isEmpty(n); => true
+//    var u = undefined;//judge.isEmpty(u); => true
+//    var num = 0;//judge.isEmpty(num); => false
+//    var obj = Object.create(null);//judge.isEmpty(obj); => true
+//    var str = '';//judge.isEmpty(str); => true
+//    var abj;
+//    alert(judge.isEmpty(abj));
 </script>
 </body>
 </html>

@@ -142,7 +142,8 @@
             .replace(/^\[object (.+)\]$/, "$1")
             .toLowerCase();
     };
-    judge.hasClass = function (element) {
+    //judge a given element hasclass or not
+    judge.hasClass = function (element,className) {
         if(element.classList)
             element.classList.contains(className);
         else
