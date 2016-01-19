@@ -147,14 +147,14 @@ null and undefined is regarded as empty;
 
 the number "0" is regarded as not empty;
 
-
-    var arr = [];//judge.isEmpty(arr); => true
-    var n = null;//judge.isEmpty(n); => true
-    var u = undefined;//judge.isEmpty(u); => true
-    var num = 0;//judge.isEmpty(num); => false
-    var obj = Object.create(null);//judge.isEmpty(obj); => true
-    var str = '';//judge.isEmpty(str); => true
-
+```js
+var arr = [];//judge.isEmpty(arr); => true
+var n = null;//judge.isEmpty(n); => true
+var u = undefined;//judge.isEmpty(u); => true
+var num = 0;//judge.isEmpty(num); => false
+var obj = Object.create(null);//judge.isEmpty(obj); => true
+var str = '';//judge.isEmpty(str); => true
+```
 
 
 
