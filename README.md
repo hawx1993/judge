@@ -3,6 +3,7 @@
 ####This is a library for judging something
 - No dependencies
 - Support `AMD` & `Common.js`
+- light weight
 
 ### API
 
@@ -84,10 +85,75 @@ judge.isEmail(email);
 
 - `judge.hasLowerCase()`
 - `judge.hasNumber()`
-- `hasCaptial()`
+- `judge.hasCaptial()`
+
+
+>`judge.isBrowser()`
+
+judge current client is browser or not;
+
+>`judge.isFunction()`
+
+judge a given value is function or not
+
+
+>`judge.isEqual()`
+
+judge two values is strict equal or not 
+
+>`judge.size()`
+
+judge a given value's size
 
 
 
+>`judge.isHttps()`
+
+judge the website is https or not 
+
+>`judge.isUnique()`
+
+judge a given array's elements is unique or not
+
+>`judge.isString()`
+
+judge a given value is string or not 
+
+>`judge.isObject()`
+
+judge a given value is Object or not
+
+>`judge.type()`
+
+judge the given value's type
+
+>`judge.hasClass()`
+
+judge a given value has class or not
+
+>`judge.isError(value)`
+
+judge a given value is Error or not
+
+>`judge.isChar()`
+
+judge a given value is char or not
+
+>`judge.isEmpty()`
+
+judge a given value is empty or not;
+
+null and undefined is regarded as empty;
+
+the number "0" is regarded as not empty;
+
+
+    var arr = [];//judge.isEmpty(arr); => true
+    var n = null;//judge.isEmpty(n); => true
+    var u = undefined;//judge.isEmpty(u); => true
+    var num = 0;//judge.isEmpty(num); => false
+    var obj = Object.create(null);//judge.isEmpty(obj); => true
+    var str = '';//judge.isEmpty(str); => true
 
 
 

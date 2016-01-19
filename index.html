@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+ 
 </head>
 <body>
+
 <script src="judge.js"></script>
 <script>
-var email = 'trigkit@163.com';
-    alert(judge.isEmail(email))
+    var arr = [];//judge.isEmpty(arr); => true
+    var n = null;//judge.isEmpty(n); => true
+    var u = undefined;//judge.isEmpty(u); => true
+    var num = 0;//judge.isEmpty(num); => false
+    var obj = Object.create(null);//judge.isEmpty(obj); => true
+    var str = '';//judge.isEmpty(str); => true
 
+    alert(judge.isEmpty(str));
 </script>
 </body>
 </html>

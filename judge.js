@@ -106,7 +106,72 @@
     judge.hasCaptial = function (str) {
         return str.match(/^.*[A-Z]+.*$/) ? true : false;
     };
+    judge.isBrowser = function () {
+        return !!(typeof window !== 'undefined' && navigator !== 'undefined' && window.document);
+    };
+    judge.isFunction = function (fn) {
+        return oString.call(fn) === ['object Function'];
+    };
+    judge.isEqual = function (val1, val2) {
+        return val1 === val2;
+    };
+    judge.size = function (val) {
+        return val.length;
+    };
+    judge.isHttps = function () {
+        return location.protocol.indexOf('https') > -1;
+    };
+    //judge a given array's elements is unique or not
+    judge.isUnique = function (array) {
+        var arr = array.sort();
+        for(var i = 0;i < array.length;i++){
+            if(arr[i] == arr[i+1]){
+                return false;
+            }
+        }
+        return true;
+    };
+    judge.isString = function (str) {
+        return judge.type(str) === 'string';
+    };
+    judge.isObject = function (obj) {
+        return judge.type(obj) === 'object';
+    };
+    judge.type = function (obj) {
+        return Object.prototype.toString.call(obj)
+            .replace(/^\[object (.+)\]$/, "$1")
+            .toLowerCase();
+    };
+    judge.hasClass = function (element) {
+        if(element.classList)
+            element.classList.contains(className);
+        else
+            new RegExp('(^| )' + className + '( |$)','gi').test(element.className)
+    };
+    judge.isError = function (value) {
+        return oString.call(value) === ['object Error'];
+    };
+    judge.isChar = function (value) {
+        return judge.isString(value) && value.length === 1;
+    };
+    //jude a given value is empty or not
+    judge.isEmpty = function (value) {
+        if(judge.array(value) || judge.isString(value)){
+            return (value.length <= 0);
+        }else if(judge.type(value)=== null || judge.type(value) === undefined){
+            return true;
+        }else if(judge.type(value) === 'number'){
+            return false;
+        }else if(judge.isObject(value)){
+            for(var key in value){
+                if(value.hasOwnProperty(key)) return false;
+            }
+            return true;
+        }
 
+        return false;
+
+    };
 
     return judge;
 }));
