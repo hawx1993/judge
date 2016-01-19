@@ -168,9 +168,7 @@
             }
             return true;
         }
-
-        return false;
-
+        return true;
     };
 
     return judge;
