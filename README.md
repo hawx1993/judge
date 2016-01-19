@@ -127,6 +127,40 @@ judge a given value is Object or not
 
 judge the given value's type
 
+```js
+var arr = new Array;
+judge.type(arr);//array
+
+var obj = {};
+judge.type(obj);//object
+
+var num = Number(1);
+judge.type(num);//number
+
+var str = '123';
+judge.type(str);//string
+
+var n = null;
+judge.type(n);//null
+
+
+var u = undefined;
+judge.type(u);//undefined
+
+var fn = function () {};
+judge.type(fn);//function
+
+var bool = Boolean();
+judge.type(bool);//boolean
+
+var proto = Object.prototype;
+judge.type(proto);//object
+
+function Person(){}
+var p1 = new Person();
+judge.type(p1);//object
+```    
+
 >`judge.hasClass()`
 
 judge a given value has class or not
@@ -148,14 +182,15 @@ null and undefined is regarded as empty;
 the number "0" is regarded as not empty;
 
 ```js
+
 var arr = [];//judge.isEmpty(arr); => true
 var n = null;//judge.isEmpty(n); => true
 var u = undefined;//judge.isEmpty(u); => true
 var num = 0;//judge.isEmpty(num); => false
 var obj = Object.create(null);//judge.isEmpty(obj); => true
 var str = '';//judge.isEmpty(str); => true
-```
 
+```
 
 
 
