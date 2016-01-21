@@ -123,9 +123,10 @@
     };
     //judge a given array's elements is unique or not
     judge.isUnique = function (array) {
+        if(array == '') return [];
         var arr = array.sort();
         for(var i = 0;i < array.length;i++){
-            if(arr[i] == arr[i+1]){
+            if(arr[i] === arr[i+1]){
                 return false;
             }
         }
@@ -171,6 +172,22 @@
         }
         return true;
     };
+    judge.isQQ = function (qq) {
+        var req = new RegExp(/^[1-9][0-9]{4,9}$/).test(qq);
+        return !!req;
+    };
+    judge.isPhone = function (num) {
+        var phone = new RegExp(/^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/).test(num);
+        return !!phone;
+    };
+    judge.isIncludeChinese = function (ch) {
+        return !!/[\u4e00-\u9fa5]/g.test(ch);
+    };
+    judge.onlyChinese = function (ch) {
+        var myReg =/^[\u4e00-\u9fa5]{0,}$/;
+        return !!myReg.test(ch);
+    };
+
 
     return judge;
 }));
