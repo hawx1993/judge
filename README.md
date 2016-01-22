@@ -194,7 +194,7 @@ var str = '';//judge.isEmpty(str); => true
 
 > `judge.isQQ`
 
-```
+```js
 judge a given number is QQ number or not
 
 var qq = 345812345;
@@ -205,7 +205,7 @@ judge.isQQ(qq);
 
 >`judge.jsPhoneNum`
 
-```
+```js
 var num = 13055503789;
 judge.isPhoneNum(num);
 
@@ -213,7 +213,7 @@ judge.isPhoneNum(num);
 ```
 >`judge.isIncludeChinese`
 
-```
+```js
 var ch = '23ef脚本';
 judge.isIncludeChinese(ch);
 
@@ -222,7 +222,7 @@ judge.isIncludeChinese(ch);
 
 >`judge.onlyChinese(ch)`
 
-```
+```js
 var ch = 'dd中国';
 judge.onlyChinese(ch);
 
@@ -242,7 +242,7 @@ judge a given value is being null or undefined
 
 judge a given value is RegExp or not 
 
-```
+```js
 var reg = /^(a,z)/i;
 judge.isRegExp(reg);
 

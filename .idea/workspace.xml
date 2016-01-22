@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="472af1b8-a623-4562-89f1-9d920bf224fc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/judge.js" afterPath="$PROJECT_DIR$/judge.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="judge.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="judge.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="judge.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/judge.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="7.291139">
+            <state vertical-scroll-proportion="0.0">
               <caret line="189" column="67" selection-start-line="189" selection-start-column="67" selection-end-line="189" selection-end-column="67" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -48,12 +45,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.9578313">
-                <caret line="254" column="0" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
+              <first_editor vertical-scroll-proportion="8.307229">
+                <caret line="196" column="5" selection-start-line="196" selection-start-column="5" selection-end-line="196" selection-end-column="5" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -101,8 +98,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-153" />
-    <option name="y" value="155" />
+    <option name="x" value="15" />
+    <option name="y" value="126" />
     <option name="width" value="1139" />
     <option name="height" value="671" />
   </component>
@@ -215,7 +212,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-153" y="155" width="1139" height="671" extended-state="0" />
+    <frame x="15" y="126" width="1139" height="671" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -454,11 +451,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.833333">
+          <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/judge.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="189" column="67" selection-start-line="189" selection-start-column="67" selection-end-line="189" selection-end-column="67" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.9578313">
-            <caret line="254" column="0" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
+          <first_editor vertical-scroll-proportion="8.307229">
+            <caret line="196" column="5" selection-start-line="196" selection-start-column="5" selection-end-line="196" selection-end-column="5" />
             <folding />
           </first_editor>
           <second_editor />
@@ -471,24 +486,6 @@
       </provider>
       <provider editor-type-id="MultiMarkdownFxPreviewEditor">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.833333">
-          <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/judge.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.291139">
-          <caret line="189" column="67" selection-start-line="189" selection-start-column="67" selection-end-line="189" selection-end-column="67" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
   </component>
