@@ -1,5 +1,7 @@
 /**
  * Created by trigkit4 on 16/1/17.
+ * judge.js <https://github.com/hawx1993/judge>
+ * @author trigkit4 <trigkit@163.com>
  */
 ;(function (root,factory) {
     //support requirejs && amd
@@ -21,7 +23,7 @@
     var op = Object.prototype,
         oString = op.toString;
 
-    judge.version = '0.1.0';
+    judge.version = '0.1.2';
     judge = (function () {
         return {
             type: function (obj) {
