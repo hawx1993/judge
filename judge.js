@@ -5,7 +5,7 @@
     //support requirejs && amd
     if(typeof define === 'function' && define.amd){
         define(function () {
-            return judge;
+            return judge = factory();
         });
         //Commonjs
     }else if(typeof exports === 'object'){
@@ -15,13 +15,12 @@
     }
 }(this, function (root) {
     root = this || global;
-    var judge = {},ua = navigator.userAgent.toLowerCase();
+    var judge = {},
+        ua = navigator.userAgent.toLowerCase();
 
     var op = Object.prototype,
-        oString = op.toString,
-        hasOwn = op.hasOwnProperty,
-        ap = Array.prototype;
-    judge.is = {};
+        oString = op.toString;
+
     judge.version = '0.1.0';
 
     judge.array = Array.isArray || function (value) {
@@ -50,7 +49,7 @@
     judge.platform = function () {
         if(ua.match(/ipad/i) === 'ipad') {
             return 'ipad';
-        }else if(ua.match(/(Android);?[\s\/]+([\d.]+)?/i)){
+        }else if(/android/i.test(ua)){
             return 'Android';
         }else if(ua.match(/(iPhone\sOS)\s([\d_]+)/i)){
             return 'iPhone';
@@ -176,7 +175,7 @@
         var req = new RegExp(/^[1-9][0-9]{4,9}$/).test(qq);
         return !!req;
     };
-    judge.isPhone = function (num) {
+    judge.isPhoneNum = function (num) {
         var phone = new RegExp(/^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/).test(num);
         return !!phone;
     };
@@ -187,7 +186,21 @@
         var myReg =/^[\u4e00-\u9fa5]{0,}$/;
         return !!myReg.test(ch);
     };
-
+    judge.isElement = function(element){
+        return typeof HTMLElement !== 'undefined' ? function (element) {
+            return (element instanceof HTMLElement);
+        } :
+            function (element) {
+                return !!(element && element.nodeType === 1);
+            }
+    }();
+    //judge a given value is being null or undefined
+    judge.isSet = function (value) {
+        return value !== null && value !== (void 0)
+    };
+    judge.isRegExp = function (reg) {
+        return judge.type(reg) === 'regexp';
+    };
 
     return judge;
 }));

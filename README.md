@@ -192,6 +192,62 @@ var str = '';//judge.isEmpty(str); => true
 
 ```
 
+> `judge.isQQ`
+
+```
+judge a given number is QQ number or not
+
+var qq = 345812345;
+judge.isQQ(qq);
+
+=>true
+```
+
+>`judge.jsPhoneNum`
+
+```
+var num = 13055503789;
+judge.isPhoneNum(num);
+
+=>true
+```
+>`judge.isIncludeChinese`
+
+```
+var ch = '23ef脚本';
+judge.isIncludeChinese(ch);
+
+=> true
+```
+
+>`judge.onlyChinese(ch)`
+
+```
+var ch = 'dd中国';
+judge.onlyChinese(ch);
+
+=>false
+```
+
+>`judge.isElement(element)`
+
+judge a given element is HTMLelement or not
+
+>`judge.isSet(value)`
+
+judge a given value is being null or undefined
+
+
+>`judge.isRegExp(reg)`
+
+judge a given value is RegExp or not 
+
+```
+var reg = /^(a,z)/i;
+judge.isRegExp(reg);
+
+=> true
+```
 
 
 
