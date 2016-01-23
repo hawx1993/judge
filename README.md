@@ -5,10 +5,11 @@
 - Support `AMD` & `Common.js`
 - light weight
 
-```
-$ node install #安装依赖
+```js
+$ npm install #安装依赖
 $ gulp compress #生成judge.min.js文件
 ```
+
 ### API
 
 >`judge.array(value)`
@@ -198,7 +199,7 @@ var str = '';//judge.isEmpty(str); => true
 
 > `judge.isQQ`
 
-```
+```js
 judge a given number is QQ number or not
 
 var qq = 345812345;
@@ -209,7 +210,7 @@ judge.isQQ(qq);
 
 >`judge.jsPhoneNum`
 
-```
+```js
 var num = 13055503789;
 judge.isPhoneNum(num);
 
@@ -217,7 +218,7 @@ judge.isPhoneNum(num);
 ```
 >`judge.isIncludeChinese`
 
-```
+```js
 var ch = '23ef脚本';
 judge.isIncludeChinese(ch);
 
@@ -246,7 +247,7 @@ judge a given value is being null or undefined
 
 judge a given value is RegExp or not 
 
-```
+```js
 var reg = /^(a,z)/i;
 judge.isRegExp(reg);
 
@@ -256,7 +257,7 @@ judge.isRegExp(reg);
 
 judge your ID number  true or false
 
-```
+```js
 var id = 350500199703235051;
 judge.isIdNumber(id);
 
@@ -275,7 +276,7 @@ judge a given value is even or not
 
 you can use `judge.assert` to assert  the value you want  assert , and if the value pass assert , the description will show green;else show red;
 
-```
+```js
 function add(a,b){
     return a + b;
 }
@@ -288,4 +289,3 @@ judge.assert(add(2,3) === 6,'false');
 
 In the param `desc`  to write your own test expressions.
 
-show more case , open `index.html`;
