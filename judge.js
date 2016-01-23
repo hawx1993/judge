@@ -18,14 +18,13 @@
 }(this, function (root) {
     root = this || global;
     var judge = {},
-        ua = navigator.userAgent.toLowerCase();
-
-    var op = Object.prototype,
+        ua = navigator.userAgent.toLowerCase(),
+        op = Object.prototype,
         oString = op.toString;
 
-    judge.version = '0.1.2';
     judge = (function () {
         return {
+            version: '0.1.2',
             type: function (obj) {
             return Object.prototype.toString.call(obj)
                 .replace(/^\[object (.+)\]$/, "$1")
@@ -197,6 +196,30 @@
             },
             isRegExp: function(reg){
                 return judge.type(reg) === 'regexp';
+            },
+            //judge your ID number  true or false
+            isIdNumber: function(num){
+                return (/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num));
+            },
+            isEven: function(num){
+                return (num % 2 === 0);
+            },
+            isOdd: function (num) {
+                return (num % 2 === 1)
+            },
+            assert: function (value, desc) {
+                document.write("<style>#results li.pass{ color: green;}#results li.fail{ color: red;}</style>");
+                document.write("<ul id='results'></ul>");
+                var results;
+                results = results || document.getElementById('results');
+                var li = document.createElement('li');
+                li.className = value ? "pass" : "fail";
+                li.appendChild(document.createTextNode(desc));
+                results.appendChild(li);
+                if(!value){
+                    li.parentNode.parentNode.className = "fail";
+                }
+                return li;
             }
         }
     })();
