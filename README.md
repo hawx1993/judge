@@ -1,6 +1,8 @@
 ###`judge.js`
 
 ####This is a library for judging something
+一个js判断库，大部分API返回布尔值，小部分API直接返回数值
+
 - No dependencies
 - Support `AMD` & `Common.js`
 - light weight
@@ -16,7 +18,6 @@ $ gulp compress #生成judge.min.js文件
 
 
 ```js
-
 judge.array(['foo','bar',{'name':'trigkit4'}])
 
 => true
@@ -41,8 +42,7 @@ judge current browser's kernel,whicth can judge `webkit`,`gecko`,`IE`,`edge`
 
 >`judge.platform()`
 
-judge user's current device,whitch can judge:`Android`,`iPad`,`iPhone`,`windows phone`
-,`Mac os X`,`Windows`,`Linux`,`qq`,`blackberry`
+judge user's current device,whitch can judge:`Android`,`iPad`,`iPhone`,`windows phone`,`Mac os X`,`Windows`,`Linux`,`qq`,`blackberry`
 
 >`judge.isExist(value)`
 
@@ -106,11 +106,16 @@ judge a given value is function or not
 
 judge two values is strict equal or not 
 
->`judge.size()`
+>`judge.size(val)`
 
 judge a given value's size
 
+```
+var val = '琅琊榜lyb';
+judge.size(val);
 
+=>6
+```
 
 >`judge.isHttps()`
 
@@ -119,6 +124,12 @@ judge the website is https or not
 >`judge.isUnique()`
 
 judge a given array's elements is unique or not
+
+```
+var a = [1,2];
+var arr = [1,2,3,4,a];
+judge.isUnique(arr);//false
+```
 
 >`judge.isString()`
 
@@ -271,6 +282,9 @@ judge a given value is odd or not
 >`judge.isEven(num)`
 
 judge a given value is even or not 
+
+
+
 
 >`judge.assert(value,desc)`
 

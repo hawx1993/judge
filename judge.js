@@ -112,7 +112,7 @@
                 return !!(typeof window !== 'undefined' && navigator !== 'undefined' && window.document);
             },
             isFunction: function (fn) {
-                return oString.call(fn) === ['object Function'];
+                return judge.type(fn) === 'function';
             },
             isEqual: function (val1, val2) {
                 return val1 === val2;
