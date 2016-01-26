@@ -220,6 +220,12 @@
                     li.parentNode.parentNode.className = "fail";
                 }
                 return li;
+            },
+            hasHash: function (url) {
+                url = url || window.location.href;
+                var match = url.match(/#(.*)$/);
+                var ends =  match ? match[1] : '';
+                return (ends !== '') ;
             }
         }
     })();

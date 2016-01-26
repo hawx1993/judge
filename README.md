@@ -303,3 +303,12 @@ judge.assert(add(2,3) === 6,'false');
 
 In the param `desc`  to write your own test expressions.
 
+>`judge.hasHash(url)`
+judge a url has hash value or not
+
+```js
+var url = 'www.baidu.com#w';
+judge.hasHash(url);
+
+=> true
+```
