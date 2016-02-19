@@ -11,14 +11,32 @@
 $ npm install #安装依赖
 $ gulp compress #生成judge.min.js文件
 ```
+## Getting started
+
+Install judgejs using:
+
+```js
+$ npm install judgejs --save-dev
+```
+### Usage
+
+```js
+
+var judge = require('judgejs');
+
+judge.vsersion
+
+=>0.1.2
+
+```
 
 ### API
 
->`judge.array(value)`
+>`judge.isArray(value)`
 
 
 ```js
-judge.array(['foo','bar',{'name':'trigkit4'}])
+judge.isArray(['foo','bar',{'name':'trigkit4'}])
 
 => true
 ```
@@ -50,6 +68,11 @@ judge user's current device,whitch can judge:`Android`,`iPad`,`iPhone`,`windows 
 var str =  null;
 judge.isExist(str)
 =>false
+
+
+var str = '';
+judge.isExist(str)
+=>false
 ```
 
 >`judge.isInt(num)`
@@ -60,10 +83,6 @@ judge.isInt(num);
 
 =>false
 ```
-
->`judge.isOnline()`
-
-judge current state is online(true) or offline(false)
 
 >`judge.inArray(val,arr)`
 
@@ -102,9 +121,41 @@ judge current client is browser or not;
 judge a given value is function or not
 
 
+```js
+var fn = new Function ();
+judge.isFunction(fn);
+
+=>true
+```
+
 >`judge.isEqual()`
 
 judge two values is strict equal or not 
+
+```js
+
+var judge = require('judgejs');
+var str = Boolean(true);
+var str2 = !!true;
+var str3 = true;
+
+var obj1 = {};
+var obj2 = new Object();
+var obj4 = Object.create(null);
+
+var foo = {name:'trigkit4'};
+var bar = {age:23};
+var baz = Object.assign(foo,bar);
+var obj3 = {
+    name: 'trigkit4',
+    age: 23
+};
+ 
+judge.isEqual(str,str2,str3);//true
+judge.isEqual(obj1,obj2,obj4);//false
+judge.isEqual(str,str2,str3);//true
+judge.isEqual(baz,obj3);//false,refer address different
+```
 
 >`judge.size(val)`
 
@@ -128,7 +179,9 @@ judge a given array's elements is unique or not
 ```
 var a = [1,2];
 var arr = [1,2,3,4,a];
-judge.isUnique(arr);//false
+judge.isUnique(arr);
+
+=>true
 ```
 
 >`judge.isString()`
@@ -227,7 +280,7 @@ judge.isPhoneNum(num);
 
 =>true
 ```
->`judge.isIncludeChinese`
+>`judge.includeChinese`
 
 ```js
 var ch = '23ef脚本';
@@ -312,3 +365,46 @@ judge.hasHash(url);
 
 => true
 ```
+
+>`judge.has(obj,key)`
+
+judge obj has contain the given key
+
+
+```js
+
+var obj ={
+    name:'trigkit4'
+};
+judge.has(obj,'name');
+
+=>true
+```
+
+>`judge.isUrl(url)`
+
+judge a value is url or not 
+
+```js
+
+var url = 'www.jd.d';
+judge.isUrl(url);
+
+=>false
+```
+
+>`judge.zipCode(code)`
+
+judge a given value is China zipcode or not
+
+```js
+var zipcode = 362014;
+judge.zipCode(zipcode);
+
+=>true
+```
+
+
+
+
+

@@ -1,3 +1,4 @@
+
 /**
  * Created by trigkit4 on 16/1/17.
  * judge.js <https://github.com/hawx1993/judge>
@@ -16,21 +17,24 @@
         root.judge = factory();
     }
 }(this, function (root) {
+
     root = this || global;
     var judge = {},
-        ua = navigator.userAgent.toLowerCase(),
         op = Object.prototype,
         oString = op.toString;
+    if(typeof window !== 'undefined'){
+        var ua = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
 
+    }
     judge = (function () {
         return {
             version: '0.1.2',
             type: function (obj) {
-            return Object.prototype.toString.call(obj)
-                .replace(/^\[object (.+)\]$/, "$1")
-                .toLowerCase();
+                return Object.prototype.toString.call(obj)
+                    .replace(/^\[object (.+)\]$/, "$1")
+                    .toLowerCase();
             },
-            array : function (value) {
+            isArray : function (value) {
                 return  oString.call(value) === '[object Array]';
             },
             include : function(str,substr){
@@ -41,23 +45,23 @@
             },
             kernel: function(){
                 if(/gecko\/\d/i.test(ua)){
-                        return 'gecko';
-                  }else if(/webkit\//.test(ua)){
-                      return 'webkit'
-                  }else if(/MSIE\d/.test(ua)){
-                      return 'IE';
-                  }else if(/edge/i.test(ua)){
-                       return 'edge';
-                  }
+                    return 'gecko';
+                }else if(/webkit\//.test(ua)){
+                    return 'webkit'
+                }else if(/MSIE\d/.test(ua)){
+                    return 'IE';
+                }else if(/edge/i.test(ua)){
+                    return 'edge';
+                }
             },
             platform : function(){
-                if(ua.match(/ipad/i) === 'ipad') {
+                if(ua.match(/ipad/i)){
                     return 'ipad';
-                }else if(/android/i.test(ua)){
+                }else if(ua.match(/android/i)){
                     return 'Android';
-                }else if(ua.match(/(iPhone\sOS)\s([\d_]+)/i)){
+                }else if(ua.match(/iphone/i)){
                     return 'iPhone';
-                }else if(ua.match(/windows mobile/i)== 'windows mlbile'){
+                }else if(ua.match(/Windows Phone ([\d.]+)/)){
                     return 'windows phone'
                 }else if(ua.match(/Mac os X/i)){
                     return 'Mac os X';
@@ -69,20 +73,19 @@
                     return 'qq'
                 }else if(ua.match(/blackberry/i || /BB10/i)){
                     return 'blackberry';
+                }else if(/android/i.test(userAgent) && !/mobile/i.test(ua)){
+                    return 'androidTablet'
                 }
             },
             //judge value isexist?
             isExist : function(value){
-                return value !== null && value !== undefined;
+                return value !== null && value !== undefined && value !== '';
             },
             isInt: function(num){
                 return Math.round(num) === num;
             },
-            isOnline: function(){
-                return navigator.onLine;
-            },
             inArray: function(val,arr){
-                if(!judge.array(arr)){
+                if(!judge.isArray(arr)){
                     return false;
                 }
                 for(var i = 0;i<arr.length;i++){
@@ -153,7 +156,7 @@
                 return judge.isString(value) && value.length === 1;
             },
             isEmpty: function(value){
-                if(judge.array(value) || judge.isString(value)){
+                if(judge.isArray(value) || judge.isString(value)){
                     return (value.length <= 0);
                 }else if(judge.type(value)=== null || judge.type(value) === undefined){
                     return true;
@@ -172,24 +175,19 @@
                 return !!req;
             },
             isPhoneNum: function(num){
-                var phone = new RegExp(/^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/).test(num);
+                var phone = /^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/.test(num);
                 return !!phone;
             },
-            isIncludeChinese: function(ch){
+            includeChinese: function(ch){
                 return !!/[\u4e00-\u9fa5]/g.test(ch);
             },
             onlyChinese: function(ch){
                 var myReg =/^[\u4e00-\u9fa5]{0,}$/;
                 return !!myReg.test(ch);
             },
-            isElement: function(element){
-                return typeof HTMLElement !== 'undefined' ? function (element) {
-                    return (element instanceof HTMLElement);
-                } :
-                    function (element) {
-                        return !!(element && element.nodeType === 1);
-                    }
-            }(),
+            isElement: function(ele){
+                return !!(ele && ele.nodeType === 1);
+            },
             //judge a given value is being null or undefined
             isSet: function(value){
                 return value !== null && value !== (void 0)
@@ -226,21 +224,21 @@
                 var match = url.match(/#(.*)$/);
                 var ends =  match ? match[1] : '';
                 return (ends !== '') ;
+            },
+            //judge obj has contain the given key
+            has: function (obj,key) {
+                return obj != null && hasOwnProperty.call(obj,key);
+            },
+            isUrl: function (url) {
+                var re = new RegExp(/^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i);
+                return re.test(url);
+            },
+            zipCode: function (code) {
+                var reg = new RegExp(/[1-9]\d{5}(?!\d)/);
+                return reg.test(code);
             }
+
         }
     })();
     return judge;
 }));
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,7 +1,7 @@
 {
-  "name": "judge",
-  "version": "0.1.0",
-  "description": "a library judge something",
+  "name": "judgejs",
+  "version": "0.1.3",
+  "description": "a js library for judging something",
   "main": "judge.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
