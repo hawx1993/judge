@@ -26,7 +26,7 @@ var judge = require('judgejs');
 
 judge.vsersion
 
-=>0.1.2
+=>0.1.4
 
 ```
 

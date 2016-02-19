@@ -28,7 +28,7 @@
     }
     judge = (function () {
         return {
-            version: '0.1.2',
+            version: '0.1.4',
             type: function (obj) {
                 return Object.prototype.toString.call(obj)
                     .replace(/^\[object (.+)\]$/, "$1")
