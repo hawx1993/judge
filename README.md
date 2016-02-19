@@ -56,11 +56,20 @@ judge current browser is weixin's built-in browser or not
 
 >`judge.kernel()`
 
-judge current browser's kernel,whicth can judge `webkit`,`gecko`,`IE`,`edge`
+judge current browser's kernel,whicth can judge：
+
+可以检测的类型如下：
+
+`webkit`,`gecko`,`IE`,`edge`
+
 
 >`judge.platform()`
 
-judge user's current device,whitch can judge:`Android`,`iPad`,`iPhone`,`windows phone`,`Mac os X`,`Windows`,`Linux`,`qq`,`blackberry`
+judge user's current device,whitch can judge:
+
+可以检测的类型如下：
+
+`Android`,`iPad`,`iPhone`,`windows phone`,`Mac os X`,`Windows`,`Linux`,`qq`,`blackberry`，`androidTablet`
 
 >`judge.isExist(value)`
 
@@ -115,6 +124,16 @@ judge.isEmail(email);
 >`judge.isBrowser()`
 
 judge current client is browser or not;
+
+>`judge.browser()`
+
+judge current browser 
+
+可以检测的类型如下：
+
+```js
+IE6、IE7、IE8、IE9，IE，Chrome，Firefox，Safari，360，Opera，maxthon
+```
 
 >`judge.isFunction()`
 
