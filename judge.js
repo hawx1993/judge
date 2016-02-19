@@ -22,13 +22,15 @@
     var judge = {},
         op = Object.prototype,
         oString = op.toString;
+
+    //support Node.js module
     if(typeof window !== 'undefined'){
         var ua = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
-
     }
+
     judge = (function () {
         return {
-            version: '0.1.4',
+            version: '0.1.2',
             type: function (obj) {
                 return Object.prototype.toString.call(obj)
                     .replace(/^\[object (.+)\]$/, "$1")
@@ -41,7 +43,7 @@
                 return str.indexOf(substr) > -1;
             },
             isWeiXin: function(){
-                return !!ua.match(/MicroMessager/i) ? 'micromessager':'false';
+                return !!ua.match(/MicroMessenger/i)=="micromessenger";
             },
             kernel: function(){
                 if(/gecko\/\d/i.test(ua)){
@@ -73,12 +75,37 @@
                     return 'qq'
                 }else if(ua.match(/blackberry/i || /BB10/i)){
                     return 'blackberry';
-                }else if(/android/i.test(userAgent) && !/mobile/i.test(ua)){
+                }else if(/android/i.test(ua) && !/mobile/i.test(ua)){
                     return 'androidTablet'
                 }
             },
+            browser: function () {
+                if(ua.indexOf("msie 6.0") > 0){
+                    return "IE6";
+                }else if(ua.indexOf("msie 7.0") > 0){
+                    return "IE7";
+                }else if(ua.indexOf("msie 9.0") >0 && !window.innerWidth){
+                    return "IE8";
+                }else if(ua.indexOf("msie 9.0") > 0){
+                    return "IE9";
+                }else if(ua.indexOf("chrome") !== -1){
+                    return "Chrome";
+                }else if(ua.indexOf("firefox") !== -1){
+                    return "Firefox";
+                }else if(ua.indexOf("safari") !== -1){
+                    return "Safari";
+                }else if(ua.indexOf("360se") > -1){
+                    return "360";
+                }else if(ua.indexOf("maxthon") > -1){
+                    return "Maxthon";
+                }else if(ua.indexOf("ie") > -1){
+                    return "IE";
+                }else if(ua.indexOf("opera") > -1){
+                    return "Opera";
+                }
+            },
             //judge value isexist?
-            isExist : function(value){
+            isExist: function(value){
                 return value !== null && value !== undefined && value !== '';
             },
             isInt: function(num){
