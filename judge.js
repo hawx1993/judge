@@ -48,12 +48,12 @@
             kernel: function(){
                 if(/gecko\/\d/i.test(ua)){
                     return 'gecko';
-                }else if(/webkit\//.test(ua)){
-                    return 'webkit'
-                }else if(/MSIE\d/.test(ua)){
-                    return 'IE';
                 }else if(/edge/i.test(ua)){
                     return 'edge';
+                } else if(/webkit\//.test(ua)){
+                    return 'webkit'
+                }else if(/msie/i.test(ua) || "ActiveXObject" in window){
+                    return 'IE';
                 }
             },
             platform : function(){
@@ -73,7 +73,7 @@
                     return 'Linux';
                 }else if(ua.match(/\sQQ/i) =='qq'){
                     return 'qq'
-                }else if(ua.match(/blackberry/i || /BB10/i)){
+                }else if(ua.match(/Blackberry/i)){
                     return 'blackberry';
                 }else if(/android/i.test(ua) && !/mobile/i.test(ua)){
                     return 'androidTablet'
@@ -102,7 +102,31 @@
                     return "IE";
                 }else if(ua.indexOf("opera") > -1){
                     return "Opera";
+                }else if(ua.indexOf("edge") > -1){
+                    return "edge"
+                }else if(ua.indexOf('baidu') > -1){
+                    return "Baidu"
+                }else if(ua.indexOf('qqbrowser') > -1){
+                    return "QQ"
+                }else if(ua.indexOf("se") > -1){
+                    return "sougou"
                 }
+            },
+            isMobile: function () {
+                return !!ua.match(/(iPhone|iPod|Android|ios|iPad)/i);
+            },
+            isPc: function () {
+                var Agents = ["Android", "iPhone",
+                    "SymbianOS", "Windows Phone",
+                    "iPad", "iPod"];
+                var flag = true;
+                for (var i = 0; i < Agents.length; i++) {
+                    if (ua.indexOf(Agents[i]) > 0) {
+                        flag = false;
+                        break;
+                    }
+                }
+                return flag;
             },
             //judge value isexist?
             isExist: function(value){

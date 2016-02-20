@@ -26,7 +26,7 @@ var judge = require('judgejs');
 
 judge.vsersion
 
-=>0.1.4
+=>0.1.5
 
 ```
 
@@ -132,7 +132,7 @@ judge current browser
 可以检测的类型如下：
 
 ```js
-IE6、IE7、IE8、IE9，IE，Chrome，Firefox，Safari，360，Opera，maxthon
+IE6、IE7、IE8、IE9，IE，Chrome，Firefox，Safari，360，Opera，maxthon，baidu,qq,sougou
 ```
 
 >`judge.isFunction()`
@@ -422,7 +422,13 @@ judge.zipCode(zipcode);
 
 =>true
 ```
+>`judge.isMobile()`
 
+judge user device is mobile(ipad,iphone,ipod,android) or not;
+
+>`judge.isPc()`
+
+judge user device is PC or not
 
 
 
