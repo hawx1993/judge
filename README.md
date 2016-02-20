@@ -431,5 +431,7 @@ judge user device is mobile(ipad,iphone,ipod,android) or not;
 judge user device is PC or not
 
 
+>`judge.isChromium()`
 
+judge user's browser is chrome kernel browser
 

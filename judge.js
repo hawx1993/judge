@@ -47,24 +47,26 @@
             },
             kernel: function(){
                 if(/gecko\/\d/i.test(ua)){
-                    return 'gecko';
+                    return 'Gecko';
                 }else if(/edge/i.test(ua)){
-                    return 'edge';
+                    return 'Edge';
                 } else if(/webkit\//.test(ua)){
-                    return 'webkit'
+                    return 'Webkit'
                 }else if(/msie/i.test(ua) || "ActiveXObject" in window){
                     return 'IE';
+                }else if(ua.indexOf('Presto') > -1){
+                    return "Opera";
                 }
             },
             platform : function(){
                 if(ua.match(/ipad/i)){
-                    return 'ipad';
+                    return 'iPad';
                 }else if(ua.match(/android/i)){
                     return 'Android';
                 }else if(ua.match(/iphone/i)){
                     return 'iPhone';
                 }else if(ua.match(/Windows Phone ([\d.]+)/)){
-                    return 'windows phone'
+                    return 'Windows phone'
                 }else if(ua.match(/Mac os X/i)){
                     return 'Mac os X';
                 }else if(ua.match(/Window/i)){
@@ -72,11 +74,11 @@
                 }else if(ua.match(/Linux/i)){
                     return 'Linux';
                 }else if(ua.match(/\sQQ/i) =='qq'){
-                    return 'qq'
+                    return 'QQ'
                 }else if(ua.match(/Blackberry/i)){
-                    return 'blackberry';
+                    return 'Blackberry';
                 }else if(/android/i.test(ua) && !/mobile/i.test(ua)){
-                    return 'androidTablet'
+                    return 'AndroidTablet'
                 }
             },
             browser: function () {
@@ -88,11 +90,11 @@
                     return "IE8";
                 }else if(ua.indexOf("msie 9.0") > 0){
                     return "IE9";
-                }else if(ua.indexOf("chrome") !== -1){
+                }else if(ua.indexOf("chrome") > -1){
                     return "Chrome";
-                }else if(ua.indexOf("firefox") !== -1){
+                }else if(ua.indexOf("firefox") > -1){
                     return "Firefox";
-                }else if(ua.indexOf("safari") !== -1){
+                }else if(ua.indexOf("safari") > -1){
                     return "Safari";
                 }else if(ua.indexOf("360se") > -1){
                     return "360";
@@ -103,30 +105,20 @@
                 }else if(ua.indexOf("opera") > -1){
                     return "Opera";
                 }else if(ua.indexOf("edge") > -1){
-                    return "edge"
+                    return "Edge";
                 }else if(ua.indexOf('baidu') > -1){
-                    return "Baidu"
+                    return "Baidu";
                 }else if(ua.indexOf('qqbrowser') > -1){
-                    return "QQ"
+                    return "QQ";
                 }else if(ua.indexOf("se") > -1){
-                    return "sougou"
+                    return "Sougou";
                 }
             },
             isMobile: function () {
                 return !!ua.match(/(iPhone|iPod|Android|ios|iPad)/i);
             },
             isPc: function () {
-                var Agents = ["Android", "iPhone",
-                    "SymbianOS", "Windows Phone",
-                    "iPad", "iPod"];
-                var flag = true;
-                for (var i = 0; i < Agents.length; i++) {
-                    if (ua.indexOf(Agents[i]) > 0) {
-                        flag = false;
-                        break;
-                    }
-                }
-                return flag;
+                return !ua.match(/(iPhone|iPod|Android|ios|iPad)/i);
             },
             //judge value isexist?
             isExist: function(value){
@@ -287,6 +279,13 @@
             zipCode: function (code) {
                 var reg = new RegExp(/[1-9]\d{5}(?!\d)/);
                 return reg.test(code);
+            },
+            isChromium: function () {
+                var chromium = "mozilla/&&applewebkit/&&chrome/&&safari/".split("&&");
+                for (var i = 0; i < chromium.length; i++)
+                    if (ua.indexOf(chromium[i]) < 0)
+                        return false;
+                return true;
             }
 
         }
