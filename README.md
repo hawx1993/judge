@@ -131,7 +131,7 @@ judge current browser
 可以检测的类型如下：
 
 ```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE", "Firefox", "Edge","Sougou","Liebao","Weixin","UC","QQ","Baidu","Chrome", "Safari"
+IE6, IE7, IE8, IE9, IE10, IE11, IE, Firefox, Edge,Sougou,Liebao,Weixin,UC,QQ,Opera,Chrome, Safari
 ```
 
 >`judge.isFunction()`

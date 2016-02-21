@@ -3,23 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>requirejs实例</title>
+    <style>
+        .ispc{color:red}
+        .ismobile{color: blue}
+        .browser{color: cornflowerblue}
+        .platform{color: green;}
+        .kernel{color: brown;}
+        .isChromium{color: pink;}
+        .require{
+            color: darkorange;}
+    </style>
 </head>
 <body>
 <script src="../lib/judge.js"></script>
 <script src="../lib/require.js"></script>
 <script src="../lib/main.js"></script>
 <script>
-    document.write(judge.isPc());
-    document.writeln();
-    document.write(judge.isMobile());
-    document.writeln();
-    document.write(judge.browser());
-    document.writeln();
-    document.write(judge.platform());
-    document.writeln();
-    document.write(judge.kernel());
-    document.writeln();
-    document.write(judge.isChromium());
+    document.write("isPC: "+'<span class="ispc">'+judge.isPc()+'</span>');
+    document.write("<br>");
+    document.write("<br>");
+    document.write("isMobile: "+'<span class="ismobile">'+judge.isMobile()+'</span>');
+    document.writeln("<br>");
+    document.write("<br>");
+    document.write("Your's browser name is: "+'<span class="browser">'+judge.browser()+'</span>');
+    document.writeln("<br>");
+    document.write("<br>");
+    document.write("Your current platform is: "+'<span class="platform">'+judge.platform()+'</span>');
+    document.writeln("<br>");
+    document.write("<br>");
+    document.write("Your browser's engine is: "+'<span class="kernel">'+judge.kernel()+'</span>');
+    document.writeln("<br>");
+    document.write("<br>");
+    document.write("Your current browser isChromium: "+'<span class="isChromium">'+judge.isChromium()+'</span>');
+    document.writeln("<br>");
+    document.write("<br>");
+    document.write('<span class="require">'+"open console to see requirejs examples"+'</span>')
 </script>
 </body>
 </html>
