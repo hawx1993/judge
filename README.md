@@ -28,7 +28,7 @@ var judge = require('judgejs');
 
 judge.vsersion
 
-=>0.1.7
+=>0.2.1
 
 ```
 
@@ -74,7 +74,7 @@ judge user's current device,whitch can judge:
 
 judge iphone device type,whitch can judge:
 
-```
+```js
 iphone4(s) ,iphone5(s), iphone6(s),iphone6(s) plus
 ```
 
@@ -82,6 +82,7 @@ iphone4(s) ,iphone5(s), iphone6(s),iphone6(s) plus
 
 judge ios system's version:
 
+```js
 judge.iosVersion();
 
 =>9.0.2
