@@ -25,7 +25,7 @@ var judge = require('judgejs');
 
 judge.vsersion
 
-=>0.1.6
+=>0.2.1
 
 ```
 
@@ -63,7 +63,28 @@ judge.include(str,substr);
 
 检测用户当前设备，可以检测的类型如下：
 
-`Android`,`iPad`,`iPhone`,`windows phone`,`Mac`,`Windows`,`Linux`,`blackberry`，`androidTablet`
+`Android`,`iPad`,`iOS`,`windows phone`,`Mac`,`Windows`,`Linux`,`blackberry`，`androidTablet`
+
+>`judge.iosDevice()`
+
+检测iPhone手机设备类型，可以检测如下类型的iPhone手机：
+
+```
+iphone4(s) ,iphone5(s), iphone6(s),iphone6(s) plus
+```
+
+>`judge.iosVersion()`
+
+检测iOS 系统版本号，返回数字形式的版本号：
+
+judge.iosVersion();
+
+=>9.0.2
+```
+
+>`judge.androidVersion()`
+
+同上
 
 >`judge.isExist(value)`
 
@@ -320,6 +341,18 @@ judge.onlyChinese(ch);
 
 =>false
 ```
+
+>`judge.onlyNumber()`
+
+判断给定值是否只含有数字：
+
+```js
+var s = '233';
+judge.onlyNumber(s);
+
+=>true
+``
+
 
 >`judge.isElement(element)`
 

@@ -31,13 +31,17 @@
     document.write("Your current platform is: "+'<span class="platform">'+judge.platform()+'</span>');
     document.writeln("<br>");
     document.write("<br>");
-    document.write("Your browser's engine is: "+'<span class="kernel">'+judge.kernel()+'</span>');
-    document.writeln("<br>");
+    document.write("Your browser's engine is: "+'<span class="kernel">'+judge.kernel()+'</span>');document.writeln("<br>");
     document.write("<br>");
     document.write("Your current browser isChromium: "+'<span class="isChromium">'+judge.isChromium()+'</span>');
     document.writeln("<br>");
     document.write("<br>");
-    document.write('<span class="require">'+"open console to see requirejs examples"+'</span>')
+
+    var s = '2';
+    document.write('is "2" onlyNumber: '+judge.onlyNumber(s));
+    document.writeln("<br>");
+    document.writeln("<br>");
+    document.write('<span class="require">'+"open console to see requirejs examples"+'</span>');
 </script>
 </body>
 </html>

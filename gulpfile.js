@@ -7,9 +7,9 @@ var jshint = require('gulp-jshint');
 var rename = require('gulp-rename');
 
 gulp.task('compress', function () {
-    return gulp.src('./judge.js')
+    return gulp.src('./lib/judge.js')
         .pipe(uglify())
-        .pipe(rename('judge.min.js'))
+        .pipe(rename('./lib/judge.min.js'))
         .pipe(gulp.dest('./'))
 });
 gulp.task('lint', function () {

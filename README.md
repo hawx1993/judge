@@ -6,7 +6,7 @@
 
 
 - No dependencies
-- Support `AMD` & `Common.js`
+- Support `AMD` & `CommonJS`
 - light weight
 
 ```js
@@ -28,7 +28,7 @@ var judge = require('judgejs');
 
 judge.vsersion
 
-=>0.1.6
+=>0.1.7
 
 ```
 
@@ -68,7 +68,29 @@ judge user's current device,whitch can judge:
 
 可以检测的类型如下：
 
-`Android`,`iPad`,`iPhone`,`windows phone`,`Mac`,`Windows`,`Linux`,`blackberry`，`androidTablet`
+`Android`,`iPad`,`iOS`,`windows phone`,`Mac`,`Windows`,`Linux`,`blackberry`，`androidTablet`
+
+>`judge.iosDevice()`
+
+judge iphone device type,whitch can judge:
+
+```
+iphone4(s) ,iphone5(s), iphone6(s),iphone6(s) plus
+```
+
+>`judge.iosVersion()`
+
+judge ios system's version:
+
+judge.iosVersion();
+
+=>9.0.2
+```
+
+>`judge.androidVersion()`
+
+like above
+
 
 >`judge.isExist(value)`
 
@@ -290,7 +312,7 @@ judge.isQQ(qq);
 =>true
 ```
 
->`judge.jsPhoneNum`
+>`judge.isPhoneNumber`
 
 ```js
 var num = 13055503789;
@@ -315,6 +337,17 @@ judge.onlyChinese(ch);
 
 =>false
 ```
+
+>`judge.onlyNumber()`
+
+judge a given value is only number or not
+
+```js
+var s = '233';
+judge.onlyNumber(s);
+
+=>true
+``
 
 >`judge.isElement(element)`
 
