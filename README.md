@@ -348,7 +348,7 @@ var s = '233';
 judge.onlyNumber(s);
 
 =>true
-``
+```
 
 >`judge.isElement(element)`
 
