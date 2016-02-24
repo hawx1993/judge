@@ -72,7 +72,7 @@ judge current browser
 可以检测的类型如下：
 
 ```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","Mobile Safari","Mobile Chrome","Chrome", "Safari"
+"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Mobile Chrome","Chrome", "Safari"
 ```
 
 >`judge.iosDevice()`
@@ -95,6 +95,7 @@ TODO,support more andoird device
 
 检测iOS 系统版本号，返回数字形式的版本号：
 
+```
 judge.iosVersion();
 
 =>9.0.2
@@ -369,7 +370,7 @@ var s = '233';
 judge.onlyNumber(s);
 
 =>true
-``
+```
 
 
 >`judge.isElement(element)`
@@ -392,6 +393,7 @@ judge.isRegExp(reg);
 
 => true
 ```
+
 >`judge.isIdNumber(id)`
 
 判断你的身份证号码是否符合规范：
@@ -433,6 +435,7 @@ judge.assert(add(2,3) === 6,'false');
 
 
 >`judge.hasHash(url)`
+
 判断一个给定的url是否有哈希值
 
 
