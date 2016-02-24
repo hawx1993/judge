@@ -77,7 +77,7 @@ judge current browser
 可以检测的类型如下：
 
 ```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","QQBrowser","Opera","Mobile Safari","Mobile Chrome","Chrome", "Safari"
+"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","Mobile Safari","Mobile Chrome","Chrome", "Safari"
 ```
 
 
