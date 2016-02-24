@@ -28,7 +28,7 @@ var judge = require('judgejs');
 
 judge.vsersion
 
-=>0.2.1
+=>0.2.2
 
 ```
 
@@ -70,6 +70,17 @@ judge user's current device,whitch can judge:
 
 `Android`,`iPad`,`iOS`,`windows phone`,`Mac`,`Windows`,`Linux`,`blackberry`，`androidTablet`
 
+>`judge.browser()`
+
+judge current browser 
+
+可以检测的类型如下：
+
+```js
+"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","QQBrowser","Opera","Mobile Safari","Mobile Chrome","Chrome", "Safari"
+```
+
+
 >`judge.iosDevice()`
 
 judge iphone device type,whitch can judge:
@@ -77,6 +88,14 @@ judge iphone device type,whitch can judge:
 ```js
 iphone4(s) ,iphone5(s), iphone6(s),iphone6(s) plus
 ```
+
+>`judge.androidDevice()`
+
+judge android device 
+
+Now, only support:MI4
+
+TODO,support more andoird device
 
 >`judge.iosVersion()`
 
@@ -147,15 +166,6 @@ judge.isEmail(email);
 
 judge current client is browser or not;
 
->`judge.browser()`
-
-judge current browser 
-
-可以检测的类型如下：
-
-```js
-IE6, IE7, IE8, IE9, IE10, IE11, IE, Firefox, Edge,Sougou,Liebao,Weixin,UC,QQ,Opera,Chrome, Safari
-```
 
 >`judge.isFunction()`
 
@@ -353,6 +363,14 @@ judge.onlyNumber(s);
 >`judge.isElement(element)`
 
 judge a given element is HTMLelement or not
+
+
+```js
+var div = document.createElement('div');
+judge.isElement(div);
+
+=>true
+```
 
 >`judge.isSet(value)`
 

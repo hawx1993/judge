@@ -25,7 +25,7 @@ var judge = require('judgejs');
 
 judge.vsersion
 
-=>0.2.1
+=>0.2.2
 
 ```
 
@@ -65,13 +65,31 @@ judge.include(str,substr);
 
 `Android`,`iPad`,`iOS`,`windows phone`,`Mac`,`Windows`,`Linux`,`blackberry`，`androidTablet`
 
+>`judge.browser()`
+
+judge current browser 
+
+可以检测的类型如下：
+
+```js
+"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","QQBrowser","Opera","Mobile Safari","Mobile Chrome","Chrome", "Safari"
+```
+
 >`judge.iosDevice()`
 
-检测iPhone手机设备类型，可以检测如下类型的iPhone手机：
+检测`iPhone`手机设备类型，可以检测如下类型的`iPhone`手机：
 
 ```
 iphone4(s) ,iphone5(s), iphone6(s),iphone6(s) plus
 ```
+
+>`judge.androidDevice()`
+
+judge android device 
+
+Now, only support:MI4
+
+TODO,support more andoird device
 
 >`judge.iosVersion()`
 
