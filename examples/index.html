@@ -18,40 +18,9 @@
 <div class="test"></div>
 <script src="../lib/judge.js"></script>
 <script src="../lib/require.js"></script>
-<script src="../lib/main.js"></script>
+<!--<script src="../lib/main.js"></script>-->
 <script>
-    document.write("isPC: "+'<span class="ispc">'+judge.isPc()+'</span>');
-    document.write("<br>");
-    document.write("<br>");
-    document.write("isMobile: "+'<span class="ismobile">'+judge.isMobile()+'</span>');
-    document.writeln("<br>");
-    document.write("<br>");
-    document.write("Your's browser name is: "+'<span class="browser">'+judge.browser()+'</span>');
-    document.writeln("<br>");
-    document.write("<br>");
-    document.write("Your current platform is: "+'<span class="platform">'+judge.platform()+'</span>');
-    document.writeln("<br>");
-    document.write("<br>");
-    document.write("Your browser's engine is: "+'<span class="kernel">'+judge.kernel()+'</span>');document.writeln("<br>");
-    document.write("<br>");
-    document.write("Your current browser isChromium: "+'<span class="isChromium">'+judge.isChromium()+'</span>');
-    document.writeln("<br>");
-    document.write("<br>");
-
-    var s = '2';
-    document.write('is "2" onlyNumber: '+judge.onlyNumber(s));
-    document.writeln("<br>");
-    document.writeln("<br>");
-    document.write('<span class="require">'+"open console to see requirejs examples"+'</span>');
-
-    var div = document.createElement('div');
-    console.log(judge.isElement(div));
-    var phone = 22087702;
-    var str = '{"name":"jack"}';
-    console.log(judge.isJson(str));
-    var json = JSON.parse(str);
-    console.log(judge.isJson(json));//true
-    console.log(judge.phoneNumber(17755503789));
+    console.log(judge.phoneNumber(13850151010));
 </script>
 </body>
 </html>
