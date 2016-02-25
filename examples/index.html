@@ -15,12 +15,29 @@
     </style>
 </head>
 <body>
-<div class="test"></div>
 <script src="../lib/judge.js"></script>
 <script src="../lib/require.js"></script>
-<!--<script src="../lib/main.js"></script>-->
+<script src="../lib/main.js"></script>
 <script>
-    console.log(judge.phoneNumber(13850151010));
+    document.write("isPC: "+'<span class="ispc">'+judge.isPc()+'</span>');
+    document.write("<br>");
+    document.write("<br>");
+    document.write("isMobile: "+'<span class="ismobile">'+judge.isMobile()+'</span>');
+    document.writeln("<br>");
+    document.write("<br>");
+    document.write("Your's browser name is: "+'<span class="browser">'+judge.browser()+'</span>');
+    document.writeln("<br>");
+    document.write("<br>");
+    document.write("Your current platform is: "+'<span class="platform">'+judge.platform()+'</span>');
+    document.writeln("<br>");
+    document.write("<br>");
+    document.write("Your browser's kernel is: "+'<span class="kernel">'+judge.kernel()+'</span>');document.writeln("<br>");
+    document.write("<br>");
+    document.write("Your current browser isChromium: "+'<span class="isChromium">'+judge.isChromium()+'</span>');
+    document.writeln("<br>");
+    document.write("<br>");
+    document.writeln("is IE browser: "+ judge.isIE());
+
 </script>
 </body>
 </html>

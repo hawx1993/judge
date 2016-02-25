@@ -20,20 +20,30 @@ $ gulp compress #生成judge.min.js文件
 
 ```js
 $ npm install judgejs --save-dev
+
 ```
+
+# 目录
+* [使用方法](#使用方法)
+* [API](#API)
+* [数据类型判断](#数据类型判断)
+* [平台判断](#平台判断)
+* [设备判断](#设备判断)
+* [存在性和信息校验](#存在性和信息校验)
+
 ### 使用方法
 
 ```js
-
 var judge = require('judgejs');
 
 judge.version
 
-=>0.2.4
-
+=>0.3.0
 ```
 
 ### API
+
+#### 数据类型判断
 
 >`judge.isArray(value)`
 
@@ -44,88 +54,6 @@ judge.isArray(['foo','bar',{'name':'trigkit4'}])
 => true
 ```
 
->`judge.include(str,substr)`
-
-```js
-var str =  'microsoft';
-var substr = 'soft';
-judge.include(str,substr);
-
-=>true
-```
-
->`judge.kernel()`
-
-用于检测当前浏览器的内核（排版引擎）
-
-可以检测的类型如下：
-
-`Webkit`,`Gecko`,`Trident`,`Edge`,`Opera`
-
-
->`judge.platform()`
-
-检测用户当前设备，可以检测的类型如下：
-
-`Android`,`iPad`,`iOS`,`windows phone`,`Mac`,`Windows`,`Linux`,`blackberry`，`androidTablet`
-
->`judge.browser()`
-
-检测当前浏览器类型，可以检测的类型如下：
-
-```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Android Chrome","iOS Chrome","Chrome", "Safari"
-```
-如需匹配不同平台的浏览器，需用`judge.platform()`再做一次匹配，使用场景可以是：
-
-```js
-    if(judge.browser()=="IE11"){...}
-```
->`judge.isIE()`
-
-判断浏览器是否是IE浏览器
-
->`judge.iosDevice()`
-
-检测`iPhone`手机设备类型，可以检测如下类型的`iPhone`手机：
-
-```
-iphone4(s) ,iphone5(s), iphone6(s),iphone6(s) plus
-```
-
->`judge.androidDevice()`
-
-检测安卓设备，现在只支持:MI4
-
-TODO：准备支持更多安卓手机设备
-
->`judge.iosVersion()`
-
-检测iOS 系统版本号，返回数字形式的版本号：
-
-```
-judge.iosVersion();
-
-=>9.0.2
-```
-
->`judge.androidVersion()`
-
-同上
-
->`judge.isExist(value)`
-
-```js
-var str =  null;
-judge.isExist(str)
-=>false
-
-
-var str = '';
-judge.isExist(str)
-=>false
-```
-
 >`judge.isInt(num)`
 
 ```js
@@ -134,9 +62,13 @@ judge.isInt(num);
 
 =>false
 ```
+>`judge.isError(value)`
+
+判断给定值是否是`Error`
+
 >`judge.isJson(json)`
 
-判断给定值是否是json格式
+判断给定值是否是`json`格式
 
 ```js
  var str = '{"name":"jack"}';
@@ -144,42 +76,6 @@ judge.isInt(num);
  var json = JSON.parse(str);
  judge.isJson(json);//true
 ```    
->`judge.inArray(val,arr)`
-
-判断参数`val`是否存在`arr`数组内：
-
-```js
-var val = [{'name':'huang'},123],
-    arr = [val,456];
-judge.inArray(val,arr);
-
-=>true
-```
-
->`judge.isTouchDevice()`
-
-判断用户当前设备是否是触屏设备，返回布尔值Boolean
-
->`judge.isEmail(em)`
-
-判断是否符合Email规范：
-
-```js
-var email = 'trigkit@163.com';
-judge.email(email);
-
-=>true
-```
-
-- `judge.hasLowerCase()`
-- `judge.hasNumber()`
-- `judge.hasCaptial()`
-
-
->`judge.isBrowser()`
-
-判断当前客户端是否是浏览器，返回布尔值
-
 
 >`judge.isFunction()`
 
@@ -192,63 +88,6 @@ judge.isFunction(fn);
 
 =>true
 ```
-
->`judge.isEqual()`
-
-判断两个给定值是否是严格相等：
-
-```js
-
-var judge = require('judgejs');
-var str = Boolean(true);
-var str2 = !!true;
-var str3 = true;
-
-var obj1 = {};
-var obj2 = new Object();
-var obj4 = Object.create(null);
-
-var foo = {name:'trigkit4'};
-var bar = {age:23};
-var baz = Object.assign(foo,bar);
-var obj3 = {
-    name: 'trigkit4',
-    age: 23
-};
- 
-judge.isEqual(str,str2,str3);//true
-judge.isEqual(obj1,obj2,obj4);//false
-judge.isEqual(str,str2,str3);//true
-judge.isEqual(baz,obj3);//false,refer address different
-```
-
->`judge.size(val)`
-
-判断给定值的大小，返回数值：
-
-```
-var val = '琅琊榜lyb';
-judge.size(val);
-
-=>6
-```
-
->`judge.isHttps()`
-
-判断当前站点是否是HTTPS，返回布尔值
-
->`judge.isUnique()`
-
-判断一个给定数组的元素的值是否唯一：
-
-```
-var a = [1,2];
-var arr = [1,2,3,4,a];
-judge.isUnique(arr);
-
-=>true
-```
-
 >`judge.isString()`
 
 判断一个给定的值是否是字符串，返回布尔值
@@ -264,7 +103,8 @@ judge.isObject(obj);//true
 
 >`judge.type()`
 
-判断值的类型，包括
+判断值的类型，包括：
+
 `array,object,number,string,null,undefined,function,boolean,object`
 
 ```js
@@ -300,35 +140,220 @@ function Person(){}
 var p1 = new Person();
 judge.type(p1);//object
 ```    
+>`judge.isEqual()`
 
->`judge.hasClass()`
+判断两个给定值是否是严格相等：
 
-判断给定值是否有class
+```js
+var judge = require('judgejs');
+var str = Boolean(true);
+var str2 = !!true;
+var str3 = true;
 
->`judge.isError(value)`
+var obj1 = {};
+var obj2 = new Object();
+var obj4 = Object.create(null);
 
-判断给定值是否是Error
+var foo = {name:'trigkit4'};
+var bar = {age:23};
+var baz = Object.assign(foo,bar);
+var obj3 = {
+    name: 'trigkit4',
+    age: 23
+};
+ 
+judge.isEqual(str,str2,str3);//true
+judge.isEqual(obj1,obj2,obj4);//false
+judge.isEqual(str,str2,str3);//true
+judge.isEqual(baz,obj3);//false,refer address different
+```
 
 >`judge.isChar()`
 
 判断给定值是否是字符
 
->`judge.isEmpty()`
+>`judge.isRegExp(reg)`
 
-判断给定值是否为空
-`null`和`undefined`被视为空，
-数字0被视为非空
+判断给定值是否是RegExp对象：
+
 
 ```js
+var reg = /^(a,z)/i;
+judge.isRegExp(reg);
 
-var arr = [];//judge.isEmpty(arr); => true
-var n = null;//judge.isEmpty(n); => true
-var u = undefined;//judge.isEmpty(u); => true
-var num = 0;//judge.isEmpty(num); => false
-var obj = Object.create(null);//judge.isEmpty(obj); => true
-var str = '';//judge.isEmpty(str); => true
+=> true
+```
+
+#### 平台判断
+
+
+>`judge.kernel()`
+
+用于检测当前浏览器的内核（排版引擎），可以检测的类型如下：
+
+`Webkit`,`Gecko`,`Trident`,`Edge`,`Opera`
+
+
+>`judge.platform()`
+
+检测用户当前设备，可以检测的类型如下：
+
+`Android`,`iPad`,`iOS`,`Windows phone`,`Mac`,`Windows`,`Linux`,`Blackberry`，`AndroidTablet`
+
+>`judge.browser()`
+
+检测当前浏览器类型，可以检测的类型如下：
+
+```js
+"IE6","IE7","IE8", "IE9", "IE10", "IE11","Firefox","Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Baidu Browser","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Android Chrome", "iOS Chrome","Chrome", "Safari","Mobile IE各个版本"
+```
+如需匹配不同平台的浏览器，需用`judge.platform()`再做一次匹配，使用场景可以是：
+
+```js
+if(judge.browser()=="IE11"){...}
+```
+
+>`judge.isIE()`
+
+判断浏览器是否是`IE`浏览器
+
+
+>`judge.iosVersion()`
+
+判断`iOS `系统版本号，返回数字形式的版本号：
 
 ```
+judge.iosVersion();
+
+=>9.0.2
+```
+
+>`judge.androidVersion()`
+
+同上
+
+
+
+
+>`judge.isChromium()`
+
+判断用户的浏览器是否是套着`chrome`内核的浏览器，返回布尔值
+
+
+
+#### 设备判断
+
+>`judge.isMobile()`
+
+判断用户设备是否是移动设备(ipad,iphone,ipod,android) ：
+
+>`judge.isPc()`
+
+判断用户设备是否是PC
+
+>`judge.iosDevice()`
+
+检测`iPhone`手机设备类型，可以检测如下类型的`iPhone`手机：
+
+```
+iphone4(s) ,iphone5(c/s), iphone6(s),iphone6(s) plus
+```
+
+>`judge.androidDevice()`
+
+检测安卓设备，现在只支持:MI4
+
+TODO：准备支持更多安卓手机设备
+
+>`judge.isTouchDevice()`
+
+判断用户当前设备是否是触屏设备，返回布尔值Boolean
+
+### 存在性和信息校验
+
+>`judge.isExist(value)`
+
+```js
+var str =  null;
+judge.isExist(str)
+=>false
+
+var str = '';
+judge.isExist(str)
+=>false
+```
+
+>`judge.inArray(val,arr)`
+
+判断参数`val`是否存在`arr`数组内：
+
+```js
+var val = [{'name':'huang'},123],
+    arr = [val,456];
+judge.inArray(val,arr);
+
+=>true
+```
+
+>`judge.email(em)`
+
+判断是否符合`Email`规范：
+
+```js
+var email = 'hwx.trigkit4@163.com';
+judge.email(email);
+
+=>true
+
+var email2 = 'hwx.trigkit.@gmail.com';
+judge.email(email2);
+=>false
+```
+
+- `judge.hasLowerCase()`
+
+- `judge.hasNumber()`
+
+- `judge.hasCaptial()`
+
+
+>`judge.isBrowser()`
+
+判断当前客户端是否是浏览器，返回布尔值
+
+
+>`judge.size(val)`
+
+判断给定值的大小，返回数值：
+
+```
+var val = '琅琊榜lyb';
+judge.size(val);
+
+=>6
+```
+
+>`judge.isHttps()`
+
+判断当前站点是否是HTTPS，返回布尔值
+
+>`judge.isUnique()`
+
+判断一个给定数组的元素的值是否唯一：
+
+```
+var a = [1,2];
+var arr = [1,2,3,4,a];//[1,2,3,4,[1,2]];
+judge.isUnique(arr);//true
+
+var arary = ['1',1];
+judge.isUnique(array);//true
+```
+
+
+>`judge.hasClass()`
+
+判断给定值是否有class
 
 > `judge.isQQ`
 
@@ -347,7 +372,7 @@ judge.isQQ(qq);
 
 ```js
 var num = 17755503789;
-judge.phoneNum(num);
+judge.phoneNumber(num);
 
 =>true
 ```
@@ -361,8 +386,8 @@ judge.phoneNum(num);
 判断给定值是否含有中文字符：
 
 ```js
-var ch = '23ef脚本';
-judge.isIncludeChinese(ch);
+var ch = 'js脚本';
+judge.includeChinese(ch);
 
 => true
 ```
@@ -371,7 +396,7 @@ judge.isIncludeChinese(ch);
 
 判断给定字符是否仅有中文字符：
 ```
-var ch = 'dd中国';
+var ch = 'zh中国';
 judge.onlyChinese(ch);
 
 =>false
@@ -393,22 +418,19 @@ judge.onlyNumber(s);
 
 判断给定元素是否是DOM元素，返回布尔值
 
+```js
+var div = document.createElement('div');
+judge.isElement(div);
+
+=>true
+```
 
 >`judge.isSet(value)`
 
 判断给定值是否不为`null`和`undefined`
 
->`judge.isRegExp(reg)`
-
-判断给定值是否是RegExp对象：
 
 
-```js
-var reg = /^(a,z)/i;
-judge.isRegExp(reg);
-
-=> true
-```
 
 >`judge.idNumber(id)`
 
@@ -498,16 +520,29 @@ judge.zipCode(zipcode);
 
 =>true
 ```
->`judge.isMobile()`
-
-判断用户设备是否是移动设备(ipad,iphone,ipod,android) ：
-
->`judge.isPc()`
-
-判断用户设备是否是PC：
 
 
+>`judge.include(str,substr)`
 
->`judge.isChromium()`
+```js
+var str =  'microsoft';
+var substr = 'soft';
+judge.include(str,substr);
 
-判断用户的浏览器是否是套着chrome内核的浏览器，返回布尔值
+=>true
+```
+
+>`judge.isEmpty()`
+
+判断给定值是否为空，`null`和`undefined`被视为空，
+数字`0`被视为`非空`
+
+```js
+var arr = [];//judge.isEmpty(arr); => true
+var n = null;//judge.isEmpty(n); => true
+var u = undefined;//judge.isEmpty(u); => true
+var num = 0;//judge.isEmpty(num); => false
+var obj = Object.create(null);//judge.isEmpty(obj); => true
+var str = '';//judge.isEmpty(str); => true
+```
+
