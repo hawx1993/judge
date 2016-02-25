@@ -166,7 +166,7 @@ judge.inArray(val,arr);
 
 ```js
 var email = 'trigkit@163.com';
-judge.isEmail(email);
+judge.email(email);
 
 =>true
 ```

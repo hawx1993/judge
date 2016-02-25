@@ -28,7 +28,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.2.3
+=>0.2.4
 
 ```
 
@@ -77,7 +77,7 @@ judge current browser
 可以检测的类型如下：
 
 ```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Android Chrome","iOS Chrome","Chrome", "Safari"
+"IE6","IE7","IE8", "IE9", "IE10", "IE11","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Android Chrome","iOS Chrome","Chrome", "Safari"
 ```
 
 
@@ -133,6 +133,17 @@ judge.isInt(num);
 
 =>false
 ```
+>`judge.isJson(json)`
+
+judge a given value is json type or not
+
+```js
+ var str = '{"name":"jack"}';
+ judge.isJson(str);//false
+ var json = JSON.parse(str);
+ judge.isJson(json);//true
+```    
+
 
 >`judge.inArray(val,arr)`
 
@@ -152,7 +163,7 @@ judge current user's device is touch device or not
 
 ```js
 var email = 'trigkit@163.com';
-judge.isEmail(email);
+judge.email(email);
 
 =>true
 ```
