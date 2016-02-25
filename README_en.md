@@ -334,14 +334,18 @@ judge.isQQ(qq);
 =>true
 ```
 
->`judge.isPhoneNumber`
+>`judge.phoneNumber`
 
 ```js
 var num = 13055503789;
-judge.isPhoneNumber(num);
+judge.phoneNumber(num);
 
 =>true
 ```
+>`judge.tel(num)`
+
+judge telephone number is true or not
+
 >`judge.includeChinese`
 
 ```js

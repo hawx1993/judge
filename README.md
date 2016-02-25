@@ -351,6 +351,11 @@ judge.phoneNum(num);
 
 =>true
 ```
+
+>`judge.tel(num)`
+
+判断电话号码是否符合规范
+
 >`judge.includeChinese`
 
 判断给定值是否含有中文字符：
