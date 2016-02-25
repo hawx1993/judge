@@ -1,5 +1,7 @@
 ###`judge.js`
 
+[EnglishDOC](./README_en.md)
+
 ####一个用来做判断的js类库
 一个js判断库，大部分API返回布尔值，小部分API直接返回数值
 
@@ -25,7 +27,7 @@ var judge = require('judgejs');
 
 judge.vsersion
 
-=>0.2.2
+=>0.2.3
 
 ```
 
@@ -67,13 +69,12 @@ judge.include(str,substr);
 
 >`judge.browser()`
 
-judge current browser 
-
-可以检测的类型如下：
+检测当前浏览器类型，可以检测的类型如下：
 
 ```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Mobile Chrome","Chrome", "Safari"
+"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Android Chrome","iOS Chrome","Chrome", "Safari"
 ```
+如需匹配不同平台的浏览器，需用`judge.platform()`再做一次匹配。
 
 >`judge.iosDevice()`
 
@@ -85,9 +86,7 @@ iphone4(s) ,iphone5(s), iphone6(s),iphone6(s) plus
 
 >`judge.androidDevice()`
 
-judge android device 
-
-Now, only support:MI4
+检测安卓设备，Now, only support:MI4
 
 TODO,support more andoird device
 
@@ -163,13 +162,6 @@ judge.isEmail(email);
 
 判断当前客户端是否是浏览器，返回布尔值
 
->`judge.browser()`
-
-判断当前浏览器名称，可以检测的类型如下：
-
-```js
-IE6, IE7, IE8, IE9, IE10, IE11, IE, Firefox, Edge,Sougou,Liebao,Weixin,UC,QQ,Opera,Chrome, Safari
-```
 
 >`judge.isFunction()`
 
@@ -495,4 +487,3 @@ judge.zipCode(zipcode);
 >`judge.isChromium()`
 
 判断用户的浏览器是否是套着chrome内核的浏览器，返回布尔值
-
