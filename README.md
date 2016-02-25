@@ -27,9 +27,9 @@ $ npm install judgejs --save-dev
 
 var judge = require('judgejs');
 
-judge.vsersion
+judge.version
 
-=>0.2.3
+=>0.2.4
 
 ```
 
@@ -74,9 +74,16 @@ judge.include(str,substr);
 检测当前浏览器类型，可以检测的类型如下：
 
 ```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Android Chrome","iOS Chrome","Chrome", "Safari"
+"IE6","IE7","IE8", "IE9", "IE10", "IE11","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Android Chrome","iOS Chrome","Chrome", "Safari"
 ```
-如需匹配不同平台的浏览器，需用judge.platform()再做一次匹配。
+如需匹配不同平台的浏览器，需用`judge.platform()`再做一次匹配，使用场景可以是：
+
+```js
+    if(judge.browser()=="IE11"){...}
+```
+>`judge.isIE()`
+
+判断浏览器是否是IE浏览器
 
 >`judge.iosDevice()`
 
@@ -127,7 +134,16 @@ judge.isInt(num);
 
 =>false
 ```
+>`judge.isJson(json)`
 
+判断给定值是否是json格式
+
+```js
+ var str = '{"name":"jack"}';
+ judge.isJson(str);//false
+ var json = JSON.parse(str);
+ judge.isJson(json);//true
+```    
 >`judge.inArray(val,arr)`
 
 判断参数`val`是否存在`arr`数组内：
@@ -325,12 +341,13 @@ judge.isQQ(qq);
 =>true
 ```
 
->`judge.isPhoneNumber`
+>`judge.phoneNumber`
 
 判断给定值是否符合手机号规范：
+
 ```js
-var num = 13055503789;
-judge.isPhoneNum(num);
+var num = 17755503789;
+judge.phoneNum(num);
 
 =>true
 ```
@@ -388,13 +405,13 @@ judge.isRegExp(reg);
 => true
 ```
 
->`judge.isIdNumber(id)`
+>`judge.idNumber(id)`
 
 判断你的身份证号码是否符合规范：
 
 ```js
 var id = 350500199703235051;
-judge.isIdNumber(id);
+judge.idNumber(id);
 
 => true
 ```
@@ -468,7 +485,7 @@ judge.isUrl(url);
 
 >`judge.zipCode(code)`
 
-判断给定值是否符合邮箱规范：
+判断给定值是否符合邮编规范：
 
 ```js
 var zipcode = 362014;

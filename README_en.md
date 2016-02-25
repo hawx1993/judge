@@ -26,9 +26,9 @@ $ npm install judgejs --save-dev
 
 var judge = require('judgejs');
 
-judge.vsersion
+judge.version
 
-=>0.2.2
+=>0.2.3
 
 ```
 

@@ -15,6 +15,7 @@
     </style>
 </head>
 <body>
+<div class="test"></div>
 <script src="../lib/judge.js"></script>
 <script src="../lib/require.js"></script>
 <script src="../lib/main.js"></script>
@@ -42,6 +43,15 @@
     document.writeln("<br>");
     document.writeln("<br>");
     document.write('<span class="require">'+"open console to see requirejs examples"+'</span>');
+
+    var div = document.createElement('div');
+    console.log(judge.isElement(div));
+    var phone = 22087702;
+    var str = '{"name":"jack"}';
+    console.log(judge.isJson(str));
+    var json = JSON.parse(str);
+    console.log(judge.isJson(json));//true
+    console.log(judge.phoneNumber(17755503789));
 </script>
 </body>
 </html>
