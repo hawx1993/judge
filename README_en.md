@@ -1,25 +1,26 @@
 ###`judge.js`
 
-[EnglishDOC](./README_en.md)
+[中文文档](./README.md)
 
-####一个用来做判断的js类库
-一个js判断库，大部分API返回布尔值，小部分API直接返回数值
+####This is a library for judging something
 
-- 没有任何依赖
-- 支持 `AMD` & `CommonJS`
-- 轻量级（5kb）
+
+- No dependencies
+- Support `AMD` & `CommonJS`
+- light weight
+
 ```js
 $ npm install #安装依赖
 $ gulp compress #生成judge.min.js文件
 ```
-## 开始
+## Getting started
 
-使用npm安装`judgejs`：
+Install judgejs using:
 
 ```js
 $ npm install judgejs --save-dev
 ```
-### 使用方法
+### Usage
 
 ```js
 
@@ -27,7 +28,7 @@ var judge = require('judgejs');
 
 judge.vsersion
 
-=>0.2.3
+=>0.2.2
 
 ```
 
@@ -54,7 +55,7 @@ judge.include(str,substr);
 
 >`judge.kernel()`
 
-用于检测当前浏览器的内核（排版引擎）
+judge current browser's kernel,whicth can judge：
 
 可以检测的类型如下：
 
@@ -63,38 +64,44 @@ judge.include(str,substr);
 
 >`judge.platform()`
 
-检测用户当前设备，可以检测的类型如下：
+judge user's current device,whitch can judge:
+
+可以检测的类型如下：
 
 `Android`,`iPad`,`iOS`,`windows phone`,`Mac`,`Windows`,`Linux`,`blackberry`，`androidTablet`
 
 >`judge.browser()`
 
-检测当前浏览器类型，可以检测的类型如下：
+judge current browser 
+
+可以检测的类型如下：
 
 ```js
 "IE6","IE7","IE8", "IE9", "IE10", "IE11", "IE","Mobile IE", "Firefox", "Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Android Chrome","iOS Chrome","Chrome", "Safari"
 ```
-如需匹配不同平台的浏览器，需用`judge.platform()`再做一次匹配。
+
 
 >`judge.iosDevice()`
 
-检测`iPhone`手机设备类型，可以检测如下类型的`iPhone`手机：
+judge iphone device type,whitch can judge:
 
-```
+```js
 iphone4(s) ,iphone5(s), iphone6(s),iphone6(s) plus
 ```
 
 >`judge.androidDevice()`
 
-检测安卓设备，Now, only support:MI4
+judge android device 
+
+Now, only support:MI4
 
 TODO,support more andoird device
 
 >`judge.iosVersion()`
 
-检测iOS 系统版本号，返回数字形式的版本号：
+judge ios system's version:
 
-```
+```js
 judge.iosVersion();
 
 =>9.0.2
@@ -102,7 +109,8 @@ judge.iosVersion();
 
 >`judge.androidVersion()`
 
-同上
+like above
+
 
 >`judge.isExist(value)`
 
@@ -128,8 +136,6 @@ judge.isInt(num);
 
 >`judge.inArray(val,arr)`
 
-判断参数`val`是否存在`arr`数组内：
-
 ```js
 var val = [{'name':'huang'},123],
     arr = [val,456];
@@ -140,11 +146,9 @@ judge.inArray(val,arr);
 
 >`judge.isTouchDevice()`
 
-判断用户当前设备是否是触屏设备，返回布尔值Boolean
+judge current user's device is touch device or not
 
 >`judge.isEmail(em)`
-
-判断是否符合Email规范：
 
 ```js
 var email = 'trigkit@163.com';
@@ -160,12 +164,12 @@ judge.isEmail(email);
 
 >`judge.isBrowser()`
 
-判断当前客户端是否是浏览器，返回布尔值
+judge current client is browser or not;
 
 
 >`judge.isFunction()`
 
-判断给定值是否是函数：
+judge a given value is function or not
 
 
 ```js
@@ -177,7 +181,7 @@ judge.isFunction(fn);
 
 >`judge.isEqual()`
 
-判断两个给定值是否是严格相等：
+judge two values is strict equal or not 
 
 ```js
 
@@ -206,7 +210,7 @@ judge.isEqual(baz,obj3);//false,refer address different
 
 >`judge.size(val)`
 
-判断给定值的大小，返回数值：
+judge a given value's size
 
 ```
 var val = '琅琊榜lyb';
@@ -217,11 +221,11 @@ judge.size(val);
 
 >`judge.isHttps()`
 
-判断当前站点是否是HTTPS，返回布尔值
+judge the website is https or not 
 
 >`judge.isUnique()`
 
-判断一个给定数组的元素的值是否唯一：
+judge a given array's elements is unique or not
 
 ```
 var a = [1,2];
@@ -233,21 +237,15 @@ judge.isUnique(arr);
 
 >`judge.isString()`
 
-判断一个给定的值是否是字符串，返回布尔值
+judge a given value is string or not 
 
 >`judge.isObject()`
 
-判断一个给定的值是否是对象，返回布尔值
-
-```js
-var obj = Object.create(null);
-judge.isObject(obj);//true
-```    
+judge a given value is Object or not
 
 >`judge.type()`
 
-判断值的类型，包括
-`array,object,number,string,null,undefined,function,boolean,object`
+judge the given value's type
 
 ```js
 var arr = new Array;
@@ -285,21 +283,23 @@ judge.type(p1);//object
 
 >`judge.hasClass()`
 
-判断给定值是否有class
+judge a given value has class or not
 
 >`judge.isError(value)`
 
-判断给定值是否是Error
+judge a given value is Error or not
 
 >`judge.isChar()`
 
-判断给定值是否是字符
+judge a given value is char or not
 
 >`judge.isEmpty()`
 
-判断给定值是否为空
-`null`和`undefined`被视为空，
-数字0被视为非空
+judge a given value is empty or not;
+
+null and undefined is regarded as empty;
+
+the number "0" is regarded as not empty;
 
 ```js
 
@@ -314,9 +314,9 @@ var str = '';//judge.isEmpty(str); => true
 
 > `judge.isQQ`
 
-判断给定值是否符合QQ号规范，返回布尔值：
-
 ```js
+judge a given number is QQ number or not
+
 var qq = 345812345;
 judge.isQQ(qq);
 
@@ -325,16 +325,13 @@ judge.isQQ(qq);
 
 >`judge.isPhoneNumber`
 
-判断给定值是否符合手机号规范：
 ```js
 var num = 13055503789;
-judge.isPhoneNum(num);
+judge.isPhoneNumber(num);
 
 =>true
 ```
 >`judge.includeChinese`
-
-判断给定值是否含有中文字符：
 
 ```js
 var ch = '23ef脚本';
@@ -345,7 +342,6 @@ judge.isIncludeChinese(ch);
 
 >`judge.onlyChinese(ch)`
 
-判断给定字符是否仅有中文字符：
 ```
 var ch = 'dd中国';
 judge.onlyChinese(ch);
@@ -355,7 +351,7 @@ judge.onlyChinese(ch);
 
 >`judge.onlyNumber()`
 
-判断给定值是否只含有数字：
+judge a given value is only number or not
 
 ```js
 var s = '233';
@@ -364,20 +360,26 @@ judge.onlyNumber(s);
 =>true
 ```
 
-
 >`judge.isElement(element)`
 
-判断给定元素是否是DOM元素，返回布尔值
+judge a given element is HTMLelement or not
 
+
+```js
+var div = document.createElement('div');
+judge.isElement(div);
+
+=>true
+```
 
 >`judge.isSet(value)`
 
-判断给定值是否不为`null`和`undefined`
+judge a given value is being null or undefined
+
 
 >`judge.isRegExp(reg)`
 
-判断给定值是否是RegExp对象：
-
+judge a given value is RegExp or not 
 
 ```js
 var reg = /^(a,z)/i;
@@ -385,10 +387,9 @@ judge.isRegExp(reg);
 
 => true
 ```
-
 >`judge.isIdNumber(id)`
 
-判断你的身份证号码是否符合规范：
+judge your ID number  true or false
 
 ```js
 var id = 350500199703235051;
@@ -399,18 +400,18 @@ judge.isIdNumber(id);
 
 >`judge.isOdd(num)`
 
-判断给定值是否是奇数，返回布尔值
+judge a given value is odd or not 
 
 >`judge.isEven(num)`
 
+judge a given value is even or not 
 
-判断一个给定的值是否是偶数，返回布尔值
 
 
 
 >`judge.assert(value,desc)`
 
-你可以使用`judge.assert` 去断言你想要断言的值，如果该值通过断言，描述不符将变为绿色，否则变为红色；
+you can use `judge.assert` to assert  the value you want  assert , and if the value pass assert , the description will show green;else show red;
 
 ```js
 function add(a,b){
@@ -423,13 +424,10 @@ judge.assert(add(2,3) === 6,'false');
 
 ```
 
-在参数`desc` 部分去填写你的测试描述
-
+In the param `desc`  to write your own test expressions.
 
 >`judge.hasHash(url)`
-
-判断一个给定的url是否有哈希值
-
+judge a url has hash value or not
 
 ```js
 var url = 'www.baidu.com#w';
@@ -440,7 +438,8 @@ judge.hasHash(url);
 
 >`judge.has(obj,key)`
 
-判断`obj`是否有包含给定的键（key）
+judge obj has contain the given key
+
 
 ```js
 
@@ -454,7 +453,7 @@ judge.has(obj,'name');
 
 >`judge.isUrl(url)`
 
-判断一个给定的值是否是URL
+judge a value is url or not 
 
 ```js
 
@@ -466,7 +465,7 @@ judge.isUrl(url);
 
 >`judge.zipCode(code)`
 
-判断给定值是否符合邮箱规范：
+judge a given value is China zipcode or not
 
 ```js
 var zipcode = 362014;
@@ -476,14 +475,13 @@ judge.zipCode(zipcode);
 ```
 >`judge.isMobile()`
 
-判断用户设备是否是移动设备(ipad,iphone,ipod,android) ：
+judge user device is mobile(ipad,iphone,ipod,android) or not;
 
 >`judge.isPc()`
 
-判断用户设备是否是PC：
-
+judge user device is PC or not
 
 
 >`judge.isChromium()`
 
-判断用户的浏览器是否是套着chrome内核的浏览器，返回布尔值
+judge user's browser is chrome kernel browser
