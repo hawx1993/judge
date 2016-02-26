@@ -25,7 +25,6 @@ $ npm install judgejs --save-dev
 
 # 目录
 * [使用方法](#使用方法)
-* [API](#API)
 * [数据类型判断](#数据类型判断)
 * [平台判断](#平台判断)
 * [设备判断](#设备判断)
@@ -38,7 +37,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.3.0
+=>0.3.2
 ```
 
 ### API
@@ -198,19 +197,20 @@ judge.isRegExp(reg);
 
 检测用户当前设备，可以检测的类型如下：
 
-`Android`,`iPad`,`iOS`,`Windows phone`,`Mac`,`Windows`,`Linux`,`Blackberry`，`AndroidTablet`
+`android`,`ipad`,`ios`,`windows phone`,`mac`,`windows`,`linux`,`blackberry`，`android tablet`
 
 >`judge.browser()`
 
 检测当前浏览器类型，可以检测的类型如下：
 
 ```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11","Firefox","Edge","Sougou","Liebao","Liebao Mobile","Weixin","UC","Mobile UC","Baidu Browser","Mobile Baidu","Mobile QQBrowser","QQBrowser","Opera","MIUI Browser","Oppo Browser","Mobile Safari","Android Chrome", "iOS Chrome","Chrome", "Safari","Mobile IE各个版本"
+"IE6","IE7","IE8", "IE9", "IE10", "IE11","firefox","edge","sougou","liebao","liebao mobile","weixin","uc","mobile uc","baidu browser","mobile baidu","mobile qqbrowser","qqbrowser","opera","miui browser","oppo browser","mobile safari","android chrome", "ios chrome","chrome", "safari","Mbile IE各个版本"
 ```
 如需匹配不同平台的浏览器，需用`judge.platform()`再做一次匹配，使用场景可以是：
 
 ```js
 if(judge.browser()=="IE11"){...}
+if(judge.browser()=="android chrome"){...}
 ```
 
 >`judge.isIE()`
@@ -377,7 +377,7 @@ judge.phoneNumber(num);
 =>true
 ```
 
->`judge.tel(num)`
+>`judge.telPhone(num)`
 
 判断电话号码是否符合规范
 
@@ -498,6 +498,18 @@ judge.has(obj,'name');
 =>true
 ```
 
+>`judge.haveSpecialChar()`
+
+判断给定值是否含有特殊字符
+
+```js
+var char = 'a!@#$%';
+judge.haveSpecialChar(char);
+
+=>true
+```
+
+
 >`judge.isUrl(url)`
 
 判断一个给定的值是否是URL
@@ -531,6 +543,10 @@ judge.include(str,substr);
 
 =>true
 ```
+
+>`judge.isOnline()`
+
+可用于判断设备是否联网，判断断网可用`judge.isOnline==false`，返回true，即断网
 
 >`judge.isEmpty()`
 
