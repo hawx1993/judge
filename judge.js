@@ -11,7 +11,7 @@
         define(function () {
             return judge = factory();
         });
-        //Commonjs
+        //CommonJS
     }else if(typeof exports === 'object'){
         module.exports = factory();
     }else{
@@ -30,7 +30,7 @@
 
     judge = (function () {
         return {
-            version: '0.4.4',
+            version: '0.4.8',
             type: function (obj) {
                 return Object.prototype.toString.call(obj)
                     .replace(/^\[object (.+)\]$/, "$1")
@@ -58,7 +58,7 @@
             },
             platform : function(){
                 var iPad = ua.match(/ipad/),
-                //貌似wp平台有伪造ua为安卓
+                    //貌似wp平台有伪造ua为安卓
                     Android = ua.match(/android/) && !ua.match(/windows phone/),
                     iOS = ua.match(/iphone/),
                     WinPhone = ua.match(/windows phone/),

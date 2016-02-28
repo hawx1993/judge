@@ -1,0 +1,17 @@
+{
+  "name": "judgejs",
+  "description": "a js library for judging something",
+  "main": "judge.js",
+  "authors": [
+    "trigkit4"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "judge"
+  ],
+  "homepage": "https://github.com/hawx1993/judge",
+  "moduleType": [
+    "amd",
+    "node"
+  ]
+}

@@ -16,11 +16,16 @@ $ gulp compress #生成judge.min.js文件
 ```
 ## 开始
 
-使用npm安装`judgejs`：
+>使用`npm`安装`judgejs`：
 
 ```js
 $ sudo npm install judgejs -g
+```
 
+>使用`bower` 安装`judgejs`
+
+```js
+$ bower install judgejs -g
 ```
 
 # 目录
@@ -37,7 +42,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.4.5
+=>0.4.8
 ```
 
 ### API
@@ -348,12 +353,34 @@ judge.email(email2);
 =>false
 ```
 
-- `judge.hasLowerCase()`
+> `judge.hasLowerCase()`
 
-- `judge.hasNumber()`
+判断是否含有小写字母：
 
-- `judge.hasCaptial()`
+```js
+var str ='trigkit4';
+judge.hasLowerCase(str);
+```
 
+> `judge.hasNumber()`
+
+判断给定值是否含有数字：
+
+```js
+var num ='trigkit4';
+judge.hasNumber(num);
+
+=>true
+```
+
+> `judge.hasCaptial()`
+
+判断是否含有大写字母：
+
+```js
+var str ='trigkit4';
+judge.hasCapital(str);
+```
 
 >`judge.isBrowser()`
 
@@ -379,7 +406,7 @@ judge.size(val);
 
 判断一个给定数组的元素的值是否唯一：
 
-```
+```js
 var a = [1,2];
 var arr = [1,2,3,4,a];//[1,2,3,4,[1,2]];
 judge.isUnique(arr);//true
@@ -536,18 +563,6 @@ judge.has(obj,'name');
 =>true
 ```
 
->`judge.haveSpecialChar()`
-
-判断给定值是否含有特殊字符
-
-```js
-var char = 'a!@#$%';
-judge.haveSpecialChar(char);
-
-=>true
-```
-
-
 >`judge.isUrl(url)`
 
 判断一个给定的值是否是URL
@@ -589,6 +604,12 @@ judge.include(str,substr);
 >`judge.hasSpecialChar()`
 
 判断是否含有特殊字符，除了大小写字母、数字和汉字以外的字符都被视为特殊字符
+```js
+var char = 'a!@#$%';
+judge.hasSpecialChar(char);
+
+=>true
+```
 
 >`judge.isEmpty()`
 
