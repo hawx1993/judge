@@ -300,7 +300,7 @@
                 }
                 return true;
             },
-            isQQNumber: function(qq){
+            qqNumber: function(qq){
                 var req = new RegExp(/^[1-9][0-9]{4,9}$/).test(qq);
                 return !!req;
             },

@@ -206,6 +206,84 @@ judge.isRegExp('/[a-z]/');
 =>false
 ```
 
+>`judge.isLength(value)`
+
+判断`value`是否是有效的类数组长度
+
+```js
+judge.isLength(Infinity);
+
+=>false
+
+var arr = Number([]);
+judge.isLength(arr);
+
+>true
+```
+
+>`judge.isWindow(obj)`
+
+判断是否是window对象。
+
+>`judge.isPlainObject(obj)`
+
+判断`obj`是否是纯粹的对象，纯粹的对象是通过`{}`创建或者通过`new Object()`创建
+
+```js
+judge.isPlainObject(window);
+
+=>false
+
+var arr = Number([]);
+judge.isPlainObject(arr);
+
+=>false
+
+judge.isPlainObject(new Date());
+
+=>false
+
+judge.isPlainObject({});//true
+```
+
+>`judge.isArrayLike(obj)`
+
+判断`obj`是否是类数组对象（类数组对象被限定为拥有非负整数属性的对象，NodeList,arguments，Array等）：
+
+```js
+judge.isArrayLike(document.body.children);
+
+=>true
+
+var obj = [{name:'null'}];
+judge.isArrayLike(obj);
+
+=>true
+
+judge.isArrayLike(null);
+
+=>false
+```
+
+>`judge.isArrayLikeObject(value)`
+
+和`judge.isArrayLike`类似，但`isArrayLikeObject`会检测`value`是否是对象
+
+```js
+judge.isArrayLikeObject('abcd');//false
+judge.isArrayLikeObject(document.body.children);//true
+```
+
+>`judge.isArguments(value)`
+
+判断参数value是否是一个`arguments`对象：
+
+```js
+judge.isArguments(function(){ return arguments;}())
+
+=>true
+```
+
 #### 平台判断
 
 
@@ -476,13 +554,13 @@ judge.isUnique(array);//true
 
 判断给定值是否有class
 
-> `judge.isQQNumber`
+> `judge.qqNumber()`
 
 判断给定值是否符合QQ号规范，返回布尔值：
 
 ```js
 var qq = 345812345;
-judge.isQQNumber(qq);
+judge.qqNumber(qq);
 
 =>true
 ```
@@ -681,80 +759,3 @@ var obj = Object.create(null);//judge.isEmpty(obj); => true
 var str = '';//judge.isEmpty(str); => true
 ```
 
->`judge.isLength(value)`
-
-判断`value`是否是有效的类数组长度
-
-```js
-judge.isLength(Infinity);
-
-=>false
-
-var arr = Number([]);
-judge.isLength(arr);
-
->true
-```
-
->`judge.isWindow(obj)`
-
-判断是否是window对象。
-
->`judge.isPlainObject(obj)`
-
-判断`obj`是否是纯粹的对象，纯粹的对象是通过`{}`创建或者通过`new Object()`创建
-
-```js
-judge.isPlainObject(window);
-
-=>false
-
-var arr = Number([]);
-judge.isPlainObject(arr);
-
-=>false
-
-judge.isPlainObject(new Date());
-
-=>false
-
-judge.isPlainObject({});//true
-```
-
->`judge.isArrayLike(obj)`
-
-判断`obj`是否是类数组对象（类数组对象被限定为拥有非负整数属性的对象，NodeList,arguments，Array等）：
-
-```js
-judge.isArrayLike(document.body.children);
-
-=>true
-
-var obj = [{name:'null'}];
-judge.isArrayLike(obj);
-
-=>true
-
-judge.isArrayLike(null);
-
-=>false
-```
-
->`judge.isArrayLikeObject(value)`
-
-和`judge.isArrayLike`类似，但`isArrayLikeObject`会检测`value`是否是对象
-
-```js
-judge.isArrayLikeObject('abcd');//false
-judge.isArrayLikeObject(document.body.children);//true
-```
-
->`judge.isArguments(value)`
-
-判断参数value是否是一个`arguments`对象：
-
-```js
-judge.isArguments(function(){ return arguments;}())
-
-=>true
-```
