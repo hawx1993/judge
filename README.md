@@ -19,7 +19,7 @@ $ gulp compress #生成judge.min.js文件
 使用npm安装`judgejs`：
 
 ```js
-$ npm install judgejs --save-dev
+$ npm install judgejs -g
 
 ```
 
@@ -37,7 +37,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.4.2
+=>0.4.4
 ```
 
 ### API
@@ -238,12 +238,12 @@ judge.browser("isChrome");
 >参数如下所示，采用驼峰命名法：
 
 ```js
-"isFirefox","isIosChrome","isAndroidChrome", "isIosSafari","isIpadSafari",
-"isEdge","isSougou","isLiebao", "isLiebaoMobile","isWeiXin","isUC",
-"isUCMobile","isBaidu","isBaiduMobile", "isQQMobile","isQQBrowser",
-"isOpera","isMiuiBrowser","isOppoBrowser","isChrome","isSafari",
+"isFirefox","isIosChrome","isIpadSafari", "isEdge", "isSougou","isLiebao",
+"isLiebaoMobile","isWeiXin","isUC", "isUCMobile", "isBaidu",
+"isBaiduMobile", "isQQMobile","isQQBrowser", "isOpera", "isMiuiBrowser",
+"isOppoBrowser","isAndroidChrome","isChrome","isIosSafari","isSafari"
 
-其中UC浏览器采用固定大写的写法。
+其中UC浏览器采用固定大写的写法。由于有的移动端浏览器采用和浏览器不同的ua，所以不能共用（无法单纯加一个`judge.isMobile()` or `judge.platform()=='android'`）。
 
 //IE
 "isIE","isMobileIE+数字（如：isMobileIE10）"，"isIE+数字(6~11)，如isIE10"
