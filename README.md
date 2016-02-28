@@ -19,7 +19,7 @@ $ gulp compress #生成judge.min.js文件
 使用npm安装`judgejs`：
 
 ```js
-$ npm install judgejs -g
+$ sudo npm install judgejs -g
 
 ```
 
@@ -37,7 +37,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.4.4
+=>0.4.5
 ```
 
 ### API
