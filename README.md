@@ -8,7 +8,7 @@
 
 - 没有任何依赖
 - 支持 `AMD` & `CommonJS`
-- 轻量级（5kb）
+- 轻量级（7kb）
 
 ```js
 $ npm install #安装依赖
@@ -37,7 +37,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.4.0
+=>0.4.2
 ```
 
 ### API
