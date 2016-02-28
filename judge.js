@@ -1,11 +1,10 @@
 
 /**
  * Created by trigkit4 on 16/1/17.
- * judge.js <https://github.com/hawx1993/judge>
+ * judge.js < https://github.com/hawx1993/judge >
  * @author trigkit4 <trigkit@163.com>
  */
-//var device = require('./dev');
-(function (root,factory) {
+;(function (root,factory) {
     //support requirejs && amd
     if(typeof define === 'function' && define.amd){
         define(function () {
@@ -30,17 +29,58 @@
 
     judge = (function () {
         return {
-            version: '0.4.8',
+            version: '0.5.0',
             type: function (obj) {
                 return Object.prototype.toString.call(obj)
                     .replace(/^\[object (.+)\]$/, "$1")
                     .toLowerCase();
             },
+            /*
+                Each iframe has their own window object
+             */
+            isWindow: function (obj) {
+                return obj != null && obj == obj.window;
+            },
             isArray : function (value) {
                 return  oString.call(value) === '[object Array]';
             },
+            /*
+                judge object is plain object(1.created by{}，2.created by new Object())
+             */
+            isPlainObject: function (obj) {
+                return judge.isObject(obj) && !judge.isWindow(obj)
+                    && Object.getPrototypeOf(obj) == Object.prototype;
+            },
             include : function(str,substr){
                 return str.indexOf(substr) > -1;
+            },
+            /*
+             *  Array,Arguments,NodeList and have Non-Negative Integer length property Object.
+             *  @example
+             *
+             *  judge.isArrayLike(document.body.className)
+             *  =>true
+             */
+            isArrayLike: function ( obj ) {
+                if( obj != null ){
+                    var length = obj.length,type = judge.type( obj );
+                }else return false;
+                if(judge.isWindow( obj )){
+                    return false;
+                }
+                if(obj.nodeType === 1 && length){
+                    return true;
+                }
+                return type === "array" || type !== "function" && ( length === 0 ||
+                    typeof length === "number" && length > 0 && ( length - 1 ) in obj );
+            },
+            /*
+             *  like isArrayLike,except it also check if 'value' is object
+             *  judge.isArrayLikeObject('abcd');
+             *  =>false
+             */
+            isArrayLikeObject: function (value) {
+                return judge.isObjectLike(value) && judge.isArrayLike(value);
             },
             kernel: function(){
                 if(/gecko\/\d/.test(ua)){
@@ -58,7 +98,7 @@
             },
             platform : function(){
                 var iPad = ua.match(/ipad/),
-                    //貌似wp平台有伪造ua为安卓
+                    //some wp platform fake ua to android
                     Android = ua.match(/android/) && !ua.match(/windows phone/),
                     iOS = ua.match(/iphone/),
                     WinPhone = ua.match(/windows phone/),
@@ -71,7 +111,8 @@
                     iPad,Android,iOS,WinPhone,Mac,Windows,Linux,Blackberry,AndroidTablet
                 ];
                 var dn = [
-                    "iPad","android","ios","windowsPhone","mac","windows","linux","blackBerry","androidTablet"
+                    "iPad","android","ios","windowsPhone","mac","windows",
+                    "linux","blackBerry","androidTablet"
                 ];
                 for(var k =0;k<device.length;k++){
                     if(device[k]){
@@ -131,6 +172,18 @@
             isExist: function(value){
                 return value !== null && value !== undefined && value !== '';
             },
+            isNull: function (value) {
+                return value == null;
+            },
+            isUndefined: function (value) {
+                return value === undefined;
+            },
+            isNumber: function (num) {
+                return judge.type(num) === 'number';
+            },
+            lt: function (val1,val2) {
+                return val1 < val2;
+            },
             inArray: function(val,arr){
                 if(!judge.isArray(arr)){
                     return false;
@@ -167,6 +220,14 @@
             isEqual: function (val1, val2) {
                 return val1 === val2;
             },
+            /**
+             *judge.isLength('1');//false
+             */
+
+            isLength: function (value) {
+                return typeof value == 'number' && value > -1 && value % 1 ==0 && value <= Number.MAX_SAFE_INTEGER;
+
+            },
             size: function(val){
                 return val.length;
             },
@@ -190,6 +251,9 @@
             isObject: function(obj){
                 return judge.type(obj) === 'object';
             },
+            isObjectLike: function (value) {
+                return !!value && typeof value == 'object';
+            },
             isInt: function(num){
                 return Math.round(num) === num;
             },
@@ -208,6 +272,20 @@
             isChar: function(value){
                 return judge.isString(value) && value.length === 1;
             },
+            /*@examples
+             *
+             *  judge.isArguments(function(){ return arguments;}())
+             *  =>true
+             */
+            isArguments: function (value) {
+                var args = '[object Arguments]';
+                return judge.isArrayLikeObject(value) && hasOwnProperty.call(value,'callee') &&
+                    (!propertyIsEnumerable.call(value,'callee') || oString.call(value)== args);
+            },
+            /*
+             * judge.isEmpty(null);
+             * => true
+             */
             isEmpty: function(value){
                 if(judge.isArray(value) || judge.isString(value)){
                     return (value.length <= 0);
@@ -222,7 +300,7 @@
                 }
                 return true;
             },
-            isQQ: function(qq){
+            isQQNumber: function(qq){
                 var req = new RegExp(/^[1-9][0-9]{4,9}$/).test(qq);
                 return !!req;
             },
@@ -245,8 +323,12 @@
                 num = /^\d+$/g.test(num);
                 return num;
             },
-            isElement: function(ele){
-                return !!(ele && ele.nodeType === 1);
+            /*
+                judge obj is Dom elements.
+             */
+            isElement: function(obj){
+                return !!obj && obj.nodeType === 1 && judge.isObjectLike(obj) &&
+                    !judge.isPlainObject(obj);
             },
             //judge a given value is being null or undefined
             isSet: function(value){
@@ -255,7 +337,7 @@
             isRegExp: function(reg){
                 return judge.type(reg) === 'regexp';
             },
-            //judge your ID number  true or false
+            //judge your ID number
             idNumber: function(num){
                 return (/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num));
             },
@@ -313,7 +395,7 @@
             },
             browser: function () {
                 var
-                    //IE版本号判断，IE6~IE10
+                    //judge IE version ，IE6~IE10
                     MSIE = ua.indexOf('msie'),
                     //IE11+
                     trident = ua.indexOf('trident/'),
@@ -326,9 +408,9 @@
                     isSougou= /metasr/.test(ua),
                     isLiebao= /lbbrowser/.test(ua),
                     isLiebaoMobile= /liebaofast/.test(ua),
-                    //判断是否来自微信平台的浏览器
+                    //judge is weixin's built-in browser or not
                     isWeiXin= /micromessenger/.test(ua),
-                    isUC= /ubrowser/.test(ua) && !/bidubrowser/.test(ua)&&!/baidubrowser/.test(ua),
+                    isUC= /ubrowser/.test(ua) && !/bidubrowser/.test(ua)&& !/baidubrowser/.test(ua),
                     isUCMobile= /ucbrowser/.test(ua),
                     isBaidu= /bidubrowser/.test(ua),
                     isBaiduMobile= /baidubrowser/.test(ua),
@@ -354,10 +436,10 @@
                     "isOppoBrowser","isAndroidChrome","isChrome","isIosSafari","isSafari"
                 ];
                 for(var i =0;i < bn.length;i++){
-                    //有参数
+                    //have params
                     if(browsers[i] && arguments[0]==bn[i]){
                         return browsers[i];
-                    //无参数
+                    //without params
                     }else if(!arguments[0] && browsers[i]){
                         return bn[i].substring(2);
                     }
@@ -384,7 +466,6 @@
                 }else if(arguments[0]==MobileIEVersion){
                     return true;
                 }
-
                 if(arguments[0]=='isIE'){
                     return !!(window.ActiveXObject || "ActiveXObject" in window);
                 }
