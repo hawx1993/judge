@@ -191,31 +191,67 @@ judge.isRegExp(reg);
 用于检测当前浏览器的内核（排版引擎），可以检测的类型如下：
 
 `Webkit`,`Gecko`,`Trident`,`Edge`,`Opera`
+浏览器的内核分别用于检测Chrome浏览器，Firefox浏览器，IE浏览器，Edge浏览器和Opera浏览器
+参数也如上所示，千万不能写错，不然检测就会出现错误。参数采用首字母大写，引号处不能出现空格等不规范写法
 
+```js
+if(judge.kernel() == 'Webkit'){...}
+```
 
 >`judge.platform()`
 
 检测用户当前设备，可以检测的类型如下：
 
-`android`,`ipad`,`ios`,`windows phone`,`mac`,`windows`,`linux`,`blackberry`，`android tablet`
+`android`,`iPad`,`ios`,`windowsPhone`,`mac`,`windows`,`linux`,`blackBerry`，`androidTablet`
+
+
+```js
+if(judge.platform() == "androidTablet"){...}
+```
+参数也如上所示，千万不能写错，不然检测就会出现错误。参数采用驼峰命名法
 
 >`judge.browser()`
 
 检测当前浏览器类型，可以检测的类型如下：
 
 ```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11","firefox","edge","sougou","liebao","liebao mobile","weixin","uc","mobile uc","baidu browser","mobile baidu","mobile qqbrowser","qqbrowser","opera","miui browser","oppo browser","mobile safari","android chrome", "ios chrome","chrome", "safari","Mbile IE各个版本"
+"IE6","IE7","IE8", "IE9", "IE10", "IE11","firefox","edge","sougou","liebao","liebao mobile","weixin","uc","mobile uc","baidu browser","mobile baidu","mobile qqbrowser","qqbrowser","opera","miui browser","oppo browser","mobile safari","android chrome", "ios chrome","chrome", "safari","ios safari","Mbile IE各个版本"
 ```
 如需匹配不同平台的浏览器，需用`judge.platform()`再做一次匹配，使用场景可以是：
 
+1.如果没有传入参数，则返回浏览器的名称，如：
+
 ```js
-if(judge.browser()=="IE11"){...}
-if(judge.browser()=="android chrome"){...}
+judge.browser();//你的浏览器是Chrome的话
+
+=>Chrome
 ```
 
->`judge.isIE()`
+2.传入参数的情况下，返回布尔值，如:
 
-判断浏览器是否是`IE`浏览器
+```js
+judge.browser("isChrome");
+
+=>true
+```
+
+>参数如下所示，采用驼峰命名法：
+
+```js
+"isFirefox","isIosChrome","isAndroidChrome", "isIosSafari","isIpadSafari",
+"isEdge","isSougou","isLiebao", "isLiebaoMobile","isWeiXin","isUC",
+"isUCMobile","isBaidu","isBaiduMobile", "isQQMobile","isQQBrowser",
+"isOpera","isMiuiBrowser","isOppoBrowser","isChrome","isSafari",
+
+其中UC浏览器采用固定大写的写法。
+
+//IE
+"isIE","isMobileIE+数字（如：isMobileIE10）"，"isIE+数字(6~11)，如isIE10"
+
+//for example
+judge.browser("isIE11");//true,如果你的浏览器是IE11的话
+
+```
 
 
 >`judge.iosVersion()`
@@ -245,7 +281,7 @@ judge.iosVersion();
 
 >`judge.isMobile()`
 
-判断用户设备是否是移动设备(ipad,iphone,ipod,android) ：
+判断用户设备是否是移动设备(ipad,iphone,ipod,android) 
 
 >`judge.isPc()`
 
@@ -255,8 +291,10 @@ judge.iosVersion();
 
 检测`iPhone`手机设备类型，可以检测如下类型的`iPhone`手机：
 
-```
-iphone4(s) ,iphone5(c/s), iphone6(s),iphone6(s) plus
+```js
+iphone4 ,iphone5, iphone6,iphone6Plus
+
+if(judge.iosDevice=='iphone6Plus'){...}
 ```
 
 >`judge.androidDevice()`
@@ -547,6 +585,10 @@ judge.include(str,substr);
 >`judge.isOnline()`
 
 可用于判断设备是否联网，判断断网可用`judge.isOnline==false`，返回true，即断网
+
+>`judge.hasSpecialChar()`
+
+判断是否含有特殊字符，除了大小写字母、数字和汉字以外的字符都被视为特殊字符
 
 >`judge.isEmpty()`
 
