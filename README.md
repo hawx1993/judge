@@ -42,7 +42,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.5.0
+=>0.5.3
 ```
 
 ### API
@@ -525,7 +525,7 @@ judge.hasCapital(str);
 
 判断给定值的大小，返回数值：
 
-```
+```js
 var val = '琅琊榜lyb';
 judge.size(val);
 
@@ -636,7 +636,7 @@ judge.isElement(div);
 判断你的身份证号码是否符合规范，其中X不区分大小写：
 
 ```js
-var id = 35050019970323505x;
+var id = '35050019970323505x';
 judge.idNumber(id);
 
 => true
@@ -798,3 +798,8 @@ judge.isNativeFn(obj.fn)
 
 =>false
 ```
+
+>`judge.isIE8Plus()`
+
+判断当前浏览器是否是IE8+ (包含IE8)，直接返回布尔值
+

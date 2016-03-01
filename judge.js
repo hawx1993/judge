@@ -29,7 +29,7 @@
 
     judge = (function () {
         return {
-            version: '0.5.2',
+            version: '0.5.3',
             type: function (obj) {
                 return Object.prototype.toString.call(obj)
                     .replace(/^\[object (.+)\]$/, "$1")
@@ -483,6 +483,13 @@
                     return !!(window.ActiveXObject || "ActiveXObject" in window);
                 }
                 return false;
+            },
+            /*
+                judge IE browser's version >= 8
+             */
+            isIE8Plus: function () {
+                var $ = judge.browser;
+                return $("isIE8") || $("isIE9") || $("isIE10") || $("isIE11");
             },
             /*   @{param} [parent]
              *   judge DOM Element's position
