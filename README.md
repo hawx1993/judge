@@ -633,10 +633,10 @@ judge.isElement(div);
 
 >`judge.idNumber(id)`
 
-判断你的身份证号码是否符合规范：
+判断你的身份证号码是否符合规范，其中X不区分大小写：
 
 ```js
-var id = 350500199703235051;
+var id = 35050019970323505x;
 judge.idNumber(id);
 
 => true
@@ -758,4 +758,43 @@ var num = 0;//judge.isEmpty(num); => false
 var obj = Object.create(null);//judge.isEmpty(obj); => true
 var str = '';//judge.isEmpty(str); => true
 ```
+>`judge.position(element,parent)`
 
+判断DOM元素位置，若只传入`element`参数，则返回其距离浏览器窗口的位置；
+若传入`parent`参数，则返回其距离父元素的位置。兼容IE浏览器
+
+`@{param}:parent` 可选
+
+```js
+judge.position(element).top ;//判断元素距离顶部位置
+judge.position(element,parent).left;//判断元素距离父元素左边的位置
+```
+
+>`judge.isNativeFn(fn)`
+
+判断`fn`是否是原生方法,不能有括号
+
+```js
+judge.isNativeFn(Object.assign);
+
+=>true
+
+
+var fn = new Function();
+judge.isNativeFn(fn);
+
+=>false
+
+
+judge.isNativeFn(Array.prototype.filter)
+
+=>true
+
+var obj = {
+        fn: function () {}
+ };
+ 
+judge.isNativeFn(obj.fn)
+
+=>false
+```

@@ -29,7 +29,7 @@
 
     judge = (function () {
         return {
-            version: '0.5.0',
+            version: '0.5.2',
             type: function (obj) {
                 return Object.prototype.toString.call(obj)
                     .replace(/^\[object (.+)\]$/, "$1")
@@ -51,7 +51,7 @@
                 return judge.isObject(obj) && !judge.isWindow(obj)
                     && Object.getPrototypeOf(obj) == Object.prototype;
             },
-            include : function(str,substr){
+            include: function(str,substr){
                 return str.indexOf(substr) > -1;
             },
             /*
@@ -82,6 +82,13 @@
             isArrayLikeObject: function (value) {
                 return judge.isObjectLike(value) && judge.isArrayLike(value);
             },
+            /*
+             *   @{param} Gecko => Firefox
+             *   @{param} Edge => Edge
+             *   @{param} Webkit => Chrome
+             *   @{param} IE => Trident
+             *   @{param} Opera = > Opera
+             */
             kernel: function(){
                 if(/gecko\/\d/.test(ua)){
                     return 'Gecko';
@@ -89,13 +96,16 @@
                     return 'Edge';
                 } else if(/webkit\//.test(ua)){
                     return 'Webkit'
-                }else if(/msie/.test(ua) || "ActiveXObject" in window){
+                }else if(/msie/.test(ua) || "ActiveXObject" in window || /trident/.test(ua)){
                     return 'Trident';
                 }else if(ua.indexOf('Presto') > -1){
                     return "Opera";
                 }
                 return 'Unknow kernel'
             },
+            /*
+                case sensitive
+             */
             platform : function(){
                 var iPad = ua.match(/ipad/),
                     //some wp platform fake ua to android
@@ -337,9 +347,9 @@
             isRegExp: function(reg){
                 return judge.type(reg) === 'regexp';
             },
-            //judge your ID number
+            //judge your ID number ,case-insensitive
             idNumber: function(num){
-                return (/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num));
+                return (/(^\d{15}$)|(^\d{17}([0-9]|X)$)/i.test(num));
             },
             isEven: function(num){
                 return (num % 2 === 0);
@@ -362,6 +372,9 @@
                 return li;
             },
             hasHash: function (url) {
+                if(!judge.isUrl(url)){
+                    return false;
+                }
                 url = url || window.location.href;
                 var match = url.match(/#(.*)$/);
                 var ends =  match ? match[1] : '';
@@ -470,6 +483,68 @@
                     return !!(window.ActiveXObject || "ActiveXObject" in window);
                 }
                 return false;
+            },
+            /*   @{param} [parent]
+             *   judge DOM Element's position
+             *   judge.position(element).top
+             *   =>return element's position of the distance from the top
+             *   judge.position(element,parent).left
+             *   =>return the element's position of the distance to the left
+             */
+            position: function (element,parent) {
+                var pos = element.getBoundingClientRect();
+                var top = document.documentElement.clientTop;
+                var left= document.documentElement.clientLeft;
+                if(parent){
+                    var l = element.offsetLeft,
+                        t = element.offsetTop;
+                    return {
+                        left : l,
+                        top : t
+                    }
+                }
+                else  return{
+                    top    :   pos.top - top,
+                    bottom :   pos.bottom - top,
+                    left   :   pos.left - left,
+                    right  :   pos.right - left
+                }
+            },
+            /*
+             *   judge value is native function or not
+             *   @example
+             *
+             *   judge.isNativeFunc(Object.assign)
+             *   =>true
+             *
+             *   judge.isNativeFunc(judge.isFunction())
+             *   =>false
+             */
+            isNativeFn: function (fn) {
+                var func = Function.prototype.toString,
+                    regChar = /[\\^$.*+?()[\]{}|]/g,
+                    //match  host constructor
+                    isHostConstructor = /^\[object .+?Constructor\]$/,
+                    //judge value is a host object in IE9 or older
+                    isHostObj = function (value) {
+                        var result = false;
+                        if(value != null && typeof value.toString != 'function'){
+                            try {
+                                result = !! (value + '');
+                            }catch (e){}
+                        }
+                        return result;
+                    };
+                var isNative = new RegExp('^' +
+                    func.call(hasOwnProperty).replace(regChar,'\\$&').replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$');
+                if(fn == null||undefined){
+                    return false;
+                }
+                if(judge.isFunction(fn)){
+                    return isNative.test(func.call(fn));
+                }
+                return judge.isObjectLike(fn) &&
+                    (isHostObj(fn) ? isNative: isHostConstructor).test(fn);
             }
         };
     })();

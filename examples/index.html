@@ -11,13 +11,14 @@
         .kernel{color: brown;}
         .isChromium{color: pink;}
         .require{
-            color: darkorange;}
+            color: darkorange;
+        }
     </style>
 </head>
 <body>
 <script src="../judge.js"></script>
 <script src="../lib/require.js"></script>
-<!--<script src="../lib/main.js"></script>-->
+<script src="../lib/main.js"></script>
 <script>
     document.write("isPC: "+'<span class="ispc">'+judge.isPc()+'</span>');
     document.write("<br>");
@@ -42,6 +43,9 @@
     document.writeln("<br>");
     document.writeln("<br>");
     document.write('<span class="require">'+"open console to see requirejs examples"+'</span>');
+    document.writeln("<br>");
+    document.writeln("<br>");
+    document.writeln("Is Array.prototype.forEach is Native function: "+judge.isNativeFn(Array.prototype.forEach));
 </script>
 </body>
 </html>
