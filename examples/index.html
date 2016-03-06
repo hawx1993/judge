@@ -46,7 +46,15 @@
     document.writeln("<br>");
     document.writeln("<br>");
     document.writeln("Is Array.prototype.forEach is Native function: "+judge.isNativeFn(Array.prototype.forEach));
-    document.writeln(judge.isIE8Plus())
+    function add(a,b){
+        return a + b;
+    }
+    var a = 1,b=2;
+
+    document.writeln(judge.assert(add(1,2)===3,'true'));
+    document.writeln(judge.assert(1+2==4,'false'));
+
+    document.writeln(judge.isNumber(1));
 </script>
 </body>
 </html>

@@ -1,10 +1,6 @@
 ###`judge.js`
 
-[EnglishDOC](./README_en.md)
-
 ####一个用来做判断的js类库
-
-一个js判断库，大部分API返回布尔值，小部分API直接返回数值
 
 - 没有任何依赖
 - 支持 `AMD` & `CommonJS`
@@ -37,15 +33,25 @@ $ bower install judgejs -g
 
 ### 使用方法
 
+
 ```js
 var judge = require('judgejs');
 
 judge.version
 
-=>0.5.3
+=>0.5.4
 ```
 
-### API
+
+可以用`$`来代替`judge`。例如：
+
+```js
+$.version;//0.5.4
+```
+
+# API
+
+
 
 #### 数据类型判断
 
@@ -284,6 +290,73 @@ judge.isArguments(function(){ return arguments;}())
 =>true
 ```
 
+
+>`judge.isSet(value)`
+
+判断给定值是否不为`null`和`undefined`
+
+
+
+
+>`judge.idNumber(id)`
+
+判断你的身份证号码是否符合规范，其中X不区分大小写：
+
+```js
+var id = '35050019970323505x';
+judge.idNumber(id);
+
+=> true
+```
+
+>`judge.isOdd(num)`
+
+判断给定值是否是奇数，返回布尔值
+
+
+>`judge.min(a,b)`
+
+判断给定的数值中谁是最小值，并返回最小值
+
+```js
+judge.min(0,-1);
+=>-1
+```
+
+>`judge.isEven(num)`
+
+判断一个给定的值是否是偶数，返回布尔值
+
+>`judge.isNull(value)`
+
+```js
+judge.isNull(void 0);
+
+=>true
+
+judge.isNull(null);
+
+=>true
+```
+>`judge.isUndefined(value)`
+
+```js
+judge.isUndefined(null);
+
+=>false
+
+judge.isUndefined(void 0);
+
+=>true
+```
+>`judge.isNumber(num)`
+
+```js
+judge.isNumber(Infinity);
+
+=>true
+```
+
 #### 平台判断
 
 
@@ -421,28 +494,7 @@ var str = '';
 judge.isExist(str)
 =>false
 ```
->`judge.isNull(value)`
 
-```js
-judge.isNull(void 0);
-
-=>true
-
-judge.isNull(null);
-
-=>true
-```
->`judge.isUndefined(value)`
-
-```js
-judge.isUndefined(null);
-
-=>false
-
-judge.isUndefined(void 0);
-
-=>true
-```
 >`judge.lt(val1,val2)`
 
 判断`val1`是否小于val2：
@@ -452,13 +504,7 @@ judge.lt(1,-2);
 
 =>false
 ```
->`judge.isNumber(num)`
 
-```js
-judge.isNumber(Infinity);
-
-=>true
-```
 
 >`judge.inArray(val,arr)`
 
@@ -624,32 +670,6 @@ judge.isElement(div);
 =>true
 ```
 
->`judge.isSet(value)`
-
-判断给定值是否不为`null`和`undefined`
-
-
-
-
->`judge.idNumber(id)`
-
-判断你的身份证号码是否符合规范，其中X不区分大小写：
-
-```js
-var id = '35050019970323505x';
-judge.idNumber(id);
-
-=> true
-```
-
->`judge.isOdd(num)`
-
-判断给定值是否是奇数，返回布尔值
-
->`judge.isEven(num)`
-
-
-判断一个给定的值是否是偶数，返回布尔值
 
 
 
@@ -799,7 +819,22 @@ judge.isNativeFn(obj.fn)
 =>false
 ```
 
->`judge.isIE8Plus()`
+>`judge.isIE8Plus(boolean)`
 
 判断当前浏览器是否是IE8+ (包含IE8)，直接返回布尔值
 
+参数如下：
+
+- true:包含IE8
+
+```js
+judge.isIE8Plus(true);//include IE8
+```
+
+- false:不包含IE8
+```js
+
+judge.isIE8Plus(false);//exclude IE8
+```
+
+没有参数，默认包含IE8

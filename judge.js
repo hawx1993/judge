@@ -21,7 +21,6 @@
     var judge = {},
         op = Object.prototype,
         oString = op.toString;
-
     //support Node.js module
     if(typeof window !== 'undefined'){
         var ua = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
@@ -29,7 +28,7 @@
 
     judge = (function () {
         return {
-            version: '0.5.3',
+            version: '0.5.4',
             type: function (obj) {
                 return Object.prototype.toString.call(obj)
                     .replace(/^\[object (.+)\]$/, "$1")
@@ -173,7 +172,7 @@
                 return match ? match[1] : false;
             },
             isMobile: function () {
-                return !!ua.match(/(iPhone|iPod|Android|ios|iPad|windows phone|tablet)/i);
+                return !!ua.match(/(iPhone|iPod|android|ios|iPad|windows phone|tablet)/i);
             },
             isPc: function () {
                 return !judge.isMobile();
@@ -334,11 +333,10 @@
                 return num;
             },
             /*
-                judge obj is Dom elements.
+             *  judge obj is Dom elements.
              */
             isElement: function(obj){
-                return !!obj && obj.nodeType === 1 && judge.isObjectLike(obj) &&
-                    !judge.isPlainObject(obj);
+                return judge.isObject(obj) && obj.nodeType > 0;
             },
             //judge a given value is being null or undefined
             isSet: function(value){
@@ -357,8 +355,20 @@
             isOdd: function (num) {
                 return (num % 2 === 1)
             },
+            min: function (a,b) {
+                if(a<b)
+                    return a;
+                return b;
+            },
             assert: function (value, desc) {
-                document.write("<style>#results li.pass{ color: green;}#results li.fail{ color: red;}</style>");
+                document.write(
+                    "<style>" +
+                    "ul{padding:0}"+
+                    "li{list-style: none};" +
+                    "#results li.pass{ color: green;}" +
+                    "li.pass:before{content:'✓';color: green;padding-right:10px} " +
+                    "li.fail:before{content: '✘';color:red;padding-right:10px}+" +
+                    "</style>");
                 document.write("<ul id='results'></ul>");
                 var results;
                 results = results || document.getElementById('results');
@@ -369,7 +379,7 @@
                 if(!value){
                     li.parentNode.parentNode.className = "fail";
                 }
-                return li;
+                return '';
             },
             hasHash: function (url) {
                 if(!judge.isUrl(url)){
@@ -466,7 +476,7 @@
                         return iev.substring(2)
                     }
                 //IE11
-                }else if(trident > 0 && /rv/.test(ua)){
+                }else if(/trident.*rv[ :]*11\./.test(ua)){
                     var rv = ua.indexOf('rv:');
                     var iee = "isIE"+parseInt(ua.substring(rv + 3,ua.indexOf('.',rv)),10);
                     if(arguments[0] ==iee){
@@ -485,11 +495,19 @@
                 return false;
             },
             /*
-                judge IE browser's version >= 8
+             *   judge IE browser's version >= 8
+             *   @params {boolean} true include IE8,false exclude IE8
              */
             isIE8Plus: function () {
                 var $ = judge.browser;
-                return $("isIE8") || $("isIE9") || $("isIE10") || $("isIE11");
+                if(arguments[0]===true){
+                    return $("isIE8") || $("isIE9") || $("isIE10") || $("isIE11");
+                }
+                if(arguments[0]===false){
+                    return $("isIE9") || $("isIE10") || $("isIE11");
+                }else{
+                    return $("isIE8") || $("isIE9") || $("isIE10") || $("isIE11");
+                }
             },
             /*   @{param} [parent]
              *   judge DOM Element's position
@@ -512,9 +530,7 @@
                 }
                 else  return{
                     top    :   pos.top - top,
-                    bottom :   pos.bottom - top,
-                    left   :   pos.left - left,
-                    right  :   pos.right - left
+                    left   :   pos.left - left
                 }
             },
             /*
@@ -554,6 +570,8 @@
                     (isHostObj(fn) ? isNative: isHostConstructor).test(fn);
             }
         };
-    })();
+    })(window);
+    window.judge = window.$ = judge;
+
     return judge;
 }));
