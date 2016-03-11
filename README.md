@@ -39,14 +39,14 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.5.4
+=>0.5.5
 ```
 
 
 可以用`$`来代替`judge`。例如：
 
 ```js
-$.version;//0.5.4
+$.version;//0.5.5
 ```
 
 # API
@@ -104,12 +104,18 @@ judge.isFunction(fn);
 
 >`judge.isObject()`
 
-判断一个给定的值是否是对象，返回布尔值
+判断一个给定的值是否是对象，返回布尔值;其中：
+`array,object,number,string,null,function,boolean`被视为对象，空字符串和`undefined`为非对象。
+
 
 ```js
 var obj = Object.create(null);
 judge.isObject(obj);//true
+
+judge.isObject(undefined);//false
 ```    
+
+
 >`judge.isObjectLike(value)`
 
 判断参数value是否是`object-like`：
@@ -128,7 +134,7 @@ judge.isObjectLike(null);
 
 判断值的类型，包括：
 
-`array,object,number,string,null,undefined,function,boolean,object`
+`array,object,number,string,null,undefined,function,boolean`
 
 ```js
 var arr = new Array;
@@ -364,12 +370,12 @@ judge.isNumber(Infinity);
 
 用于检测当前浏览器的内核（排版引擎），可以检测的类型如下：
 
-`Webkit`,`Gecko`,`Trident`,`Edge`,`Opera`
+`webkit`,`gecko`,`trident`,`edge`,`opera`
 浏览器的内核分别用于检测Chrome浏览器，Firefox浏览器，IE浏览器，Edge浏览器和Opera浏览器
-参数也如上所示，千万不能写错，不然检测就会出现错误。参数采用首字母大写，引号处不能出现空格等不规范写法
 
 ```js
-if(judge.kernel() == 'Webkit'){...}
+if(judge.kernel() == 'webkit'){...} //引号处不能出现空格等不规范写法
+
 ```
 
 >`judge.platform()`
@@ -466,14 +472,14 @@ judge.iosVersion();
 检测`iPhone`手机设备类型，可以检测如下类型的`iPhone`手机：
 
 ```js
-iphone4 ,iphone5, iphone6,iphone6Plus
+iphone4(s) ,iphone5(s), iphone6(s),iphone6(s)Plus
 
 if(judge.iosDevice=='iphone6Plus'){...}
 ```
 
 >`judge.androidDevice()`
 
-检测安卓设备，现在只支持:MI4
+检测安卓设备，现在只支持:mi4,魅族metal(mz-metal),魅族mx5，魅族mx3
 
 TODO：准备支持更多安卓手机设备
 
@@ -838,3 +844,11 @@ judge.isIE8Plus(false);//exclude IE8
 ```
 
 没有参数，默认包含IE8
+
+>`judge.strLength(str)`
+
+判断字符长度，返回数字。一个中文字符被视为2，一个英文字符为视为1：
+
+```js
+judge.strLength('你好China');//9
+```

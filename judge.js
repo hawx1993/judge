@@ -28,26 +28,29 @@
 
     judge = (function () {
         return {
-            version: '0.5.4',
+            version: '0.5.5',
+            /*
+            * `array,object,number,string,null,undefined,function,boolean`
+            * */
             type: function (obj) {
                 return Object.prototype.toString.call(obj)
                     .replace(/^\[object (.+)\]$/, "$1")
                     .toLowerCase();
             },
             /*
-                Each iframe has their own window object
+             Each iframe has their own window object
              */
             isWindow: function (obj) {
                 return obj != null && obj == obj.window;
             },
             isArray : function (value) {
-                return  oString.call(value) === '[object Array]';
+                return  typeof value ==='object' && oString.call(value) === '[object Array]';
             },
             /*
-                judge object is plain object(1.created by{}，2.created by new Object())
+             judge object is plain object(1.created by{}，2.created by new Object())
              */
             isPlainObject: function (obj) {
-                return judge.isObject(obj) && !judge.isWindow(obj)
+                return $.isObject(obj) && !$.isWindow(obj)
                     && Object.getPrototypeOf(obj) == Object.prototype;
             },
             include: function(str,substr){
@@ -62,9 +65,9 @@
              */
             isArrayLike: function ( obj ) {
                 if( obj != null ){
-                    var length = obj.length,type = judge.type( obj );
+                    var length = obj.length,type = $.type( obj );
                 }else return false;
-                if(judge.isWindow( obj )){
+                if($.isWindow( obj )){
                     return false;
                 }
                 if(obj.nodeType === 1 && length){
@@ -75,39 +78,39 @@
             },
             /*
              *  like isArrayLike,except it also check if 'value' is object
-             *  judge.isArrayLikeObject('abcd');
+             *  $.isArrayLikeObject('abcd');
              *  =>false
              */
             isArrayLikeObject: function (value) {
-                return judge.isObjectLike(value) && judge.isArrayLike(value);
+                return $.isObjectLike(value) && $.isArrayLike(value);
             },
             /*
-             *   @{param} Gecko => Firefox
-             *   @{param} Edge => Edge
-             *   @{param} Webkit => Chrome
-             *   @{param} IE => Trident
-             *   @{param} Opera = > Opera
+             *   @{param} gecko => Firefox
+             *   @{param} edge => Edge
+             *   @{param} webkit => Chrome
+             *   @{param} trident => IE
+             *   @{param} opera = > Opera
              */
             kernel: function(){
                 if(/gecko\/\d/.test(ua)){
-                    return 'Gecko';
+                    return 'gecko';
                 }else if(/edge/i.test(ua)){
-                    return 'Edge';
+                    return 'edge';
                 } else if(/webkit\//.test(ua)){
-                    return 'Webkit'
+                    return 'webkit'
                 }else if(/msie/.test(ua) || "ActiveXObject" in window || /trident/.test(ua)){
-                    return 'Trident';
-                }else if(ua.indexOf('Presto') > -1){
-                    return "Opera";
+                    return 'trident';
+                }else if(find('presto')){
+                    return "opera";
                 }
                 return 'Unknow kernel'
             },
             /*
-                case sensitive
+             case sensitive
              */
             platform : function(){
                 var iPad = ua.match(/ipad/),
-                    //some wp platform fake ua to android
+                //some wp platform fake ua to android
                     Android = ua.match(/android/) && !ua.match(/windows phone/),
                     iOS = ua.match(/iphone/),
                     WinPhone = ua.match(/windows phone/),
@@ -142,7 +145,7 @@
                 var device = [
                     iPhone4,iPhone5,iPhone6,iPhone6P
                 ];
-                dn = ["iPhone4","iPhone5","iPhone6","iPhone6Plus"];
+                dn = ["iPhone4(s)","iPhone5(s)","iPhone6(s)","iPhone6(s)Plus"];
                 for(var j = 0,l=device.length;j<l;j++){
                     if(device[j]){
                         return dn[j];
@@ -152,13 +155,20 @@
             },
             androidDevice: function () {
                 //HM NOTE 1s ->navigator.appVersion
-                if(ua.match(/android/i)){
-                    var mi4 = ua.indexOf('mi 4');
-                    mi4 = ua.substr(mi4 , 4).toUpperCase();
-                    return mi4;
-                } else{
-                    return "Unknow AndroidDevice";
+                if(ua.match(/mx5/)){
+                    return 'mx5'
                 }
+                if(ua.match(/mi 4/)){
+                    return 'mi4'
+                }
+                if(ua.match(/metal/)){
+                    return 'mz-metal'
+                }
+                if(ua.match(/m3/)){
+                    return 'mx3'
+                }
+                else return 'unknow device';
+
             },
             iosVersion: function () {
                 if(ua.match(/iPhone/i)){
@@ -169,13 +179,13 @@
             },
             androidVersion: function () {
                 var match = ua.match(/android\s([0-9\.]*)/i);
-                return match ? match[1] : false;
+                return match ? "android" + " "+match[1] : false;
             },
             isMobile: function () {
                 return !!ua.match(/(iPhone|iPod|android|ios|iPad|windows phone|tablet)/i);
             },
             isPc: function () {
-                return !judge.isMobile();
+                return !$.isMobile();
             },
             //judge value isexist?
             isExist: function(value){
@@ -188,13 +198,13 @@
                 return value === undefined;
             },
             isNumber: function (num) {
-                return judge.type(num) === 'number';
+                return $.type(num) === 'number';
             },
             lt: function (val1,val2) {
                 return val1 < val2;
             },
             inArray: function(val,arr){
-                if(!judge.isArray(arr)){
+                if(!$.isArray(arr)){
                     return false;
                 }
                 for(var i = 0;i<arr.length;i++){
@@ -224,13 +234,13 @@
                 return !!(typeof window !== 'undefined' && navigator !== 'undefined' && window.document);
             },
             isFunction: function (fn) {
-                return judge.type(fn) === 'function';
+                return $.type(fn) === 'function';
             },
             isEqual: function (val1, val2) {
                 return val1 === val2;
             },
             /**
-             *judge.isLength('1');//false
+             *  $.isLength('1');//false
              */
 
             isLength: function (value) {
@@ -255,10 +265,12 @@
                 return true;
             },
             isString: function(str){
-                return judge.type(str) === 'string';
+                return $.type(str) === 'string';
             },
             isObject: function(obj){
-                return judge.type(obj) === 'object';
+                if(obj !== '' && obj !== undefined){
+                    return !!$.type(obj);
+                }else return false;
             },
             isObjectLike: function (value) {
                 return !!value && typeof value == 'object';
@@ -279,7 +291,7 @@
                 return oString.call(value) === ['object Error'];
             },
             isChar: function(value){
-                return judge.isString(value) && value.length === 1;
+                return $.isString(value) && value.length === 1;
             },
             /*@examples
              *
@@ -288,7 +300,7 @@
              */
             isArguments: function (value) {
                 var args = '[object Arguments]';
-                return judge.isArrayLikeObject(value) && hasOwnProperty.call(value,'callee') &&
+                return $.isArrayLikeObject(value) && hasOwnProperty.call(value,'callee') &&
                     (!propertyIsEnumerable.call(value,'callee') || oString.call(value)== args);
             },
             /*
@@ -296,13 +308,13 @@
              * => true
              */
             isEmpty: function(value){
-                if(judge.isArray(value) || judge.isString(value)){
+                if($.isArray(value) || $.isString(value)){
                     return (value.length <= 0);
-                }else if(judge.type(value)=== null || judge.type(value) === undefined){
+                }else if($.type(value)=== null || $.type(value) === undefined){
                     return true;
-                }else if(judge.type(value) === 'number'){
+                }else if($.type(value) === 'number'){
                     return false;
-                }else if(judge.isObject(value)){
+                }else if($.isObject(value)){
                     for(var key in value){
                         if(value.hasOwnProperty(key)) return false;
                     }
@@ -336,14 +348,14 @@
              *  judge obj is Dom elements.
              */
             isElement: function(obj){
-                return judge.isObject(obj) && obj.nodeType > 0;
+                return $.isObject(obj) && obj.nodeType > 0;
             },
             //judge a given value is being null or undefined
             isSet: function(value){
                 return value !== null && value !== (void 0)
             },
             isRegExp: function(reg){
-                return judge.type(reg) === 'regexp';
+                return $.type(reg) === 'regexp';
             },
             //judge your ID number ,case-insensitive
             idNumber: function(num){
@@ -382,7 +394,7 @@
                 return '';
             },
             hasHash: function (url) {
-                if(!judge.isUrl(url)){
+                if(!$.isUrl(url)){
                     return false;
                 }
                 url = url || window.location.href;
@@ -436,8 +448,8 @@
                     isUC= /ubrowser/.test(ua) && !/bidubrowser/.test(ua)&& !/baidubrowser/.test(ua),
                     isUCMobile= /ucbrowser/.test(ua),
                     isBaidu= /bidubrowser/.test(ua),
-                    isBaiduMobile= /baidubrowser/.test(ua),
-                    isQQMobile= /qqbrowser/.test(ua) &&judge.isMobile(),
+                    isBaiduMobile= /baidubrowser/.test(ua) || /baiduboxapp/.test(ua),
+                    isQQMobile= /qqbrowser/.test(ua) && $.isMobile(),
                     isQQBrowser= /qqbrowser/.test(ua),
                     isOpera= /opr/.test(ua),
                     isMiuiBrowser= /miuibrowser/.test(ua),
@@ -563,11 +575,17 @@
                 if(fn == null||undefined){
                     return false;
                 }
-                if(judge.isFunction(fn)){
+                if($.isFunction(fn)){
                     return isNative.test(func.call(fn));
                 }
-                return judge.isObjectLike(fn) &&
+                return $.isObjectLike(fn) &&
                     (isHostObj(fn) ? isNative: isHostConstructor).test(fn);
+            },
+            /*
+            * Chinese char is regarded as 2,English is 1
+            * */
+            strLength: function (str) {
+                return String(str).replace(/[^\x00-\xff]/g,'aa').length;
             }
         };
     })(window);

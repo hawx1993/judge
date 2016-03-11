@@ -38,23 +38,15 @@
     document.writeln("<br>");
     document.write("<br>");
 
-    var s = '2';
-    document.write('is "2" onlyNumber: '+judge.onlyNumber(s));
     document.writeln("<br>");
     document.writeln("<br>");
     document.write('<span class="require">'+"open console to see requirejs examples"+'</span>');
     document.writeln("<br>");
     document.writeln("<br>");
     document.writeln("Is Array.prototype.forEach is Native function: "+judge.isNativeFn(Array.prototype.forEach));
-    function add(a,b){
-        return a + b;
-    }
-    var a = 1,b=2;
 
-    document.writeln(judge.assert(add(1,2)===3,'true'));
-    document.writeln(judge.assert(1+2==4,'false'));
-
-    document.writeln(judge.isNumber(1));
+    document.writeln(judge.assert(judge.isArray([null,undefined]),'[null,undefined] is array'));
+    document.writeln(judge.assert(judge.isObject(undefined),'undefined is object'));
 </script>
 </body>
 </html>
