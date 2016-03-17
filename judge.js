@@ -21,6 +21,15 @@
     var judge = {},
         op = Object.prototype,
         oString = op.toString;
+    var reg = {
+        url: /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g,
+        email: /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/,
+        id:/(^\d{15}$)|(^\d{17}([0-9]|X)$)/i,
+        qq:/^[1-9][0-9]{4,9}$/,
+        phone:/^1[3|4|5|7|8]\d{9}$/,
+        tel:/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/,
+        nativeFn:/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g
+    };
     //support Node.js module
     if(typeof window !== 'undefined'){
         var ua = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
@@ -28,7 +37,7 @@
 
     judge = (function () {
         return {
-            version: '0.5.5',
+            version: '0.6.0',
             /*
             * `array,object,number,string,null,undefined,function,boolean`
             * */
@@ -42,6 +51,19 @@
              */
             isWindow: function (obj) {
                 return obj != null && obj == obj.window;
+            },
+            isDocument: function (obj) {
+                if(!obj) return false;
+                var body = obj.body;
+                if(typeof body == 'undefined') return false;
+                try{
+                    obj.body = null;
+                    obj.body = body;
+                    return false;
+                }catch(e){
+                    return true;
+                }
+
             },
             isArray : function (value) {
                 return  typeof value ==='object' && oString.call(value) === '[object Array]';
@@ -110,7 +132,7 @@
              */
             platform : function(){
                 var iPad = ua.match(/ipad/),
-                //some wp platform fake ua to android
+                    //some wp platform fake ua to android
                     Android = ua.match(/android/) && !ua.match(/windows phone/),
                     iOS = ua.match(/iphone/),
                     WinPhone = ua.match(/windows phone/),
@@ -122,33 +144,33 @@
                 var device =[
                     iPad,Android,iOS,WinPhone,Mac,Windows,Linux,Blackberry,AndroidTablet
                 ];
-                var dn = [
+                var arrDevice = [
                     "iPad","android","ios","windowsPhone","mac","windows",
                     "linux","blackBerry","androidTablet"
                 ];
                 for(var k =0;k<device.length;k++){
                     if(device[k]){
-                        return dn[k];
+                        return arrDevice[k];
                     }
                 }
                 return "Unknow Platform";
             },
             iosDevice: function () {
-                var iPhone4 = ua.match(/iphone/i) && window.screen.height ==480,
-                    iPhone5 = ua.match(/iphone/i) && window.screen.height>480
+                var iPhone4 = ua.match(/iphone/) && window.screen.height ==480,
+                    iPhone5 = ua.match(/iphone/) && window.screen.height>480
                         && window.screen.height <667,
-                    iPhone6 = ua.match(/iphone/i) && window.screen.height>480
+                    iPhone6 = ua.match(/iphone/) && window.screen.height>480
                         && window.screen.height<736,
-                    iPhone6P = ua.match(/iphone/i) && window.devicePixelRatio==3.0
+                    iPhone6P = ua.match(/iphone/) && window.devicePixelRatio==3.0
                         &&window.screen.height==736;
 
                 var device = [
                     iPhone4,iPhone5,iPhone6,iPhone6P
                 ];
-                dn = ["iPhone4(s)","iPhone5(s)","iPhone6(s)","iPhone6(s)Plus"];
+                arrDevice = ["iPhone4","iPhone5","iPhone6","iPhone6Plus"];
                 for(var j = 0,l=device.length;j<l;j++){
                     if(device[j]){
-                        return dn[j];
+                        return arrDevice[j];
                     }
                 }
                 return "Unknow iosDevice";
@@ -204,9 +226,7 @@
                 return val1 < val2;
             },
             inArray: function(val,arr){
-                if(!$.isArray(arr)){
-                    return false;
-                }
+                if(!$.isArray(arr)) return false;
                 for(var i = 0;i<arr.length;i++){
                     if(arr[i] == val){
                         return true;
@@ -218,8 +238,8 @@
                 return 'ontouchstart' in window ||
                     'DocumentTouch' in window && document instanceof DocumentTouch;
             },
-            email: function(em){
-                return !!em.match(/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/);
+            email: function(num){
+                return reg.email.test(num);
             },
             hasLowerCase: function(str){
                 return !!str.match(/^.*[a-z]+.*$/);
@@ -231,7 +251,9 @@
                 return !!str.match(/^.*[A-Z]+.*$/);
             },
             isBrowser: function(){
-                return !!(typeof window !== 'undefined' && navigator !== 'undefined' && window.document);
+                return !!(typeof window !== 'undefined' &&
+                        navigator !== 'undefined' && window.document
+                );
             },
             isFunction: function (fn) {
                 return $.type(fn) === 'function';
@@ -242,10 +264,9 @@
             /**
              *  $.isLength('1');//false
              */
-
             isLength: function (value) {
-                return typeof value == 'number' && value > -1 && value % 1 ==0 && value <= Number.MAX_SAFE_INTEGER;
-
+                return typeof value == 'number' && value > -1 &&
+                    value % 1 ==0 && value <= Number.MAX_SAFE_INTEGER;
             },
             size: function(val){
                 return val.length;
@@ -321,17 +342,17 @@
                 }
                 return true;
             },
-            qqNumber: function(qq){
-                var req = new RegExp(/^[1-9][0-9]{4,9}$/).test(qq);
+            qqNumber: function(num){
+                var req = reg.qq.test(num);
                 return !!req;
             },
             phoneNumber: function(num){
-                var phone = /^1[3|4|5|7|8]\d{9}$/.test(num);
+                var phone = reg.phone.test(num);
                 return !!phone;
             },
             telPhone: function (num) {
-                var tel = /^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(num);
-                return !!tel;
+                var telNumber = reg.tel.test(num);
+                return !!telNumber;
             },
             includeChinese: function(ch){
                 return !!/[\u4e00-\u9fa5]/g.test(ch);
@@ -341,8 +362,7 @@
                 return !!myReg.test(ch);
             },
             onlyNumber: function (num) {
-                num = /^\d+$/g.test(num);
-                return num;
+                return /^\d+$/g.test(num);
             },
             /*
              *  judge obj is Dom elements.
@@ -359,7 +379,7 @@
             },
             //judge your ID number ,case-insensitive
             idNumber: function(num){
-                return (/(^\d{15}$)|(^\d{17}([0-9]|X)$)/i.test(num));
+                return (reg.id.test(num));
             },
             isEven: function(num){
                 return (num % 2 === 0);
@@ -406,9 +426,8 @@
             has: function (obj,key) {
                 return obj != null && hasOwnProperty.call(obj,key);
             },
-            isUrl: function (url) {
-                var re = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g;
-                return re.test(url);
+            isUrl: function (link) {
+                return reg.url.test(link);
             },
             zipCode: function (code) {
                 var reg = new RegExp(/[1-9]\d{5}(?!\d)/);
@@ -571,7 +590,7 @@
                         return result;
                     };
                 var isNative = new RegExp('^' +
-                    func.call(hasOwnProperty).replace(regChar,'\\$&').replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$');
+                    func.call(hasOwnProperty).replace(regChar,'\\$&').replace(reg.nativeFn, '$1.*?') + '$');
                 if(fn == null||undefined){
                     return false;
                 }

@@ -4,7 +4,7 @@
 
 - 没有任何依赖
 - 支持 `AMD` & `CommonJS`
-- 轻量级（7kb）
+- 轻量级（10kb）
 
 ```js
 $ npm install #安装依赖
@@ -39,14 +39,14 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.5.5
+=>0.6.0
 ```
 
 
 可以用`$`来代替`judge`。例如：
 
 ```js
-$.version;//0.5.5
+$.version;//0.6.0
 ```
 
 # API
@@ -236,6 +236,11 @@ judge.isLength(arr);
 >`judge.isWindow(obj)`
 
 判断是否是window对象。
+
+>`judge.isDocument()`
+
+判断是否是Document对象
+
 
 >`judge.isPlainObject(obj)`
 
@@ -476,7 +481,13 @@ iphone4(s) ,iphone5(s), iphone6(s),iphone6(s)Plus
 
 if(judge.iosDevice=='iphone6Plus'){...}
 ```
+参数为：`iphone4,iphone5,iphone6,iphone6Plus`
 
+```js
+$.iosDevice();//if your ios device is iphone6
+
+=>iphone6 
+```
 >`judge.androidDevice()`
 
 检测安卓设备，现在只支持:mi4,魅族metal(mz-metal),魅族mx5，魅族mx3
