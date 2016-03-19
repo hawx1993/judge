@@ -1,4 +1,3 @@
-
 /**
  * Created by trigkit4 on 16/1/17.
  * judge.js < https://github.com/hawx1993/judge >
@@ -20,7 +19,8 @@
     root = this || global;
     var judge = {},
         op = Object.prototype,
-        oString = op.toString;
+        oString = op.toString,
+        funcTo = Function.prototype.toString;
     var reg = {
         url: /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g,
         email: /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/,
@@ -33,11 +33,12 @@
     //support Node.js module
     if(typeof window !== 'undefined'){
         var ua = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
+        window.judge = window.$ = judge;
     }
 
     judge = (function () {
         return {
-            version: '0.6.0',
+            version: '0.6.5',
             /*
             * `array,object,number,string,null,undefined,function,boolean`
             * */
@@ -575,8 +576,7 @@
              *   =>false
              */
             isNativeFn: function (fn) {
-                var func = Function.prototype.toString,
-                    regChar = /[\\^$.*+?()[\]{}|]/g,
+                var regChar = /[\\^$.*+?()[\]{}|]/g,
                     //match  host constructor
                     isHostConstructor = /^\[object .+?Constructor\]$/,
                     //judge value is a host object in IE9 or older
@@ -590,12 +590,12 @@
                         return result;
                     };
                 var isNative = new RegExp('^' +
-                    func.call(hasOwnProperty).replace(regChar,'\\$&').replace(reg.nativeFn, '$1.*?') + '$');
+                    funcTo.call(hasOwnProperty).replace(regChar,'\\$&').replace(reg.nativeFn, '$1.*?') + '$');
                 if(fn == null||undefined){
                     return false;
                 }
                 if($.isFunction(fn)){
-                    return isNative.test(func.call(fn));
+                    return isNative.test(funcTo.call(fn));
                 }
                 return $.isObjectLike(fn) &&
                     (isHostObj(fn) ? isNative: isHostConstructor).test(fn);
@@ -607,8 +607,6 @@
                 return String(str).replace(/[^\x00-\xff]/g,'aa').length;
             }
         };
-    })(window);
-    window.judge = window.$ = judge;
-
+    })();
     return judge;
 }));

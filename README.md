@@ -10,6 +10,9 @@
 $ npm install #安装依赖
 $ gulp compress #生成judge.min.js文件
 ```
+
+>DEMO:http://hawx1993.github.io/judge/examples/
+
 ## 开始
 
 >使用`npm`安装`judgejs`：
@@ -21,7 +24,7 @@ $ sudo npm install judgejs -g
 >使用`bower` 安装`judgejs`
 
 ```js
-$ bower install judgejs -g
+$ sudo bower install judgejs -g 
 ```
 
 # 目录
@@ -39,14 +42,14 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.6.0
+=>0.6.5
 ```
 
 
 可以用`$`来代替`judge`。例如：
 
 ```js
-$.version;//0.6.0
+$.version;//0.6.5
 ```
 
 # API
