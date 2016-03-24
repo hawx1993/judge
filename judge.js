@@ -17,12 +17,13 @@
     }
 }(this, function (root) {
     root = this || global;
+    'use strict';
     var judge = {},
         op = Object.prototype,
         oString = op.toString,
         funcTo = Function.prototype.toString;
     var reg = {
-        url: /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g,
+        url: /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/,
         email: /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/,
         id:/(^\d{15}$)|(^\d{17}([0-9]|X)$)/i,
         qq:/^[1-9][0-9]{4,9}$/,
@@ -33,14 +34,13 @@
     //support Node.js module
     if(typeof window !== 'undefined'){
         var ua = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
-        window.judge = window.$ = judge;
     }
 
     judge = (function () {
         return {
-            version: '0.6.5',
+            version: '0.7.0',
             /*
-            * `array,object,number,string,null,undefined,function,boolean`
+            * array,object,number,string,null,undefined,function,boolean`
             * */
             type: function (obj) {
                 return Object.prototype.toString.call(obj)
@@ -64,10 +64,10 @@
                 }catch(e){
                     return true;
                 }
-
             },
             isArray : function (value) {
-                return  typeof value ==='object' && oString.call(value) === '[object Array]';
+                return  typeof value ==='object' &&
+                    oString.call(value) === '[object Array]';
             },
             /*
              judge object is plain object(1.created by{}，2.created by new Object())
@@ -126,7 +126,7 @@
                 }else if(find('presto')){
                     return "opera";
                 }
-                return 'Unknow kernel'
+                return 'unknow'
             },
             /*
              case sensitive
@@ -154,7 +154,7 @@
                         return arrDevice[k];
                     }
                 }
-                return "Unknow Platform";
+                return "unknow";
             },
             iosDevice: function () {
                 var iPhone4 = ua.match(/iphone/) && window.screen.height ==480,
@@ -168,13 +168,13 @@
                 var device = [
                     iPhone4,iPhone5,iPhone6,iPhone6P
                 ];
-                arrDevice = ["iPhone4","iPhone5","iPhone6","iPhone6Plus"];
+                var arrDevice = ["iPhone4","iPhone5","iPhone6","iPhone6Plus"];
                 for(var j = 0,l=device.length;j<l;j++){
                     if(device[j]){
                         return arrDevice[j];
                     }
                 }
-                return "Unknow iosDevice";
+                return "unknow";
             },
             androidDevice: function () {
                 //HM NOTE 1s ->navigator.appVersion
@@ -190,15 +190,14 @@
                 if(ua.match(/m3/)){
                     return 'mx3'
                 }
-                else return 'unknow device';
-
+                else return 'unknow';
             },
             iosVersion: function () {
+                if(!$.isMobile() && !ua.match(/iphone/)) return false;
                 if(ua.match(/iPhone/i)){
-                    os = ua.indexOf('os');
+                    var os = ua.indexOf('os');
                 }
-                iosVersion = ua.substr(os + 3, 5).replace('_','.').replace('_','.');
-                return iosVersion;
+               return ua.substr(os + 3, 5).replace('_','.').replace('_','.');
             },
             androidVersion: function () {
                 var match = ua.match(/android\s([0-9\.]*)/i);
@@ -236,8 +235,8 @@
                 return false;
             },
             isTouchDevice: function(){
-                return 'ontouchstart' in window ||
-                    'DocumentTouch' in window && document instanceof DocumentTouch;
+                return 'ontouchstart' in root ||
+                    'DocumentTouch' in root && document instanceof DocumentTouch;
             },
             email: function(num){
                 return reg.email.test(num);
@@ -252,8 +251,8 @@
                 return !!str.match(/^.*[A-Z]+.*$/);
             },
             isBrowser: function(){
-                return !!(typeof window !== 'undefined' &&
-                        navigator !== 'undefined' && window.document
+                return !!(typeof root !== 'undefined' &&
+                        navigator !== 'undefined' && root.document
                 );
             },
             isFunction: function (fn) {
@@ -383,7 +382,7 @@
                 return (reg.id.test(num));
             },
             isEven: function(num){
-                return (num % 2 === 0);
+                return num!==null && (num % 2 ===0);
             },
             isOdd: function (num) {
                 return (num % 2 === 1)
@@ -605,8 +604,15 @@
             * */
             strLength: function (str) {
                 return String(str).replace(/[^\x00-\xff]/g,'aa').length;
+            },
+            isLeapYear: function (year) {
+                return !!(((year % 4) ==0) && ((year % 100) !==0) ||(year % 400) ==0 );
             }
         };
     })();
+    root.judge = judge;
+    //if $ is undefined,point to judge
+    root.$ === undefined && (root.$ = judge);
+
     return judge;
 }));

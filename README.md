@@ -18,13 +18,13 @@ $ gulp compress #生成judge.min.js文件
 >使用`npm`安装`judgejs`：
 
 ```js
-$ sudo npm install judgejs -g
+$ npm install judgejs 
 ```
 
 >使用`bower` 安装`judgejs`
 
 ```js
-$ sudo bower install judgejs -g 
+$ bower install judgejs  
 ```
 
 # 目录
@@ -42,14 +42,17 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.6.5
+=>0.7.0
 ```
 
 
 可以用`$`来代替`judge`。例如：
 
 ```js
-$.version;//0.6.5
+require('../judge.js')
+
+$.version;
+=> 0.7.0
 ```
 
 # API
@@ -341,6 +344,11 @@ judge.min(0,-1);
 
 判断一个给定的值是否是偶数，返回布尔值
 
+```js
+$.isEven(null);
+
+=>false
+```
 >`judge.isNull(value)`
 
 ```js
@@ -866,3 +874,8 @@ judge.isIE8Plus(false);//exclude IE8
 ```js
 judge.strLength('你好China');//9
 ```
+
+>`judge.isLeapYear(year)`
+
+判断是否是闰年
+

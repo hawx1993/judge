@@ -47,6 +47,20 @@
 
     document.writeln(judge.assert(judge.isArray([null,undefined]),'[null,undefined] is array'));
     document.writeln(judge.assert(judge.isObject(undefined),'undefined is object'));
+    document.writeln("<br>");
+    document.writeln('以下判断请使用移动设备打开本页面或扫描二维码打开!');
+    document.writeln("<br>");
+    document.writeln("<br>");
+    document.writeln('your current device is touch device：'+$.isTouchDevice());
+    document.writeln("<br>");
+    document.writeln("<br>");
+    document.writeln('your current Android version is：'+ $.androidVersion());
+    document.writeln("<br>");
+    document.writeln("<br>");
+    document.writeln('your current ios version is：'+ $.iosVersion());
+    document.writeln("<br>");
+    document.writeln("<br>");
+    document.writeln('your current iphone device is：'+ $.iosDevice());
 </script>
 </body>
 </html>

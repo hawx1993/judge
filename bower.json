@@ -1,6 +1,6 @@
 {
   "name": "judgejs",
-  "description": "a js library for judging something",
+  "description": "A lightweight vanilla JavaScript library for judging",
   "main": "judge.js",
   "authors": [
     "trigkit4"
