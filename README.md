@@ -18,7 +18,7 @@ $ gulp compress #生成judge.min.js文件
 >使用`npm`安装`judgejs`：
 
 ```js
-$ npm install judgejs 
+$ npm install judgejs
 ```
 
 >使用`bower` 安装`judgejs`
@@ -42,7 +42,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.7.0
+=>0.7.1
 ```
 
 
@@ -52,7 +52,7 @@ judge.version
 require('../judge.js')
 
 $.version;
-=> 0.7.0
+=> 0.7.1
 ```
 
 # API
@@ -196,7 +196,7 @@ var obj3 = {
     name: 'trigkit4',
     age: 23
 };
- 
+
 judge.isEqual(str,str2,str3);//true
 judge.isEqual(obj1,obj2,obj4);//false
 judge.isEqual(str,str2,str3);//true
@@ -477,7 +477,7 @@ judge.iosVersion();
 
 >`judge.isMobile()`
 
-判断用户设备是否是移动设备(ipad,iphone,ipod,android) 
+判断用户设备是否是移动设备(ipad,iphone,ipod,android)
 
 >`judge.isPc()`
 
@@ -497,7 +497,7 @@ if(judge.iosDevice=='iphone6Plus'){...}
 ```js
 $.iosDevice();//if your ios device is iphone6
 
-=>iphone6 
+=>iphone6
 ```
 >`judge.androidDevice()`
 
@@ -841,7 +841,7 @@ judge.isNativeFn(Array.prototype.filter)
 var obj = {
         fn: function () {}
  };
- 
+
 judge.isNativeFn(obj.fn)
 
 =>false
@@ -878,4 +878,3 @@ judge.strLength('你好China');//9
 >`judge.isLeapYear(year)`
 
 判断是否是闰年
-

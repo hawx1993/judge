@@ -24,7 +24,7 @@
         funcTo = Function.prototype.toString;
     var reg = {
         url: /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/,
-        email: /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/,
+        email: /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i,
         id:/(^\d{15}$)|(^\d{17}([0-9]|X)$)/i,
         qq:/^[1-9][0-9]{4,9}$/,
         phone:/^1[3|4|5|7|8]\d{9}$/,
@@ -38,7 +38,7 @@
 
     judge = (function () {
         return {
-            version: '0.7.0',
+            version: '0.7.1',
             /*
             * array,object,number,string,null,undefined,function,boolean`
             * */
@@ -193,7 +193,7 @@
                 else return 'unknow';
             },
             iosVersion: function () {
-                if(!$.isMobile() && !ua.match(/iphone/)) return false;
+                if($.platform() !== 'ios') return false;
                 if(ua.match(/iPhone/i)){
                     var os = ua.indexOf('os');
                 }

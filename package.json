@@ -1,6 +1,6 @@
 {
   "name": "judgejs",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A lightweight vanilla JavaScript library for judging",
   "main": "judge.js",
   "scripts": {
@@ -21,9 +21,7 @@
   "homepage": "https://github.com/hawx1993/judge#readme",
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-jshint": "^2.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.1",
-    "jshint": "^2.9.1"
+    "gulp-uglify": "^1.5.1"
   }
 }
