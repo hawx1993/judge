@@ -1,6 +1,5 @@
-###`judge.js`
-
-####一个用来做判断的js类库
+## `judge.js`
+一个用来做判断的js类库
 
 - 没有任何依赖
 - 支持 `AMD` & `CommonJS`
@@ -371,6 +370,7 @@ judge.isUndefined(void 0);
 
 =>true
 ```
+
 >`judge.isNumber(num)`
 
 ```js
@@ -729,6 +729,14 @@ var url = 'www.baidu.com#w';
 judge.hasHash(url);
 
 => true
+```
+>`judge.getHash(url)`
+
+获取给定url链接的hash值
+
+```js
+var url = 'www.weidian.com#wd';
+$.getHash(url);//wd
 ```
 
 >`judge.has(obj,key)`
