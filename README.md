@@ -42,7 +42,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.7.1
+=>0.7.2
 ```
 
 
@@ -52,7 +52,7 @@ judge.version
 require('../judge.js')
 
 $.version;
-=> 0.7.1
+=> 0.7.2
 ```
 
 # API

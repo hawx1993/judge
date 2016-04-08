@@ -38,17 +38,15 @@
 
     judge = (function () {
         return {
-            version: '0.7.1',
-            /*
-            * array,object,number,string,null,undefined,function,boolean`
-            * */
+            version: '0.7.2',
+            /**
+             * return {array,object,number,string,null,undefined,function,boolean}
+             */
             type: function (obj) {
-                return Object.prototype.toString.call(obj)
-                    .replace(/^\[object (.+)\]$/, "$1")
-                    .toLowerCase();
+                return oString.call(obj).replace(/^\[object (.+)\]$/, "$1").toLowerCase();
             },
-            /*
-             Each iframe has their own window object
+            /**
+             * Each iframe has their own window object
              */
             isWindow: function (obj) {
                 return obj != null && obj == obj.window;
@@ -69,22 +67,25 @@
                 return  typeof value ==='object' &&
                     oString.call(value) === '[object Array]';
             },
-            /*
-             judge object is plain object(1.created by{}，2.created by new Object())
+            isObject: function(obj){
+                return $.type(obj) == 'object';
+            },
+            isObjectLike: function (value) {
+                return !!value && typeof value == 'object';
+            },
+            /**
+             * judge obj is plain object,created by {} or new Object
              */
             isPlainObject: function (obj) {
-                return $.isObject(obj) && !$.isWindow(obj)
-                    && Object.getPrototypeOf(obj) == Object.prototype;
+                return $.isObject(obj) && !$.isWindow(obj) && Object.getPrototypeOf(obj) == op;
             },
             include: function(str,substr){
                 return str.indexOf(substr) > -1;
             },
-            /*
+            /**
              *  Array,Arguments,NodeList and have Non-Negative Integer length property Object.
-             *  @example
              *
-             *  judge.isArrayLike(document.body.className)
-             *  =>true
+             *  $.isArrayLike(document.body.className)//=>true
              */
             isArrayLike: function ( obj ) {
                 if( obj != null ){
@@ -99,20 +100,16 @@
                 return type === "array" || type !== "function" && ( length === 0 ||
                     typeof length === "number" && length > 0 && ( length - 1 ) in obj );
             },
-            /*
+            /**
              *  like isArrayLike,except it also check if 'value' is object
-             *  $.isArrayLikeObject('abcd');
-             *  =>false
+             *  $.isArrayLikeObject('abcd');//false
              */
             isArrayLikeObject: function (value) {
                 return $.isObjectLike(value) && $.isArrayLike(value);
             },
-            /*
-             *   @{param} gecko => Firefox
-             *   @{param} edge => Edge
-             *   @{param} webkit => Chrome
-             *   @{param} trident => IE
-             *   @{param} opera = > Opera
+            /**
+             * @returns
+             *   [gecko: 'firefox',edge: 'edge',webkit: 'chrome',trident: 'IE',presto: 'opera']
              */
             kernel: function(){
                 if(/gecko\/\d/.test(ua)){
@@ -123,17 +120,20 @@
                     return 'webkit'
                 }else if(/msie/.test(ua) || "ActiveXObject" in window || /trident/.test(ua)){
                     return 'trident';
-                }else if(find('presto')){
+                }else if(/presto/.test(ua)){
                     return "opera";
                 }
                 return 'unknow'
             },
-            /*
-             case sensitive
+            /**
+             * case sensitive
+             * @returns
+             * ["iPad","android","ios","windowsPhone","mac",
+             * "windows","linux","blackBerry","androidTablet"]
              */
             platform : function(){
                 var iPad = ua.match(/ipad/),
-                    //some wp platform fake ua to android
+                //some wp platform fake ua to android
                     Android = ua.match(/android/) && !ua.match(/windows phone/),
                     iOS = ua.match(/iphone/),
                     WinPhone = ua.match(/windows phone/),
@@ -156,14 +156,17 @@
                 }
                 return "unknow";
             },
+            /**
+             * @returns ["iPhone4","iPhone5","iPhone6","iPhone6Plus"]
+             */
             iosDevice: function () {
-                var iPhone4 = ua.match(/iphone/) && window.screen.height ==480,
-                    iPhone5 = ua.match(/iphone/) && window.screen.height>480
+                var reg = ua.match(/iphone/);
+                var iPhone4 = reg && window.screen.height ==480,
+                    iPhone5 = reg && window.screen.height>480
                         && window.screen.height <667,
-                    iPhone6 = ua.match(/iphone/) && window.screen.height>480
+                    iPhone6 = reg && window.screen.height>480
                         && window.screen.height<736,
-                    iPhone6P = ua.match(/iphone/) && window.devicePixelRatio==3.0
-                        &&window.screen.height==736;
+                    iPhone6P = reg && window.devicePixelRatio==3.0 && window.screen.height==736;
 
                 var device = [
                     iPhone4,iPhone5,iPhone6,iPhone6P
@@ -176,6 +179,9 @@
                 }
                 return "unknow";
             },
+            /**
+             * @returns ['mx5','mi4','mz-metal','mx3',unknow]
+             */
             androidDevice: function () {
                 //HM NOTE 1s ->navigator.appVersion
                 if(ua.match(/mx5/)){
@@ -197,7 +203,7 @@
                 if(ua.match(/iPhone/i)){
                     var os = ua.indexOf('os');
                 }
-               return ua.substr(os + 3, 5).replace('_','.').replace('_','.');
+                return ua.substr(os + 3, 5).replace('_','.').replace('_','.');
             },
             androidVersion: function () {
                 var match = ua.match(/android\s([0-9\.]*)/i);
@@ -209,7 +215,6 @@
             isPc: function () {
                 return !$.isMobile();
             },
-            //judge value isexist?
             isExist: function(value){
                 return value !== null && value !== undefined && value !== '';
             },
@@ -252,7 +257,7 @@
             },
             isBrowser: function(){
                 return !!(typeof root !== 'undefined' &&
-                        navigator !== 'undefined' && root.document
+                    navigator !== 'undefined' && root.document
                 );
             },
             isFunction: function (fn) {
@@ -288,14 +293,6 @@
             isString: function(str){
                 return $.type(str) === 'string';
             },
-            isObject: function(obj){
-                if(obj !== '' && obj !== undefined){
-                    return !!$.type(obj);
-                }else return false;
-            },
-            isObjectLike: function (value) {
-                return !!value && typeof value == 'object';
-            },
             isInt: function(num){
                 return Math.round(num) === num;
             },
@@ -314,19 +311,17 @@
             isChar: function(value){
                 return $.isString(value) && value.length === 1;
             },
-            /*@examples
-             *
-             *  judge.isArguments(function(){ return arguments;}())
-             *  =>true
+            /**
+             * @examples
+             *  judge.isArguments(function(){ return arguments;}());//true
              */
             isArguments: function (value) {
                 var args = '[object Arguments]';
                 return $.isArrayLikeObject(value) && hasOwnProperty.call(value,'callee') &&
                     (!propertyIsEnumerable.call(value,'callee') || oString.call(value)== args);
             },
-            /*
-             * judge.isEmpty(null);
-             * => true
+            /**
+             * judge.isEmpty(null);//true
              */
             isEmpty: function(value){
                 if($.isArray(value) || $.isString(value)){
@@ -364,7 +359,7 @@
             onlyNumber: function (num) {
                 return /^\d+$/g.test(num);
             },
-            /*
+            /**
              *  judge obj is Dom elements.
              */
             isElement: function(obj){
@@ -421,6 +416,14 @@
                 var match = url.match(/#(.*)$/);
                 var ends =  match ? match[1] : '';
                 return (ends !== '') ;
+            },
+            getHash: function (url) {
+                if($.isUrl(url)){
+                    url = url || window.location.href;
+                    var match = url.match(/#(.*)$/);
+                    return match ? match[1] : '';
+                }
+                return false;
             },
             //judge obj has contain the given key
             has: function (obj,key) {
@@ -493,7 +496,7 @@
                     //have params
                     if(browsers[i] && arguments[0]==bn[i]){
                         return browsers[i];
-                    //without params
+                        //without params
                     }else if(!arguments[0] && browsers[i]){
                         return bn[i].substring(2);
                     }
@@ -506,7 +509,7 @@
                     }else if(!arguments[0] && iev){
                         return iev.substring(2)
                     }
-                //IE11
+                    //IE11
                 }else if(/trident.*rv[ :]*11\./.test(ua)){
                     var rv = ua.indexOf('rv:');
                     var iee = "isIE"+parseInt(ua.substring(rv + 3,ua.indexOf('.',rv)),10);
@@ -525,7 +528,7 @@
                 }
                 return false;
             },
-            /*
+            /**
              *   judge IE browser's version >= 8
              *   @params {boolean} true include IE8,false exclude IE8
              */
@@ -540,12 +543,12 @@
                     return $("isIE8") || $("isIE9") || $("isIE10") || $("isIE11");
                 }
             },
-            /*   @{param} [parent]
-             *   judge DOM Element's position
-             *   judge.position(element).top
-             *   =>return element's position of the distance from the top
-             *   judge.position(element,parent).left
-             *   =>return the element's position of the distance to the left
+            /**
+             *  judge DOM Element's position
+             *  1.judge.position(element).top
+             *  =>return element's position of the distance from the top
+             *  2.judge.position(element,parent).left
+             *  =>return the element's position of the distance to the left
              */
             position: function (element,parent) {
                 var pos = element.getBoundingClientRect();
@@ -564,21 +567,17 @@
                     left   :   pos.left - left
                 }
             },
-            /*
+            /**
              *   judge value is native function or not
              *   @example
-             *
-             *   judge.isNativeFunc(Object.assign)
-             *   =>true
-             *
-             *   judge.isNativeFunc(judge.isFunction())
-             *   =>false
+             *   judge.isNativeFunc(Object.assign);//true
+             *   judge.isNativeFunc(judge.isFunction());//false
              */
             isNativeFn: function (fn) {
                 var regChar = /[\\^$.*+?()[\]{}|]/g,
-                    //match  host constructor
+                //match  host constructor
                     isHostConstructor = /^\[object .+?Constructor\]$/,
-                    //judge value is a host object in IE9 or older
+                //judge value is a host object in IE9 or older
                     isHostObj = function (value) {
                         var result = false;
                         if(value != null && typeof value.toString != 'function'){
@@ -599,9 +598,11 @@
                 return $.isObjectLike(fn) &&
                     (isHostObj(fn) ? isNative: isHostConstructor).test(fn);
             },
-            /*
-            * Chinese char is regarded as 2,English is 1
-            * */
+            /**
+             * @param str
+             * $.strLength('前端');//=>2
+             * $.strLength("frontEnd");//=>4
+             */
             strLength: function (str) {
                 return String(str).replace(/[^\x00-\xff]/g,'aa').length;
             },
