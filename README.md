@@ -11,7 +11,7 @@ $ npm install #安装依赖
 $ gulp compress #生成judge.min.js文件
 ```
 
->DEMO:http://hawx1993.github.io/judge/examples/
+>DEMO:http://hawx1993.github.io/judge/test/
 
 ## 开始
 
@@ -42,7 +42,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.7.2
+=>0.8.0
 ```
 
 
@@ -52,7 +52,7 @@ judge.version
 require('../judge.js')
 
 $.version;
-=> 0.7.2
+=> 0.8.0
 ```
 
 # API
@@ -110,8 +110,7 @@ judge.isFunction(fn);
 
 >`judge.isObject()`
 
-判断一个给定的值是否是对象，返回布尔值;其中：
-`array,object,number,string,null,function,boolean`被视为对象，空字符串和`undefined`为非对象。
+判断一个给定的值是否是对象，返回布尔值; 
 
 
 ```js
@@ -136,11 +135,21 @@ judge.isObjectLike(null);
 =>false
 ```
 
+>`judge.isEmptyObject(obj)`
+
+判断是否为空对象
+
+```js
+var obj = Object.create(null);
+$.isEmptyObject(obj);
+```
+
+
 >`judge.type()`
 
 判断值的类型，包括：
 
-`array,object,number,string,null,undefined,function,boolean`
+`array,object,number,string,null,undefined,function,boolean,regexp`
 
 ```js
 var arr = new Array;
@@ -199,7 +208,6 @@ var obj3 = {
 
 judge.isEqual(str,str2,str3);//true
 judge.isEqual(obj1,obj2,obj4);//false
-judge.isEqual(str,str2,str3);//true
 judge.isEqual(baz,obj3);//false,refer address different
 ```
 
@@ -398,7 +406,7 @@ if(judge.kernel() == 'webkit'){...} //引号处不能出现空格等不规范写
 
 检测用户当前设备，可以检测的类型如下：
 
-`android`,`iPad`,`ios`,`windowsPhone`,`mac`,`windows`,`linux`,`blackBerry`，`androidTablet`
+`android`,`iPad`,`ios`,`windowsPhone`,`mac`,`windows`,`linux`,`blackBerry`，`tablet`,`androidTablet`
 
 
 ```js
@@ -411,7 +419,7 @@ if(judge.platform() == "androidTablet"){...}
 检测当前浏览器类型，可以检测的类型如下：
 
 ```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11","firefox","edge","sougou","liebao","liebao mobile","weixin","uc","mobile uc","baidu browser","mobile baidu","mobile qqbrowser","qqbrowser","opera","miui browser","oppo browser","mobile safari","android chrome", "ios chrome","chrome", "safari","ios safari","Mbile IE各个版本"
+"IE6","IE7","IE8", "IE9", "IE10", "IE11","firefox","edge","sougou","liebao","liebao mobile","weixin","uc","mobile uc","baidu browser","mobile baidu","mobile qqbrowser","qqbrowser","opera","miui browser","oppo browser","mobile safari","android chrome", "ios chrome","chrome", "safari","ios safari","Mobile IE各个版本"
 ```
 如需匹配不同平台的浏览器，需用`judge.platform()`再做一次匹配，使用场景可以是：
 
@@ -581,7 +589,7 @@ judge.hasNumber(num);
 =>true
 ```
 
-> `judge.hasCaptial()`
+> `judge.hasCapital()`
 
 判断是否含有大写字母：
 
@@ -649,10 +657,6 @@ judge.phoneNumber(num);
 
 =>true
 ```
-
->`judge.telPhone(num)`
-
-判断电话号码是否符合规范
 
 >`judge.includeChinese`
 
@@ -745,17 +749,6 @@ judge.has(obj,'name');
 =>true
 ```
 
->`judge.isUrl(url)`
-
-判断一个给定的值是否是URL
-
-```js
-
-var url = 'www.jd.d';
-judge.isUrl(url);
-
-=>false
-```
 
 >`judge.zipCode(code)`
 
@@ -878,3 +871,7 @@ judge.strLength('你好China');//9
 >`judge.isLeapYear(year)`
 
 判断是否是闰年
+
+>`judge.isDate(val)`
+
+判断是否是日期

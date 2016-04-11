@@ -23,17 +23,17 @@
         oString = op.toString,
         funcTo = Function.prototype.toString;
     var reg = {
-        url: /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/,
         email: /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i,
         id:/(^\d{15}$)|(^\d{17}([0-9]|X)$)/i,
         qq:/^[1-9][0-9]{4,9}$/,
         phone:/^1[3|4|5|7|8]\d{9}$/,
-        tel:/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/,
         nativeFn:/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g
     };
     //support Node.js module
     if(typeof window !== 'undefined'){
-        var ua = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
+        var ua = 'navigator' in window && 'userAgent' in navigator &&
+            navigator.userAgent.toLowerCase() || '';
+        var vendor = 'vendor' in navigator && navigator.vendor.toLowerCase();
     }
 
     judge = (function () {
@@ -49,7 +49,7 @@
              * Each iframe has their own window object
              */
             isWindow: function (obj) {
-                return obj != null && obj == obj.window;
+                return typeof obj == 'object' && 'setInterval' in obj;
             },
             isDocument: function (obj) {
                 if(!obj) return false;
@@ -72,6 +72,13 @@
             },
             isObjectLike: function (value) {
                 return !!value && typeof value == 'object';
+            },
+            isEmptyObject: function (obj) {
+                var k;
+                for(k in obj){
+                    return false;
+                }
+                return true;
             },
             /**
              * judge obj is plain object,created by {} or new Object
@@ -141,13 +148,14 @@
                     Windows = ua.match(/window/),
                     Linux = ua.match(/linux/),
                     Blackberry = ua.match(/blackberry/),
+                    Tablet = /ipad|android(?!.*mobile)/i.test(ua),
                     AndroidTablet = /android/.test(ua) && !/mobile/.test(ua);
                 var device =[
-                    iPad,Android,iOS,WinPhone,Mac,Windows,Linux,Blackberry,AndroidTablet
+                    iPad,Android,iOS,WinPhone,Mac,Windows,Linux,Blackberry,Tablet,AndroidTablet
                 ];
                 var arrDevice = [
                     "iPad","android","ios","windowsPhone","mac","windows",
-                    "linux","blackBerry","androidTablet"
+                    "linux","blackBerry","tablet","androidTablet"
                 ];
                 for(var k =0;k<device.length;k++){
                     if(device[k]){
@@ -199,7 +207,7 @@
                 else return 'unknow';
             },
             iosVersion: function () {
-                if($.platform() !== 'ios') return false;
+                if($.platform() !== 'ios') return 'unknow';
                 if(ua.match(/iPhone/i)){
                     var os = ua.indexOf('os');
                 }
@@ -207,7 +215,7 @@
             },
             androidVersion: function () {
                 var match = ua.match(/android\s([0-9\.]*)/i);
-                return match ? "android" + " "+match[1] : false;
+                return match ? "android" + " "+match[1] : 'unknow';
             },
             isMobile: function () {
                 return !!ua.match(/(iPhone|iPod|android|ios|iPad|windows phone|tablet)/i);
@@ -276,8 +284,9 @@
             size: function(val){
                 return val.length;
             },
-            isHttps: function(){
-                return location.protocol.indexOf('https') > -1;
+            isHttps: function(url){
+                return location.protocol.indexOf('https') > -1 ||
+                    url.toLowerCase().indexOf('https') > -1;
             },
             //judge a given array's elements is unique or not
             isUnique: function(array){
@@ -345,10 +354,6 @@
                 var phone = reg.phone.test(num);
                 return !!phone;
             },
-            telPhone: function (num) {
-                var telNumber = reg.tel.test(num);
-                return !!telNumber;
-            },
             includeChinese: function(ch){
                 return !!/[\u4e00-\u9fa5]/g.test(ch);
             },
@@ -409,29 +414,21 @@
                 return '';
             },
             hasHash: function (url) {
-                if(!$.isUrl(url)){
-                    return false;
-                }
                 url = url || window.location.href;
                 var match = url.match(/#(.*)$/);
                 var ends =  match ? match[1] : '';
-                return (ends !== '') ;
+                return (ends !== '');
             },
             getHash: function (url) {
-                if($.isUrl(url)){
-                    url = url || window.location.href;
-                    var match = url.match(/#(.*)$/);
-                    return match ? match[1] : '';
-                }
-                return false;
+                url = url || window.location.href;
+                var match = url.match(/#(.*)$/);
+                return match ? match[1] : '';
             },
             //judge obj has contain the given key
             has: function (obj,key) {
                 return obj != null && hasOwnProperty.call(obj,key);
             },
-            isUrl: function (link) {
-                return reg.url.test(link);
-            },
+
             zipCode: function (code) {
                 var reg = new RegExp(/[1-9]\d{5}(?!\d)/);
                 return reg.test(code);
@@ -477,9 +474,9 @@
                     isMiuiBrowser= /miuibrowser/.test(ua),
                     isOppoBrowser= /oppobrowser/.test(ua),
                     isAndroidChrome = /android/.test(ua) && /chrome/.test(ua),
-                    isChrome = /chrome/.test(ua),
+                    isChrome = /chrome|chromium/i.test(ua) && /google inc/.test(vendor),
                     isIosSafari = /iphone/.test(ua) && /safari/.test(ua),
-                    isSafari = /safari/.test(ua) && ua.indexOf('chrome') < 1;
+                    isSafari = /webkit\W(?!.*chrome).*safari\W/i.test(ua);
                 var browsers = [
                     isFirefox,isIosChrome, isIpadSafari,isEdge,isSougou,isLiebao,
                     isLiebaoMobile,isWeiXin,isUC, isUCMobile,isBaidu,isBaiduMobile,
@@ -608,6 +605,9 @@
             },
             isLeapYear: function (year) {
                 return !!(((year % 4) ==0) && ((year % 100) !==0) ||(year % 400) ==0 );
+            },
+            isDate: function (val) {
+                return oString.call(val) === '[object Date]';
             }
         };
     })();
