@@ -1,6 +1,10 @@
 {
   "name": "judgejs",
+<<<<<<< HEAD
   "version": "0.7.2",
+=======
+  "version": "0.8.0",
+>>>>>>> master
   "description": "A lightweight vanilla JavaScript library for judging",
   "main": "judge.js",
   "scripts": {
