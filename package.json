@@ -1,6 +1,6 @@
 {
   "name": "judgejs",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "A lightweight vanilla JavaScript library for judging",
   "main": "judge.js",
   "scripts": {

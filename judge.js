@@ -38,7 +38,7 @@
 
     judge = (function () {
         return {
-            version: '0.7.2',
+            version: '0.8.1',
             /**
              * return {array,object,number,string,null,undefined,function,boolean}
              */
@@ -469,14 +469,14 @@
                     isBaidu= /bidubrowser/.test(ua),
                     isBaiduMobile= /baidubrowser/.test(ua) || /baiduboxapp/.test(ua),
                     isQQMobile= /qqbrowser/.test(ua) && $.isMobile(),
-                    isQQBrowser= /qqbrowser/.test(ua),
+                    isQQBrowser= /qqbrowser/.test(ua) && $.isPc(),
                     isOpera= /opr/.test(ua),
                     isMiuiBrowser= /miuibrowser/.test(ua),
                     isOppoBrowser= /oppobrowser/.test(ua),
                     isAndroidChrome = /android/.test(ua) && /chrome/.test(ua),
-                    isChrome = /chrome|chromium/i.test(ua) && /google inc/.test(vendor),
+                    isChrome = /chrome|chromium/i.test(ua) && /google inc/.test(vendor) && $.isPc(),
                     isIosSafari = /iphone/.test(ua) && /safari/.test(ua),
-                    isSafari = /webkit\W(?!.*chrome).*safari\W/i.test(ua);
+                    isSafari = /webkit\W(?!.*chrome).*safari\W/i.test(ua) && $.isPc();
                 var browsers = [
                     isFirefox,isIosChrome, isIpadSafari,isEdge,isSougou,isLiebao,
                     isLiebaoMobile,isWeiXin,isUC, isUCMobile,isBaidu,isBaiduMobile,
