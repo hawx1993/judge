@@ -73,8 +73,6 @@
             isObjectLike: function (value) {
                 return !!value && typeof value == 'object';
             },
-<<<<<<< HEAD
-=======
             isEmptyObject: function (obj) {
                 var k;
                 for(k in obj){
@@ -82,7 +80,6 @@
                 }
                 return true;
             },
->>>>>>> master
             /**
              * judge obj is plain object,created by {} or new Object
              */
@@ -135,15 +132,12 @@
                 }
                 return 'unknow'
             },
-<<<<<<< HEAD
-=======
             /**
              * case sensitive
              * @returns
              * ["iPad","android","ios","windowsPhone","mac",
              * "windows","linux","blackBerry","androidTablet"]
              */
->>>>>>> master
             platform : function(){
                 var iPad = ua.match(/ipad/),
                 //some wp platform fake ua to android
@@ -430,14 +424,6 @@
                 var match = url.match(/#(.*)$/);
                 return match ? match[1] : '';
             },
-            getHash: function (url) {
-                if($.isUrl(url)){
-                    url = url || window.location.href;
-                    var match = url.match(/#(.*)$/);
-                    return match ? match[1] : '';
-                }
-                return false;
-            },
             //judge obj has contain the given key
             has: function (obj,key) {
                 return obj != null && hasOwnProperty.call(obj,key);
@@ -463,9 +449,9 @@
             },
             browser: function () {
                 var
-                    //judge IE version ，IE6~IE10
+                //judge IE version ，IE6~IE10
                     MSIE = ua.indexOf('msie'),
-                    //IE11+
+                //IE11+
                     trident = ua.indexOf('trident/'),
                     IEMobile = /iemobile/.test(ua),
                     MobileIEVersion = "isMobileIE"+parseInt(ua.substring(MSIE + 5,ua.indexOf(".",MSIE))),
@@ -476,7 +462,7 @@
                     isSougou= /metasr/.test(ua),
                     isLiebao= /lbbrowser/.test(ua),
                     isLiebaoMobile= /liebaofast/.test(ua),
-                    //judge is weixin's built-in browser or not
+                //judge is weixin's built-in browser or not
                     isWeiXin= /micromessenger/.test(ua),
                     isUC= /ubrowser/.test(ua) && !/bidubrowser/.test(ua)&& !/baidubrowser/.test(ua),
                     isUCMobile= /ucbrowser/.test(ua),
@@ -555,10 +541,6 @@
                 }
             },
             /**
-<<<<<<< HEAD
-             *  @param [parent]
-=======
->>>>>>> master
              *  judge DOM Element's position
              *  1.judge.position(element).top
              *  =>return element's position of the distance from the top
