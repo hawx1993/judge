@@ -449,9 +449,9 @@
             },
             browser: function () {
                 var
-                //judge IE version ，IE6~IE10
+                    //judge IE version ，IE6~IE10
                     MSIE = ua.indexOf('msie'),
-                //IE11+
+                    //IE11+
                     trident = ua.indexOf('trident/'),
                     IEMobile = /iemobile/.test(ua),
                     MobileIEVersion = "isMobileIE"+parseInt(ua.substring(MSIE + 5,ua.indexOf(".",MSIE))),
@@ -462,7 +462,7 @@
                     isSougou= /metasr/.test(ua),
                     isLiebao= /lbbrowser/.test(ua),
                     isLiebaoMobile= /liebaofast/.test(ua),
-                //judge is weixin's built-in browser or not
+                    //judge is weixin's built-in browser or not
                     isWeiXin= /micromessenger/.test(ua),
                     isUC= /ubrowser/.test(ua) && !/bidubrowser/.test(ua)&& !/baidubrowser/.test(ua),
                     isUCMobile= /ucbrowser/.test(ua),
