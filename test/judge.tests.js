@@ -242,22 +242,8 @@ QUnit.test('isEqual', function () {
     var obj1 = {};
     var obj2 = new Object();
     var obj4 = Object.create(null);
-
-    var foo = {name:'trigkit4'};
-    var bar = {age:23};
-    var baz = Object.assign(foo,bar);
-    var obj3 = {
-        name: 'trigkit4',
-        age: 23
-    };
     equal($.isEqual(str,str2,str3),true,"Boolean(true)和!!true，true是严格相等");
     equal($.isEqual(obj1,obj2,obj4),false,"{}和new Object(),Object.create(null)不是严格相等");
-    equal($.isEqual(baz,obj3),false,"" +" "+
-        "var foo = {name:'trigkit4'}" +"  "+
-        "var bar = {age:23}" +"  "+
-        "var baz = Object.assign(foo,bar)" +
-        "var obj3 = {name: 'trigkit4',age: 23}"+"baz和obj3不是严格相等的"
-    )
 });
 QUnit.test("isWindow", function () {
     ok($.isWindow(window),"window是window对象 " + $.isWindow(window))
@@ -266,7 +252,7 @@ QUnit.test("isDocument", function () {
     ok($.isDocument(document),"document是document对象 "+ $.isDocument(document))
 });
 QUnit.test("isPlainObject", function () {
-    equal($.isPlainObject(date),false,'new Date()不是plain Object')
+    equal($.isPlainObject(date),false,'new Date()不是plain Object');
     equal($.isPlainObject(obj),true,'{}是plain Object');
     equal($.isPlainObject(arr),false,"[]不是plainObject")
 });
