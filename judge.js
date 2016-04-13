@@ -49,7 +49,7 @@
              * Each iframe has their own window object
              */
             isWindow: function (obj) {
-                return typeof obj == 'object' && 'setInterval' in obj;
+                return obj != null && obj === obj.window;
             },
             isDocument: function (obj) {
                 if(!obj) return false;
@@ -63,6 +63,9 @@
                     return true;
                 }
             },
+            /**
+             * Array.isArray() don't support IE8 or older
+             */
             isArray : function (value) {
                 return  typeof value ==='object' &&
                     oString.call(value) === '[object Array]';
@@ -211,7 +214,7 @@
                 if(ua.match(/iPhone/i)){
                     var os = ua.indexOf('os');
                 }
-                return ua.substr(os + 3, 5).replace('_','.').replace('_','.');
+                return ua.substr(os + 3, 5).replace('_','.');
             },
             androidVersion: function () {
                 var match = ua.match(/android\s([0-9\.]*)/i);
@@ -348,18 +351,18 @@
             },
             qqNumber: function(num){
                 var req = reg.qq.test(num);
-                return !!req;
+                return req;
             },
             phoneNumber: function(num){
                 var phone = reg.phone.test(num);
-                return !!phone;
+                return phone;
             },
             includeChinese: function(ch){
-                return !!/[\u4e00-\u9fa5]/g.test(ch);
+                return /[\u4e00-\u9fa5]/g.test(ch);
             },
             onlyChinese: function(ch){
                 var myReg =/^[\u4e00-\u9fa5]{0,}$/;
-                return !!myReg.test(ch);
+                return myReg.test(ch);
             },
             onlyNumber: function (num) {
                 return /^\d+$/g.test(num);
@@ -456,7 +459,8 @@
                     IEMobile = /iemobile/.test(ua),
                     MobileIEVersion = "isMobileIE"+parseInt(ua.substring(MSIE + 5,ua.indexOf(".",MSIE))),
                     isFirefox = /firefox/.test(ua),
-                    isIosChrome = ((/iphone/.test(ua)) || /ipad/.test(ua)) && ua.match(/crios/) == 'crios',
+                    isIosChrome = ((/iphone/.test(ua)) || /ipad/.test(ua)) &&
+                        ua.match(/crios/) == 'crios',
                     isIpadSafari = /ipad/.test(ua) && /safari/.test(ua),
                     isEdge = /edge/.test(ua),
                     isSougou= /metasr/.test(ua),
@@ -464,7 +468,8 @@
                     isLiebaoMobile= /liebaofast/.test(ua),
                     //judge is weixin's built-in browser or not
                     isWeiXin= /micromessenger/.test(ua),
-                    isUC= /ubrowser/.test(ua) && !/bidubrowser/.test(ua)&& !/baidubrowser/.test(ua),
+                    isUC= /ubrowser/.test(ua) && !/bidubrowser/.test(ua)&&
+                        !/baidubrowser/.test(ua),
                     isUCMobile= /ucbrowser/.test(ua),
                     isBaidu= /bidubrowser/.test(ua),
                     isBaiduMobile= /baidubrowser/.test(ua) || /baiduboxapp/.test(ua),
@@ -474,7 +479,8 @@
                     isMiuiBrowser= /miuibrowser/.test(ua),
                     isOppoBrowser= /oppobrowser/.test(ua),
                     isAndroidChrome = /android/.test(ua) && /chrome/.test(ua),
-                    isChrome = /chrome|chromium/i.test(ua) && /google inc/.test(vendor) && $.isPc(),
+                    isChrome = /chrome|chromium/i.test(ua) &&
+                        /google inc/.test(vendor) && $.isPc(),
                     isIosSafari = /iphone/.test(ua) && /safari/.test(ua),
                     isSafari = /webkit\W(?!.*chrome).*safari\W/i.test(ua) && $.isPc();
                 var browsers = [

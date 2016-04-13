@@ -273,5 +273,15 @@ QUnit.test("isPlainObject", function () {
 QUnit.test("isDate", function () {
     ok($.isDate(date),"new Date()是日期")
 });
-
-
+QUnit.test("includeChinese",function () {
+    var ch = "我爱China"
+    equal($.includeChinese(ch),true,"我爱China包含中文");
+})
+QUnit.test("onlyChinese",function () {
+    var ch = "我爱China";
+    equal($.onlyChinese(ch),false,"我爱China不是只有汉字")
+})
+QUnit.test("onlyNumber", function () {
+    var num = 3456789;
+    equal($.onlyNumber(num),true,"3456789仅含有数字")
+})
