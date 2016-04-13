@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/hawx1993/judge#readme",
   "devDependencies": {
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.1"
   }

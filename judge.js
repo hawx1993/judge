@@ -479,8 +479,12 @@
                     isMiuiBrowser= /miuibrowser/.test(ua),
                     isOppoBrowser= /oppobrowser/.test(ua),
                     isAndroidChrome = /android/.test(ua) && /chrome/.test(ua),
+<<<<<<< HEAD
                     isChrome = /chrome|chromium/i.test(ua) &&
                         /google inc/.test(vendor) && $.isPc(),
+=======
+                    isChrome = /chrome|chromium/i.test(ua) && /google inc/.test(vendor)&& $.isPc(),
+>>>>>>> gh-pages
                     isIosSafari = /iphone/.test(ua) && /safari/.test(ua),
                     isSafari = /webkit\W(?!.*chrome).*safari\W/i.test(ua) && $.isPc();
                 var browsers = [
