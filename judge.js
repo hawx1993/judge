@@ -38,7 +38,7 @@
 
     judge = (function () {
         return {
-            version: '0.8.1',
+            version: '0.8.2',
             /**
              * return {array,object,number,string,null,undefined,function,boolean}
              */

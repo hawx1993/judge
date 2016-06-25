@@ -1,19 +1,26 @@
-###`judge.js`
+# Overview
 
-####一个用来做判断的js类库
+A lightweight vanilla JavaScript library for judging.https://tonicdev.com/trigkit4/judgejs
+
+[![npm version](https://badge.fury.io/js/judgejs.svg)](https://badge.fury.io/js/judgejs)
+![bandge](https://david-dm.org/hawx1993/judge.svg)
+![](https://img.shields.io/github/stars/hawx1993/judge.svg)
+
+# Features
 
 - 没有任何依赖
 - 支持 `AMD` & `CommonJS`
 - 轻量级（10kb）
 
+
+>单元测试:http://hawx1993.github.io/judge/test/
+
+## Quick Start
+
 ```js
-$ npm install #安装依赖
-$ gulp compress #生成judge.min.js文件
+$ npm install  
+$ gulp compress  
 ```
-
->DEMO:http://hawx1993.github.io/judge/test/
-
-## 开始
 
 >使用`npm`安装`judgejs`：
 
@@ -28,6 +35,7 @@ $ bower install judgejs
 ```
 
 # 目录
+
 * [使用方法](#使用方法)
 * [数据类型判断](#数据类型判断)
 * [平台判断](#平台判断)
@@ -42,7 +50,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.8.1
+=>0.8.2
 ```
 
 
@@ -52,7 +60,7 @@ judge.version
 require('../judge.js')
 
 $.version;
-=> 0.8.1
+=> 0.8.2
 ```
 
 # API
@@ -110,7 +118,7 @@ judge.isFunction(fn);
 
 >`judge.isObject()`
 
-判断一个给定的值是否是对象，返回布尔值; 
+判断一个给定的值是否是对象，返回布尔值;
 
 
 ```js
