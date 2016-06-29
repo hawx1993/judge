@@ -13,6 +13,6 @@ gulp.task('compress', function () {
         .pipe(gulp.dest('./'))
 });
 gulp.task("deploy", function () {
-    return gulp.src(['.test/*','./*.js'])
+    return gulp.src('./**/*')
         .pipe(plugins.ghPages());
 });
