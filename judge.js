@@ -38,7 +38,7 @@
 
     judge = (function () {
         return {
-            version: '0.8.2',
+            version: '0.8.3',
             /**
              * return {array,object,number,string,null,undefined,function,boolean}
              */
@@ -350,12 +350,20 @@
                 return true;
             },
             qqNumber: function(num){
-                var req = reg.qq.test(num);
-                return req;
+                return reg.qq.test(num);
             },
             phoneNumber: function(num){
-                var phone = reg.phone.test(num);
-                return phone;
+                return reg.phone.test(num);
+            },
+            isLetter: function (str) {
+                if("" == str) return false;
+                var l = /^[A-Za-z]+$/;
+                return l.test(str);
+
+            },
+            isAlpha: function (str) {
+                var alp = /^[a-zA-Z0-9_]{1,}$/;
+                return alp.test(str);
             },
             includeChinese: function(ch){
                 return /[\u4e00-\u9fa5]/g.test(ch);

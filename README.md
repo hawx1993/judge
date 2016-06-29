@@ -50,7 +50,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.8.2
+=>0.8.3
 ```
 
 
@@ -686,6 +686,13 @@ judge.onlyChinese(ch);
 
 =>false
 ```
+>$.isLetter(str)
+
+判断给定字符是否全是英文字母
+
+>$.isAlpha(str)
+
+判断输入字符是否仅由字母或数字或下划线组成
 
 >`judge.onlyNumber()`
 

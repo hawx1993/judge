@@ -1,11 +1,12 @@
 {
   "name": "judgejs",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "A lightweight vanilla JavaScript library for judging",
   "main": "judge.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hawx1993/judge.git"

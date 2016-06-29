@@ -266,7 +266,7 @@ QUnit.test("isDocument", function () {
     ok($.isDocument(document),"document是document对象 "+ $.isDocument(document))
 });
 QUnit.test("isPlainObject", function () {
-    equal($.isPlainObject(date),false,'new Date()不是plain Object')
+    equal($.isPlainObject(date),false,'new Date()不是plain Object');
     equal($.isPlainObject(obj),true,'{}是plain Object');
     equal($.isPlainObject(arr),false,"[]不是plainObject")
 });
@@ -274,14 +274,32 @@ QUnit.test("isDate", function () {
     ok($.isDate(date),"new Date()是日期")
 });
 QUnit.test("includeChinese",function () {
-    var ch = "我爱China"
+    var ch = "我爱China";
     equal($.includeChinese(ch),true,"我爱China包含中文");
-})
+});
 QUnit.test("onlyChinese",function () {
     var ch = "我爱China";
     equal($.onlyChinese(ch),false,"我爱China不是只有汉字")
-})
+});
 QUnit.test("onlyNumber", function () {
     var num = 3456789;
     equal($.onlyNumber(num),true,"3456789仅含有数字")
-})
+});
+QUnit.test("qqNumber", function () {
+    var qqNum = 345823122;
+    equal($.qqNumber(qqNum),true,"345823122是有效的qq号码");
+
+    var qqNum2 = 123;
+    equal($.qqNumber(qqNum2),false,"123不是有效的qq号码")
+});
+QUnit.test("isLetter", function () {
+    var str = '223',str2 = 'trigkit4',str3 = 'China';
+    equal($.isLetter(str),false,"123不是英文字母");
+    equal($.isLetter(str2),false,'trigkit4不是字母');
+    equal($.isLetter(str3),true,"China是字母")
+});
+QUnit.test("isAlpha", function () {
+    var str = 1,str2 = 'huang123_';
+    equal($.isAlpha(str),true,"1是仅由字母数字下划线组成");
+    equal($.isAlpha(str2),true,"huang123_是由字母数字下划线组成")
+});
