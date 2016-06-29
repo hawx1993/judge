@@ -60,7 +60,7 @@ judge.version
 require('../judge.js')
 
 $.version;
-=> 0.8.2
+=> 0.8.3
 ```
 
 # API
@@ -686,11 +686,11 @@ judge.onlyChinese(ch);
 
 =>false
 ```
->$.isLetter(str)
+>`$.isLetter(str)`
 
 判断给定字符是否全是英文字母
 
->$.isAlpha(str)
+>`$.isAlpha(str)`
 
 判断输入字符是否仅由字母或数字或下划线组成
 
