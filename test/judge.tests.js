@@ -303,3 +303,11 @@ QUnit.test("isAlpha", function () {
     equal($.isAlpha(str),true,"1是仅由字母数字下划线组成");
     equal($.isAlpha(str2),true,"huang123_是由字母数字下划线组成")
 });
+
+QUnit.test('isUrl',function () {
+    var url1 = 'http://io.io',url2='360.cn',url3='www.baidu.com',url4='https://测试.com';
+    equal($.isUrl(url1),true,'http://io.io是合法url');
+    equal($.isUrl(url2),false,'360.cn不是合法的url');
+    equal($.isUrl(url3),false,'www.baidu.com是合法的url');
+    equal($.isUrl(url4),false,'测试.com不是合法的URL')
+});

@@ -50,7 +50,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.8.3
+=>0.8.5
 ```
 
 
@@ -60,7 +60,7 @@ judge.version
 require('../judge.js')
 
 $.version;
-=> 0.8.3
+=> 0.8.5
 ```
 
 # API
@@ -890,3 +890,9 @@ judge.strLength('你好China');//9
 >`judge.isDate(val)`
 
 判断是否是日期
+
+>`judge.isUrl(str)`
+
+
+判断URL合法性,不是很严格的做法，主要匹配url是否带有协议头，比如http/https等
+

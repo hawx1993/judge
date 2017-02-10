@@ -1,6 +1,6 @@
 {
   "name": "judgejs",
-  "version": "0.8.3",
+  "version": "0.8.5",
   "description": "A lightweight vanilla JavaScript library for judging",
   "main": "judge.js",
   "scripts": {
@@ -15,7 +15,6 @@
     "judge"
   ],
   "author": "trigkit4",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/hawx1993/judge/issues"
   },

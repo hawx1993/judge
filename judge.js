@@ -27,7 +27,8 @@
         id:/(^\d{15}$)|(^\d{17}([0-9]|X)$)/i,
         qq:/^[1-9][0-9]{4,9}$/,
         phone:/^1[3|4|5|7|8]\d{9}$/,
-        nativeFn:/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g
+        nativeFn:/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,
+        url: /^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
     };
     //support Node.js module
     if(typeof window !== 'undefined'){
@@ -38,7 +39,7 @@
 
     judge = (function () {
         return {
-            version: '0.8.3',
+            version: '0.8.5',
             /**
              * return {array,object,number,string,null,undefined,function,boolean}
              */
@@ -622,6 +623,9 @@
             },
             isDate: function (val) {
                 return oString.call(val) === '[object Date]';
+            },
+            isUrl: function (str) {
+                return!!str.match(reg.url);
             }
         };
     })();
