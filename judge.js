@@ -39,7 +39,7 @@
 
     judge = (function () {
         return {
-            version: '0.8.5',
+            version: '0.9.0',
             /**
              * return {array,object,number,string,null,undefined,function,boolean}
              */

@@ -50,7 +50,7 @@ var judge = require('judgejs');
 
 judge.version
 
-=>0.8.5
+=>0.9.0
 ```
 
 
@@ -60,7 +60,7 @@ judge.version
 require('../judge.js')
 
 $.version;
-=> 0.8.5
+=> 0.9.0
 ```
 
 # API
@@ -894,5 +894,5 @@ judge.strLength('你好China');//9
 >`judge.isUrl(str)`
 
 
-判断URL合法性,不是很严格的做法，主要匹配url是否带有协议头，比如http/https等
+判断URL合法性,不是很严格的判断，主要匹配url是否带有协议头等，比如http/https等
 
