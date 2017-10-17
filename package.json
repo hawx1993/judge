@@ -1,14 +1,16 @@
 {
   "name": "judgejs",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "A lightweight vanilla JavaScript library for judging",
-  "main": "lib/judge.js",
+  "main": "lib/judge.min.js",
   "typings": "types/index.d.ts",
   "scripts": {
-    "start": "npm run tsc && npm run rollup",
+    "start": "npm run tsc && npm run rollup && npm run minify && npm run rimraf",
     "tsc": "tsc judge.ts",
     "rollup": "rollup judge.js --output.format cjs --output.file ./lib/judge.js",
-    "test": "mocha --compilers ts:ts-node/register test/test.ts"
+    "test": "mocha --compilers ts:ts-node/register test/test.ts",
+    "minify": "uglifyjs  lib/judge.js --output lib/judge.min.js",
+    "rimraf": "rimraf judge.js lib/judge.js"
   },
   "license": "MIT",
   "repository": {

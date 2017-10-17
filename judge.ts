@@ -44,7 +44,7 @@ import { fn } from "./types/judge";
 
   judge = (function () {
     return {
-      version: '0.9.8',
+      version: '0.9.9',
       /**
        * return {array,object,number,string,null,undefined,function,boolean}
        */
