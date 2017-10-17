@@ -1,10 +1,10 @@
 {
   "name": "judgejs",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "A lightweight vanilla JavaScript library for judging",
   "main": "lib/judge.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers ts:ts-node/register test/test.ts"
   },
   "license": "MIT",
   "repository": {
@@ -27,7 +27,12 @@
     "gulp-uglify": "^1.5.1"
   },
   "dependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.43",
     "@types/node": "^8.0.35",
-    "zepto": "^1.2.0"
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.5.3"
   }
 }

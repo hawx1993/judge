@@ -44,7 +44,7 @@ import { fn } from "./types/judge";
 
   judge = (function () {
     return {
-      version: '0.9.5',
+      version: '0.9.6',
       /**
        * return {array,object,number,string,null,undefined,function,boolean}
        */
@@ -249,7 +249,7 @@ import { fn } from "./types/judge";
       lt(val1,val2): boolean {
         return val1 < val2;
       },
-      inArray(val,arr): boolean{
+      inArray(val, arr): boolean{
         if(!$.isArray(arr)) return false;
         for(let i = 0;i < arr.length;i++){
           if(arr[i] == val){
@@ -324,7 +324,7 @@ import { fn } from "./types/judge";
           return new RegExp('(^| )' + className + '( |$)','gi').test(element.className)
       },
       isError(value): boolean{
-        return oString.call(value) === ['object Error'];
+        return oString.call(value) === '[object Error]';
       },
       isChar(value): boolean{
         return $.isString(value) && value.length === 1;

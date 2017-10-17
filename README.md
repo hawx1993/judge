@@ -15,11 +15,13 @@ A lightweight vanilla JavaScript library for judging.https://tonicdev.com/trigki
 
 >单元测试:http://hawx1993.github.io/judge/test/
 
+
 ## Quick Start
 
 ```js
-$ npm install  
-$ gulp compress  
+$ npm install
+// unit test  
+$ npm test
 ```
 
 >使用`npm`安装`judgejs`：
