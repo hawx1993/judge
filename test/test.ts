@@ -32,6 +32,7 @@ describe('judgejs Api test', ()=> {
     expect($.isEmptyObject(global)).to.not.be.ok;
     expect($.isEmptyObject(arrayLikeObject)).to.not.be.ok;
     expect($.isEmptyObject(obj)).to.not.be.ok;
+    expect($.isEmptyObject(undefined)).to.be.ok;
   })
   it('$.isPlainObject()', () => {
     expect($.isPlainObject(emptyObject)).to.be.ok;

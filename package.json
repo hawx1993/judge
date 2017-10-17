@@ -1,6 +1,6 @@
 {
   "name": "judgejs",
-  "version": "0.9.6",
+  "version": "0.9.8",
   "description": "A lightweight vanilla JavaScript library for judging",
   "main": "lib/judge.js",
   "typings": "types/index.d.ts",

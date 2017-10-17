@@ -1,5 +1,3 @@
-'use strict';
-
 "use strict";
 /**
  * Created by trigkit4 on 16/1/17.
@@ -22,7 +20,7 @@ exports.__esModule = true;
     else {
         root.judge = factory();
     }
-}(undefined, function (root) {
+}(this, function (root) {
     root = this || global;
     'use strict';
     var judge, op = Object.prototype, oString = op.toString, funcTo = Function.prototype.toString;
