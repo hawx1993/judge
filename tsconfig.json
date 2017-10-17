@@ -3,15 +3,18 @@
     "target": "es5",
     "module": "commonjs",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "lib/",
     "removeComments": true,
     "moduleResolution": "node",
+    "declarationDir": "types",
     "rootDir": "./",
     "typeRoots": [
       "node_modules/@types"
     ],
     "allowJs": true
   },
+  "include": ["judge.ts"],
+  "files": ["judge.ts"],
   "exclude": [
     "node_modules"
   ]
