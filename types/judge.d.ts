@@ -1,6 +1,6 @@
-export interface fn {
+export interface FnType {
   version: string,
-  type(obj: any): any
+  type(obj: any): string
   isWindow(obj): boolean,
   isDocument(obj): boolean,
   isArray(value): boolean,
@@ -14,7 +14,6 @@ export interface fn {
   kernel(): string,
   platform(): string,
   iosDevice(): string,
-  androidDevice(): string,
   iosVersion(): string,
   androidVersion(): string,
   isMobile(): boolean,

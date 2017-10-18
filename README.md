@@ -13,13 +13,11 @@ A lightweight vanilla JavaScript library for judging.https://tonicdev.com/trigki
 - 轻量级（10kb）
 
 
->单元测试:http://hawx1993.github.io/judge/test/
-
 
 ## Quick Start
 
 ```js
-$ npm install
+$ yarn
 // unit test  
 $ npm test
 ```
@@ -28,6 +26,8 @@ $ npm test
 
 ```js
 $ npm install judgejs
+// or yarn
+$ yarn add judgejs
 ```
 
 >使用`bower` 安装`judgejs`

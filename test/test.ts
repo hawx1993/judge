@@ -96,4 +96,61 @@ describe('judgejs Api test', ()=> {
     expect($.onlyChinese('判断')).to.be.ok;
     expect($.onlyChinese('judge')).to.not.be.ok;
   })
+  it('$.isFunction()', () => {
+    expect($.isFunction(new Function ())).to.be.ok;
+    expect($.isFunction(() => {} )).to.be.ok;
+    expect($.isFunction('judge')).to.not.be.ok;
+  })
+  it('$.isUnique()', () => {
+    expect($.isUnique([1,2,3,'3'])).to.be.ok;
+    expect($.isUnique([1,2,2])).to.not.be.ok;
+    expect($.isUnique(['judge','js', '[js]'] )).to.be.ok;
+  })
+  it('$.isString()', () => {
+    expect($.isString(str)).to.be.ok;
+    expect($.isString([1,2,2])).to.not.be.ok;
+    expect($.isString(String(1))).to.be.ok;
+  })
+  it('$.isJson()', () => {
+    expect($.isJson(obj)).to.not.be.ok;
+    expect($.isJson(arrayLikeObject)).to.not.be.ok;
+    expect($.isJson(emptyObject)).to.not.be.ok;
+    expect($.isJson('{ "name": "judgejs", "author": "trigkit4"}')).to.be.ok;
+    expect($.isJson({ "name": "judgejs", "author": "trigkit4"})).to.not.be.ok;
+  })
+  it('$.isEmpty()', () => {
+    expect($.isEmpty(emptyObject)).to.be.ok;
+    expect($.isEmpty([])).to.be.ok;
+    expect($.isEmpty(Object.create(null))).to.be.ok;
+    expect($.isEmpty(null)).to.be.ok;
+    expect($.isEmpty({ "name": "judgejs", "author": "trigkit4"})).to.not.be.ok;
+  })
+  it('$.has()', () => {
+    expect($.has({},'')).to.not.be.ok;
+    expect($.has({"name": "trigkit4"}, "name")).to.be.ok;
+    expect($.has({0: "judgejs"}, 0)).to.be.ok;
+  })
+  it('$.has()', () => {
+    expect($.zipCode(310000)).to.be.ok;
+    expect($.zipCode("310000")).to.be.ok
+  })
+  it('$.isEven()', () => {
+    expect($.hasSpecialChar('husd78&^%')).to.be.ok;
+    expect($.hasSpecialChar("310000")).to.not.be.ok
+  })
+  it('$.isEven()', () => {
+    expect($.isEven('90')).to.be.ok;
+    expect($.isEven(90)).to.be.ok
+    expect($.isEven(91)).to.not.be.ok
+  })
+  it('$.isOdd()', () => {
+    expect($.isOdd(num)).to.be.ok;
+    expect($.isOdd("1")).to.be.ok
+    expect($.isOdd("12")).to.not.be.ok
+  })
+  it('$.strLength()', () => {
+    expect($.strLength(num)).to.be.equal(3);
+    expect($.strLength("1")).to.be.equal(1)
+    expect($.strLength("12")).to.be.equal(2)
+  })
 })

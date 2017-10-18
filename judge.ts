@@ -5,9 +5,9 @@
  */
 /// <reference path="types/index.d.ts" />
 
-import { fn } from "./types/judge";
+import { FnType } from "./types/judge";
 
-(function (root, factory: any) {
+(function (root, factory: Function) {
   //support requirejs && amd
   if(typeof define === 'function' && define.amd){
     define(function () {
@@ -22,7 +22,7 @@ import { fn } from "./types/judge";
 }(this, function (root) {
   root = this || global;
   'use strict';
-  let judge: fn,
+  let judge: FnType,
     op = Object.prototype,
     oString = op.toString,
     funcTo = Function.prototype.toString;
@@ -44,11 +44,11 @@ import { fn } from "./types/judge";
 
   judge = (function () {
     return {
-      version: '0.9.9',
+      version: '1.0.0',
       /**
        * return {array,object,number,string,null,undefined,function,boolean}
        */
-      type(obj: any): any {
+      type(obj: any): string {
         return oString.call(obj).replace(/^\[object (.+)\]$/, "$1").toLowerCase();
       },
       /**
@@ -213,25 +213,6 @@ import { fn } from "./types/judge";
         }
         return "unknow";
       },
-      /**
-       * @returns ['mx5','mi4','mz-metal','mx3',unknow]
-       */
-      androidDevice(): string{
-        //HM NOTE 1s ->navigator.appVersion
-        if(ua.match(/mx5/)){
-          return 'mx5'
-        }
-        if(ua.match(/mi 4/)){
-          return 'mi4'
-        }
-        if(ua.match(/metal/)){
-          return 'mz-metal'
-        }
-        if(ua.match(/m3/)){
-          return 'mx3'
-        }
-        else return 'unknow';
-      },
       iosVersion(): string {
         let os;
         if($.platform() !== 'ios') return 'unknow';
@@ -330,8 +311,15 @@ import { fn } from "./types/judge";
       isInt(num): boolean{
         return Math.round(num) === num;
       },
-      isJson(json): boolean{
-        return typeof json == 'object' && JSON.stringify(json).indexOf('{') == 0;
+      isJson(jsonString): boolean{
+        try {
+          let o = JSON.parse(jsonString);
+          if (o && typeof o === "object") {
+            return o;
+          }
+        }
+        catch (e) { }
+        return false;
       },
       hasClass(element,className): boolean{
         if(element.classList)
@@ -414,13 +402,13 @@ import { fn } from "./types/judge";
       idNumber(num): boolean{
         return (reg.id.test(num));
       },
-      isEven(num): boolean{
+      isEven(num: number): boolean{
         return num !== null && (num % 2 ===0);
       },
-      isOdd(num): boolean {
+      isOdd(num: number): boolean {
         return (num % 2 === 1)
       },
-      min(a, b): number{
+      min(a: number, b: number): number{
         return (a < b ? a : b)
       },
       hasHash(url): boolean {
@@ -435,10 +423,9 @@ import { fn } from "./types/judge";
         return match ? match[1] : '';
       },
       //judge obj has contain the given key
-      has(obj, key): boolean {
-        return obj != null && Object.hasOwnProperty.call(obj,key);
+      has(obj: object, key: string): boolean {
+        return obj != null && Object.hasOwnProperty.call(obj, key);
       },
-
       zipCode(code): boolean {
         let reg = new RegExp(/[1-9]\d{5}(?!\d)/);
         return reg.test(code);
@@ -517,16 +504,16 @@ import { fn } from "./types/judge";
        * $.strLength('前端');//=>2
        * $.strLength("frontEnd");//=>4
        */
-      strLength(str): number {
+      strLength(str: string): number {
         return String(str).replace(/[^\x00-\xff]/g,'aa').length;
       },
-      isLeapYear(year): boolean {
+      isLeapYear(year: number): boolean {
         return ((year % 4) ==0) && ((year % 100) !==0) || (year % 400) ==0 ;
       },
       isDate(val): boolean {
         return oString.call(val) === '[object Date]';
       },
-      isUrl(str): boolean {
+      isUrl(str: string): boolean {
         return!!str.match(reg.url);
       }
     };
