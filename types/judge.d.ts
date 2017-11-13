@@ -70,5 +70,6 @@ export interface FnType {
   strLength(str): number,
   isLeapYear(year): boolean,
   isDate(val): boolean,
-  isUrl(str): boolean
+  isUrl(str): boolean,
+  isNumberic(num): boolean
 }

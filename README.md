@@ -10,6 +10,7 @@ A lightweight vanilla JavaScript library for judging.https://tonicdev.com/trigki
 
 - 没有任何依赖
 - 支持 `AMD` & `CommonJS`
+- 支持typescript
 - 轻量级（10kb）
 
 
@@ -36,4 +37,4 @@ $ yarn add judgejs
 $ bower install judgejs  
 ```
 
->Links: https://hawx1993.github.io/judge/#/
+#### API: https://hawx1993.github.io/judge/#/
