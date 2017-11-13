@@ -422,48 +422,6 @@ if(judge.platform() == "androidTablet"){...}
 ```
 参数也如上所示，千万不能写错，不然检测就会出现错误。参数采用驼峰命名法
 
->`judge.browser()`
-
-检测当前浏览器类型，可以检测的类型如下：
-
-```js
-"IE6","IE7","IE8", "IE9", "IE10", "IE11","firefox","edge","sougou","liebao","liebao mobile","weixin","uc","mobile uc","baidu browser","mobile baidu","mobile qqbrowser","qqbrowser","opera","miui browser","oppo browser","mobile safari","android chrome", "ios chrome","chrome", "safari","ios safari","Mobile IE各个版本"
-```
-如需匹配不同平台的浏览器，需用`judge.platform()`再做一次匹配，使用场景可以是：
-
-1.如果没有传入参数，则返回浏览器的名称，如：
-
-```js
-judge.browser();//你的浏览器是Chrome的话
-
-=>Chrome
-```
-
-2.传入参数的情况下，返回布尔值，如:
-
-```js
-judge.browser("isChrome");
-
-=>true
-```
-
->参数如下所示，采用驼峰命名法：
-
-```js
-"isFirefox","isIosChrome","isIpadSafari", "isEdge", "isSougou","isLiebao",
-"isLiebaoMobile","isWeiXin","isUC", "isUCMobile", "isBaidu",
-"isBaiduMobile", "isQQMobile","isQQBrowser", "isOpera", "isMiuiBrowser",
-"isOppoBrowser","isAndroidChrome","isChrome","isIosSafari","isSafari"
-
-其中UC浏览器采用固定大写的写法。由于有的移动端浏览器采用和浏览器不同的ua，所以不能共用（无法单纯加一个`judge.isMobile()` or `judge.platform()=='android'`）。
-
-//IE
-"isIE","isMobileIE+数字（如：isMobileIE10）"，"isIE+数字(6~11)，如isIE10"
-
-//for example
-judge.browser("isIE11");//true,如果你的浏览器是IE11的话
-
-```
 
 
 >`judge.iosVersion()`
@@ -515,11 +473,7 @@ $.iosDevice();//if your ios device is iphone6
 
 =>iphone6
 ```
->`judge.androidDevice()`
 
-检测安卓设备，现在只支持:mi4,魅族metal(mz-metal),魅族mx5，魅族mx3
-
-TODO：准备支持更多安卓手机设备
 
 >`judge.isTouchDevice()`
 
@@ -854,27 +808,6 @@ judge.isNativeFn(obj.fn)
 
 =>false
 ```
-
->`judge.isIE8Plus(boolean)`
-
-判断当前浏览器是否是IE8+ (包含IE8)，直接返回布尔值
-
-参数如下：
-
-- true:包含IE8
-
-```js
-judge.isIE8Plus(true);//include IE8
-```
-
-- false:不包含IE8
-```js
-
-judge.isIE8Plus(false);//exclude IE8
-```
-
-没有参数，默认包含IE8
-
 >`judge.strLength(str)`
 
 判断字符长度，返回数字。一个中文字符被视为2，一个英文字符为视为1：
@@ -896,3 +829,14 @@ judge.strLength('你好China');//9
 
 判断URL合法性,不是很严格的判断，主要匹配url是否带有协议头等，比如http/https等
 
+>`judge.isNumberic`
+
+判断数字
+
+将忽略字符串，可以判断数字，小数，带字符串的数字
+
+```js
+$.isNumberic(123);//true
+$.isNumberic('1.2');//true
+$.isNumberic(-.2);//true
+```

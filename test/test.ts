@@ -153,4 +153,14 @@ describe('judgejs Api test', ()=> {
     expect($.strLength("1")).to.be.equal(1)
     expect($.strLength("12")).to.be.equal(2)
   })
+  it('$.isNumber()', () => {
+    expect($.isNumber(num)).to.be.ok;
+    expect($.isNumber("1.2")).to.be.not.ok
+    expect($.isNumber(1.2)).to.be.ok
+  })
+  it('$.isNumberic()', () => {
+    expect($.isNumberic(num)).to.be.ok;
+    expect($.isNumberic("1.2")).to.be.ok
+    expect($.isNumberic(-.2)).to.be.ok
+  })
 })

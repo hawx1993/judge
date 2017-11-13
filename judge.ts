@@ -243,6 +243,9 @@ import { FnType } from "./types/judge";
       isNumber(num: any): boolean {
         return $.type(num) === 'number';
       },
+      isNumberic(num: any): boolean{
+        return /^-{0,1}\d*\.{0,1}\d+$/.test(num)
+      },
       lt(val1,val2): boolean {
         return val1 < val2;
       },
