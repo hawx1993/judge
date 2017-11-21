@@ -158,9 +158,19 @@ describe('judgejs Api test', ()=> {
     expect($.isNumber("1.2")).to.be.not.ok
     expect($.isNumber(1.2)).to.be.ok
   })
-  it('$.isNumberic()', () => {
-    expect($.isNumberic(num)).to.be.ok;
-    expect($.isNumberic("1.2")).to.be.ok
-    expect($.isNumberic(-.2)).to.be.ok
+  it('$.isPositiveInteger()', () => {
+    expect($.isPositiveInteger(num)).to.be.ok;
+    expect($.isPositiveInteger("1")).to.be.ok
+    expect($.isPositiveInteger(-.2)).to.be.not.ok
+  })
+  it('$.isInteger()', () => {
+    expect($.isInteger(num)).to.be.ok;
+    expect($.isInteger("1.2")).to.be.not.ok
+    expect($.isInteger(-.2)).to.be.not.ok
+  })
+  it('$.isUptoAdecimal()', () => {
+    expect($.isUptoAdecimal(num)).to.be.ok;
+    expect($.isUptoAdecimal("1.2")).to.be.ok
+    expect($.isUptoAdecimal(0.22)).to.be.not.ok
   })
 })

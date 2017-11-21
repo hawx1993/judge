@@ -71,5 +71,8 @@ export interface FnType {
   isLeapYear(year): boolean,
   isDate(val): boolean,
   isUrl(str): boolean,
-  isNumberic(num): boolean
+  isNumberic(num): boolean,
+  isPositiveInteger(num): boolean,
+  isInteger(num): boolean,
+  isUptoAdecimal(num): boolean
 }

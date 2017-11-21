@@ -246,6 +246,17 @@ import { FnType } from "./types/judge";
       isNumberic(num: any): boolean{
         return /^-{0,1}\d*\.{0,1}\d+$/.test(num)
       },
+      isPositiveInteger(num: any): boolean{
+        return /^[1-9]+[0-9]*]*$/.test(num)
+      },
+      isInteger(num: any): boolean{
+        return typeof num === 'number' &&
+          isFinite(num) &&
+          Math.floor(num) === num;
+      },
+      isUptoAdecimal(num: any,suffix): boolean{
+        return /^(\d+)?([.]?\d{0,1})?$/.test(num)
+      },
       lt(val1,val2): boolean {
         return val1 < val2;
       },

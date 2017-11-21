@@ -10,6 +10,7 @@ A lightweight vanilla JavaScript library for judging.https://tonicdev.com/trigki
 
 - 没有任何依赖
 - 支持 `AMD` & `CommonJS`
+- 支持typescript
 - 轻量级（10kb）
 
 
@@ -840,3 +841,15 @@ $.isNumberic(123);//true
 $.isNumberic('1.2');//true
 $.isNumberic(-.2);//true
 ```
+
+>`judge.isPositiveInteger`
+
+判断是否是正整数
+
+>`judge.isInteger`
+
+判断是否是整数
+
+>`judge.isUptoAdecimal`
+
+判断最多是否只有一位小数
