@@ -34,12 +34,11 @@ import { FnType } from "./types/judge";
     nativeFn:/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,
     url: /^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
   };
-  let ua , vendor;
+  let ua;
   //support Node.js module
   if(typeof window !== 'undefined'){
     ua = 'navigator' in window && 'userAgent' in navigator &&
       navigator.userAgent.toLowerCase() || '';
-    vendor = 'vendor' in navigator && navigator.vendor.toLowerCase();
   }
 
   judge = (function () {
@@ -254,7 +253,7 @@ import { FnType } from "./types/judge";
           isFinite(num) &&
           Math.floor(num) === num;
       },
-      isUptoAdecimal(num: any,suffix): boolean{
+      isUptoAdecimal(num: any): boolean{
         return /^(\d+)?([.]?\d{0,1})?$/.test(num)
       },
       lt(val1,val2): boolean {
