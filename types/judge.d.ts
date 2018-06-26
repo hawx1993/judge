@@ -34,6 +34,7 @@ export interface FnType {
   isEqual(val1, val2): boolean,
   isLength(value): boolean,
   size(val): number,
+  isElectron(): boolean,
   isHttps(url: string): boolean,
   isUnique(array): boolean,
   isString(str): boolean,

@@ -423,7 +423,12 @@ if(judge.platform() == "androidTablet"){...}
 ```
 参数也如上所示，千万不能写错，不然检测就会出现错误。参数采用驼峰命名法
 
+>`judge.isElectron()`
 
+judge current user is in Electron app or not
+```js
+judge.isElectron()
+```
 
 >`judge.iosVersion()`
 

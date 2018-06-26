@@ -43,7 +43,7 @@ import { FnType } from "./types/judge";
 
   judge = (function () {
     return {
-      version: '1.0.0',
+      version: '1.0.4',
       /**
        * return {array,object,number,string,null,undefined,function,boolean}
        */
@@ -71,17 +71,17 @@ import { FnType } from "./types/judge";
       /**
        * Array.isArray() don't support IE8 or older
        */
-      isArray(value): boolean {
+      isArray(value: any): boolean {
         return  typeof value ==='object' &&
           oString.call(value) === '[object Array]';
       },
-      isObject(obj): boolean{
+      isObject(obj: any): boolean{
         return $.type(obj) == 'object';
       },
-      isObjectLike(value): boolean {
+      isObjectLike(value: any): boolean {
         return !!value && typeof value == 'object';
       },
-      isEmptyObject(obj): boolean {
+      isEmptyObject(obj: any): boolean {
         // null and undefined are "empty"
         if (obj == null) return true;
 
@@ -118,7 +118,7 @@ import { FnType } from "./types/judge";
        *
        *  $.isArrayLike(document.body.className)//=>true
        */
-      isArrayLike( obj: any ): boolean {
+      isArrayLike(obj: any): boolean {
         let length, type;
         if( obj != null ){
           length = obj.length, type = $.type( obj );
@@ -188,6 +188,12 @@ import { FnType } from "./types/judge";
           }
         }
         return "unknow";
+      },
+      /*
+      * judge current user is in electron app or not
+      * */
+      isElectron(): boolean {
+        return ua.indexOf('electron/') > -1
       },
       /**
        * @returns ["iPhone4","iPhone5","iPhone6","iPhone6Plus"]
